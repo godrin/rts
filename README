@@ -1,0 +1,15 @@
+These classes must be derivable:
+* AGWidget
+* AntEntity
+* AGApplication
+
+These functions must downcast:
+* getChildren (Widgets)
+
+
+These should store ruby-VALUEs:
+* addEntity
+* addWidget (may be a ruby-widget)
+  
+
+Painting and such things should be separated from ruby.
