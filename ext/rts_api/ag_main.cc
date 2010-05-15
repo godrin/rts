@@ -132,22 +132,6 @@ AGMain *getMain()
         exit(1);
       }
 
-
-    static bool registered=false;
-    if(!registered)
-      {
-        // registered must be set here, so that we don't get into an endless recursion
-        registered=true;
-
-        // IMPORTANT:
-        //   put it into a global variable - so that it won't get garbage collected
-        rb_eval_string("include Antargis");
-        //rb_eval_string("Antargis");
-        registered=(rb_eval_string("if Antargis.respond_to?(:getMain) \n $agMain=getMain\n true \n else \n false \nend")==Qtrue);
-        cdebug("registered:"<<registered);
-      }
-
-
     return mAGMain;
   }
 

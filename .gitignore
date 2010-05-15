@@ -1,0 +1,7 @@
+*.o
+*.so
+*~
+*.log
+rk_log.txt
+debug.txt
+.directory

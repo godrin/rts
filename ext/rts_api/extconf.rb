@@ -14,9 +14,11 @@ unless ok
 end
 
 have_library("GL")
+have_library("GLU")
 have_library("SDL")
 have_library("SDL_image")
 have_library("SDL_ttf")
+
 
 cpp_include("SDL.h")
 #include_path SDL !!!
