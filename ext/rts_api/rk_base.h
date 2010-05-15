@@ -35,6 +35,8 @@
 #define AGEXPORT
 #endif
 
+#ifdef NOTDEF
+
 #include <iostream>
 
 class AGRubyObject;
@@ -81,4 +83,5 @@ bool checkedDeleteArray(T *o) {
   }
 }
 
+#endif
 #endif

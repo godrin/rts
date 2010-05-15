@@ -183,10 +183,10 @@ int IMG_SavePNG_RW(SDL_Surface *surface, SDL_RWops *src)
           }
       }
     if (row_pointers)
-      checkedDeleteArray( row_pointers);
+      delete [] row_pointers;
 
     if (info_ptr->palette)
-      checkedDeleteArray( info_ptr->palette);
+      delete [] info_ptr->palette;
 
     png_destroy_write_struct(&png_ptr, (png_infopp)NULL);
 
