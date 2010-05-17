@@ -357,8 +357,6 @@ AGColor calcColor(AGVector2 p, const AGColor &pc0, const AGColor &pc1, const AGC
 }
 
 void AGPainter::drawGradient(const AGRect2 &pr, const AGColor &pc0, const AGColor &pc1, const AGColor &pc2, const AGColor &pc3) {
-  STACKTRACE;
-  AGGLScreen *glScreen = dynamic_cast<AGGLScreen*> (mTarget.getPtr());
 
   AGRect2 src(0, 0, 1, 1);
 

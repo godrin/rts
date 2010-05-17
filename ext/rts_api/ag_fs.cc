@@ -29,6 +29,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <sys/stat.h>
+#include <stdio.h>
 
 #ifdef WIN32
 #include <windows.h>
