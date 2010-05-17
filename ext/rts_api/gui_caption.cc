@@ -18,9 +18,22 @@
  * License along with this program.
  */
 
-#include "ag_caption.h"
-#include "rk_debug.h"
-#include "ag_screen.h"
+#include "gui_caption.h"
+#include "gui_screen.h"
+
+#include "basic_debug.h"
+
+static bool useVertexArrays()
+  {
+    AGString s=getConfig()->get("useVertexArrays");
+    if(s!="true" && s!="false")
+      {
+        s="true";
+        getConfig()->set("useVertexArrays",s);
+      }
+    return s=="true";
+  }
+
 
 AGCaption::AGCaption(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG):
   AGText(pParent,pRect,pText,pFont),

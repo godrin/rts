@@ -1,7 +1,7 @@
 #ifndef MTWIST_H
 #define MTWIST_H
 
-#include <rk_base.h>
+#include <basic_base.h>
 
 /*
  * $Id: mtwist.h,v 1.15 2003/09/11 23:56:20 geoff Exp geoff $

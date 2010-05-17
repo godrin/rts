@@ -23,8 +23,8 @@
 #ifndef AG_CAPTION_H
 #define AG_CAPTION_H
 
-#include "ag_text.h"
-#include "ag_background.h"
+#include "gui_text.h"
+#include "gui_background.h"
 
 class AGEXPORT AGCaption:public AGText
 {
