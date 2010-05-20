@@ -18,14 +18,14 @@
  * License along with this program.
  */
 
-#include "ag_menu.h"
-#include "ag_menuitem.h"
-#include "ag_font.h"
-#include "ag_text.h"
-#include "ag_surface.h"
-#include "ag_theme.h"
+#include <gui_menu.h>
+#include <gui_menuitem.h>
+#include <gui_font.h>
+#include <gui_text.h>
+#include <gui_surface.h>
+#include <gui_theme.h>
 
-#include "rk_debug.h"
+#include <basic_debug.h>
 
 using namespace std;
 

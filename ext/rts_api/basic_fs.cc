@@ -24,8 +24,8 @@
 #include <string>
 #include <list>
 #include <assert.h>
-#include <ag_fs.h>
-#include <ag_config.h>
+#include <basic_fs.h>
+#include <gui_config.h>
 #include <dirent.h>
 #include <errno.h>
 #include <sys/stat.h>
@@ -36,11 +36,11 @@
 #include <shlobj.h>
 #endif
 
-#include "rk_debug.h"
-#include "rk_tools.h"
+#include <basic_debug.h>
+#include <basic_tools.h>
 
-#include "ag_main.h"
-#include "ag_serial.h"
+#include <gui_main.h>
+#include <basic_serial.h>
 #include <zlib.h>
 
 static std::list<AGString> gFilesystemPathes;

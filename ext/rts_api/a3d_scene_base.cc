@@ -1,8 +1,8 @@
-#include "ag_profiler.h"
+#include <basic_profiler.h>
 
-#include "quadtree.h"
+#include <a3d_quadtree.h>
 
-#include "scene_base.h"
+#include <a3d_scene_base.h>
 
 #include <algorithm>
 

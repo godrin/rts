@@ -4,10 +4,10 @@
 #include "rice/Constructor.hpp"
 #include "rice/Director.hpp"
     
-#include "ag_application.h"
-#include "ag_glscreen.h"
-#include "ag_main.h"
-#include "ag_video.h"
+#include <gui_application.h>
+#include <gui_glscreen.h>
+#include <gui_main.h>
+#include <gui_video.h>
     
     
     using namespace Rice;

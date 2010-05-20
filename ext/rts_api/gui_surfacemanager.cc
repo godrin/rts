@@ -18,18 +18,18 @@
  * License along with this program.
  */
 
-#include "ag_surfacemanager.h"
-#include "ag_rendercontext.h"
-#include "ag_surface.h"
-#include "ag_texture.h"
-#include "ag_kill.h"
-#include "rk_debug.h"
-#include "ag_config.h"
-#include "ag_glscreen.h"
-#include "ag_profiler.h"
-#include "ag_video.h"
+#include <gui_surfacemanager.h>
+#include <gui_rendercontext.h>
+#include <gui_surface.h>
+#include <gui_texture.h>
+#include <basic_kill.h>
+#include <basic_debug.h>
+#include <gui_config.h>
+#include <gui_glscreen.h>
+#include <basic_profiler.h>
+#include <gui_video.h>
 
-#include "ag_surface_internal.h"
+#include <gui_surface_internal.h>
 
 #include <map>
 

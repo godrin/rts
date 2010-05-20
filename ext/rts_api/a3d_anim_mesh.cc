@@ -1,14 +1,14 @@
-#include "anim_mesh.h"
-#include "scene.h"
-#include "ag_texturecache.h"
-#include "ag_rendercontext.h"
+#include <a3d_anim_mesh.h>
+#include <a3d_scene.h>
+#include <gui_texturecache.h>
+#include <gui_rendercontext.h>
 
-#include "ag_vdebug.h"
-#include "ag_xml.h"
-#include "ag_fs.h"
-#include "ag_config.h"
-#include "ag_profiler.h"
-#include "entity.h"
+#include <gui_vdebug.h>
+#include <basic_xml.h>
+#include <basic_fs.h>
+#include <gui_config.h>
+#include <basic_profiler.h>
+#include <game_entity.h>
 
 #include <cmath>
 

@@ -18,19 +18,19 @@
  * License along with this program.
  */
 
-#include "ag_application.h"
-#include "ag_main.h"
-#include "ag_screen.h"
-#include "ag_glscreen.h"
-#include "ag_main.h"
-#include "rk_debug.h"
-#include "ag_mixer.h"
-#include "ag_texturecache.h"
-#include "ag_profiler.h"
-#include "ag_clip_painttarget.h"
-#include "ag_video.h"
-#include "ag_vdebug.h"
-#include "ag_painter.h"
+#include <gui_application.h>
+#include <gui_main.h>
+#include <gui_screen.h>
+#include <gui_glscreen.h>
+#include <gui_main.h>
+#include <basic_debug.h>
+#include <sound_mixer.h>
+#include <gui_texturecache.h>
+#include <basic_profiler.h>
+#include <gui_clip_painttarget.h>
+#include <gui_video.h>
+#include <gui_vdebug.h>
+#include <gui_painter.h>
 
 #include <ruby.h>
 

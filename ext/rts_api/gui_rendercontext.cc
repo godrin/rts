@@ -18,11 +18,11 @@
  * License along with this program.
  */
 
-#include "ag_rendercontext.h"
-#include "rk_debug.h"
-#include "ag_vdebug.h"
-#include "ag_texture.h"
-#include "ag_surfacemanager.h"
+#include <gui_rendercontext.h>
+#include <basic_debug.h>
+#include <gui_vdebug.h>
+#include <gui_texture.h>
+#include <gui_surfacemanager.h>
 
 #define SLOWCONTEXT
 //#define TEXTURE_TEST

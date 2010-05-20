@@ -3,8 +3,8 @@
 #ifndef AG_MESSAGE_H_
 #define AG_MESSAGE_H_
 
-#include <rk_string.h>
-#include <rk_rubyobj.h>
+#include <basic_string.h>
+#include <basic_rubyobj.h>
 
 #include <map>
 #include <set>

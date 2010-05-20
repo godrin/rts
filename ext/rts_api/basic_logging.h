@@ -87,7 +87,6 @@ namespace logger {
 
     static std::string getType(const Type &pType);
   private:
-    void check();
 
     Type mType;
     bool mEnabled;

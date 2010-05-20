@@ -18,15 +18,15 @@
  * License along with this program.
  */
 
-#include "ag_window.h"
-#include "ag_surface.h"
-#include "ag_theme.h"
-#include "ag_image.h"
-#include "ag_text.h"
-#include "rk_debug.h"
-#include "ag_button.h"
-#include "ag_caption.h"
-#include "ag_texturecache.h"
+#include <gui_window.h>
+#include <gui_surface.h>
+#include <gui_theme.h>
+#include <gui_image.h>
+#include <gui_text.h>
+#include <basic_debug.h>
+#include <gui_button.h>
+#include <gui_caption.h>
+#include <gui_texturecache.h>
 
 #undef connect
 

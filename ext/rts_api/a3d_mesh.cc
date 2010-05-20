@@ -1,11 +1,11 @@
-#include "mesh.h"
+#include <a3d_mesh.h>
 
 #include <map>
 #include <vector>
 #include <cmath>
-#include <ag_vdebug.h>
-#include <ag_texturecache.h>
-#include <ag_profiler.h>
+#include <gui_vdebug.h>
+#include <gui_texturecache.h>
+#include <basic_profiler.h>
 
 
 

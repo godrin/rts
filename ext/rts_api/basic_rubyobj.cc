@@ -1,11 +1,11 @@
-#include "rk_base.h"
-#include "rk_rubyobj.h"
+#include <basic_base.h>
+#include <basic_rubyobj.h>
 #include <assert.h>
 #include <typeinfo>
 #include <set>
 #include <map>
 #include <iostream>
-#include "rk_logging.h"
+#include <basic_logging.h>
 
 
 #ifdef __WIN32__

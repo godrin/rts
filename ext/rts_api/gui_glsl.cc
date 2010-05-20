@@ -1,8 +1,8 @@
-#include "ag_gl.h"
-#include "ag_glsl.h"
-#include "ag_vdebug.h"
-#include "ag_main.h"
-#include "rk_rubyobj.h"
+#include <gui_gl.h>
+#include <gui_glsl.h>
+#include <gui_vdebug.h>
+#include <gui_main.h>
+#include <basic_rubyobj.h>
 
 std::map<std::string,AGVertexProgram*> mVertexPrograms;
 std::map<std::string,AGFragProgram*> mFragPrograms;

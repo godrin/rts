@@ -1,6 +1,6 @@
-#include "ag_clip_painttarget.h"
-#include "rk_debug.h"
-#include "ag_projection.h"
+#include <gui_clip_painttarget.h>
+#include <basic_debug.h>
+#include <gui_projection.h>
 
 AGClipPaintTarget::AGClipPaintTarget(AGPaintTarget *pTarget):mTarget(pTarget)
 {

@@ -22,7 +22,7 @@
 #define __AG_CLIP_PAINTTARGET_H
 
 #include <gui_painttarget.h>
-#include <uig_clip.h>
+#include <gui_clip.h>
 
 /// virtual paint target - use this for advanced clipping !
 class AGEXPORT AGClipPaintTarget:public AGPaintTarget

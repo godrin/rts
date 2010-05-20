@@ -18,8 +18,8 @@
  * License along with this program.
  */
 
-#include "ag_font.h"
-#include "ag_fontengine.h"
+#include <gui_font.h>
+#include <gui_fontengine.h>
 #include <sstream>
 
 AGFont::AGFont(const std::string &pFile,int size):

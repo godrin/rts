@@ -18,8 +18,8 @@
  * License along with this program.
  */
 
-#include "ag_image.h"
-#include "rk_debug.h"
+#include <gui_image.h>
+#include <basic_debug.h>
 
 AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile):
   AGWidget(pParent,r),

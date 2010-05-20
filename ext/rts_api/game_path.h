@@ -6,7 +6,7 @@
 #include <game_height_map.h>
 #include <game_heuristic.h>
 
-#include <gui_serial.h>
+#include <basic_serial.h>
 #include <gui_surface.h>
 
 /**

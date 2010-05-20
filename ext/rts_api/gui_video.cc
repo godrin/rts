@@ -1,13 +1,13 @@
-#include <ag_video.h>
+#include <gui_video.h>
 
-#include <rk_debug.h>
-#include <ag_vdebug.h>
-#include <ag_gltexture.h>
-#include <ag_glscreen.h>
-#include <ag_screen.h>
-#include <ag_sdlscreen.h>
-#include <ag_surfacemanager.h>
-#include <ag_main.h>
+#include <basic_debug.h>
+#include <gui_vdebug.h>
+#include <gui_gltexture.h>
+#include <gui_glscreen.h>
+#include <gui_screen.h>
+#include <gui_sdlscreen.h>
+#include <gui_surfacemanager.h>
+#include <gui_main.h>
 
 #include <SDL_image.h>
 

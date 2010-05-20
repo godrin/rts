@@ -19,13 +19,13 @@
  */
 
 #include <stdexcept>
-#include "ag_gltexture.h"
-#include "ag_surfacemanager.h"
-#include "ag_rendercontext.h"
-#include "rk_debug.h"
-#include "ag_vdebug.h"
+#include <gui_gltexture.h>
+#include <gui_surfacemanager.h>
+#include <gui_rendercontext.h>
+#include <basic_debug.h>
+#include <gui_vdebug.h>
 
-#include "ag_surface_internal.h"
+#include <gui_surface_internal.h>
 
 
 //FIXME: this should be static

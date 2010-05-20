@@ -1,6 +1,6 @@
-#include "ag_clip.h"
-#include "ag_projection.h"
-#include "ag_stringstream.h"
+#include <gui_clip.h>
+#include <gui_projection.h>
+#include <basic_stringstream.h>
 #include <stdexcept>
 
 void AGClipping::exclude(const AGRect2 &r)

@@ -21,7 +21,7 @@
 #include <GLee.h>
 #include <gui_glpainter.h>
 #include <gui_color.h>
-#include <gui_profiler.h>
+#include <basic_profiler.h>
 #include <gui_texture.h>
 #include <gui_rendercontext.h>
 #include <basic_debug.h>

@@ -18,8 +18,8 @@
  * License along with this program.
  */
 
-#include "ag_surface_internal.h"
-#include "ag_surfacemanager.h"
+#include <gui_surface_internal.h>
+#include <gui_surfacemanager.h>
 
 AGInternalSurface::AGInternalSurface()
 {

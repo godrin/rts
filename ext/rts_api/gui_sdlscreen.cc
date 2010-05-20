@@ -18,20 +18,20 @@
  * License along with this program.
  */
 
-#include "ag_sdlscreen.h"
-#include "ag_texture.h"
-#include "rk_debug.h"
-#include "ag_fs.h"
-#include "ag_draw.h"
-#include "ag_fontengine.h"
+#include <gui_sdlscreen.h>
+#include <gui_texture.h>
+#include <basic_debug.h>
+#include <basic_fs.h>
+#include <gui_draw.h>
+#include <gui_fontengine.h>
 
-#include "SDL_image.h"
-#include "ag_sgeexport.h"
+#include <SDL_image.h>
+#include <gui_sgeexport.h>
 #include <cmath>
 
-#include "ag_sdlpainter.h"
+#include <gui_sdlpainter.h>
 
-#include "ag_surface_internal.h"
+#include <gui_surface_internal.h>
 
 static bool gUseSDLclipping=true;
 

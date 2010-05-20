@@ -26,7 +26,7 @@
 #include <basic_rubyobj.h>
 
 #include <gui_collector.h>
-#include <gui_rand_base.h>
+#include <basic_rand_base.h>
 #include <gui_video_base.h>
 
 #include <string>

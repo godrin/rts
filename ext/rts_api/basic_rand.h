@@ -24,7 +24,7 @@
 #define __AG_RAND
 
 #include <string>
-#include <gui_rand_base.h>
+#include <basic_rand_base.h>
 #include <mtwist.h>
 
 // Randomizer using Mersenne Twister - it's even faster

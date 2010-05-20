@@ -18,10 +18,10 @@
  * License along with this program.
  */
 
-#include "rk_debug.h"
-#include "ag_main.h"
-#include "ag_profiler.h"
-#include "ag_rand.h"
+#include <basic_debug.h>
+#include <gui_main.h>
+#include <basic_profiler.h>
+#include <basic_rand.h>
 
 #include <sstream>
 

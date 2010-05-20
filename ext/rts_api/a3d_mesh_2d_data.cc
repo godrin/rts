@@ -1,4 +1,4 @@
-#include "mesh_2d_data.h"
+#include <a3d_mesh_2d_data.h>
 
 Mesh2DData::Mesh2DData(AGTexture *pTexture):
   mTexture(pTexture)

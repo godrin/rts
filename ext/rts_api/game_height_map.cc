@@ -2,7 +2,7 @@
 #include <game_terrain.h>
 #include <basic_serial.h>
 #include <gui_main.h>
-#include <gui_rand.h>
+#include <basic_rand.h>
 
 #include <basic_rtools.h>
 

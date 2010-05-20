@@ -33,7 +33,7 @@
 #include <iostream>
 #include <fstream>
 #include <assert.h>
-#include <ag_vdebug.h>
+#include <gui_vdebug.h>
 
 using namespace std;
 #include <SDL_image.h>

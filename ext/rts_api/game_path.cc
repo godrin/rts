@@ -1,11 +1,11 @@
-#include "path.h"
+#include <game_path.h>
 #include <math.h>
 #include <stdexcept>
-#include <ag_profiler.h>
-#include <rk_debug.h>
+#include <basic_profiler.h>
+#include <basic_debug.h>
 //#include <SDL.h>
-#include <ag_surface.h>
-#include <ag_painter.h>
+#include <gui_surface.h>
+#include <gui_painter.h>
 
 
 

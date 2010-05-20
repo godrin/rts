@@ -1,6 +1,6 @@
-#include <ag_collector.h>
-#include <rk_debug.h>
-#include <ag_main.h>
+#include <gui_collector.h>
+#include <basic_debug.h>
+#include <gui_main.h>
 
 AGCollector::~AGCollector() throw()
   {

@@ -1,4 +1,4 @@
-#include "mesh_sort.h"
+#include <a3d_mesh_sort.h>
 
 
 bool SortDistance::operator()(const SceneNode *n1,const SceneNode *n2)

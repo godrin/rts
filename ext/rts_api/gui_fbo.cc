@@ -19,11 +19,11 @@
  */
 
 
-#include "GLee.h"
-#include "ag_fbo.h"
-#include "ag_surface.h"
-#include "ag_vdebug.h"
-#include "ag_config.h"
+#include <GLee.h>
+#include <gui_fbo.h>
+#include <gui_surface.h>
+#include <gui_vdebug.h>
+#include <gui_config.h>
 
 #include <stdexcept>
 

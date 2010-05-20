@@ -1,8 +1,8 @@
 
-#include "rk_logging.h"
-#include "rk_time.h"
-#include "rk_config.h"
-#include "rk_string.h"
+#include <basic_logging.h>
+#include <basic_time.h>
+#include <gui_config.h>
+#include <basic_string.h>
 
 #include <sstream>
 #include <iostream>
@@ -153,7 +153,6 @@ namespace logger {
   }
 
   Channel &Channel::operator<<(const Special &s) {
-    check();
     if(mEnabled) {
       if (s.getType() == Special::ENDL)
         flush();
@@ -161,19 +160,7 @@ namespace logger {
     return *this;
   }
 
-  void Channel::check() {
-    if (!mChecked) {
-      mChecked = true;
-      AGString levels = RKConfig::getInstance()->get("logLevels");
-      std::vector<AGString> ls = levels.split(",");
-      if (std::find(ls.begin(), ls.end(), getType(getType())) == ls.end())
-        mEnabled = false;
-    }
-  }
-
   Channel &Channel::operator<<(const std::string &s) {
-    check();
-
     if(mEnabled) {
       RKLogging *clogger = RKLogging::getInstance();
       if (clogger)

@@ -21,9 +21,9 @@
 
 // TODO: Is this still used ?
 
-#include "ag_kill.h"
-#include "rk_debug.h"
-#include "rk_rubyobj.h"
+#include <basic_kill.h>
+#include <basic_debug.h>
+#include <basic_rubyobj.h>
 
 AGInstanceKiller *mInstanceKiller=0;
 bool mIndirectInstance=false;

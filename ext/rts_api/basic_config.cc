@@ -1,4 +1,4 @@
-#include "rk_config.h"
+#include <basic_config.h>
 
 std::string RKConfig::get(const std::string &pKey) const {
   std::map<std::string, std::string>::const_iterator i=mData.find(pKey);

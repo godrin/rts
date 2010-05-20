@@ -1,7 +1,7 @@
-#include <rk_string.h>
-#include <rk_debug.h>
-#include <rk_utf8.h>
-#include <rk_rtools.h>
+#include <basic_string.h>
+#include <basic_debug.h>
+#include <basic_utf8.h>
+#include <basic_rtools.h>
 
 ///////////
 // AGString

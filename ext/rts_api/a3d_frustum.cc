@@ -18,9 +18,9 @@
  * License along with this program.
  */
 
-#include "ant_frustum.h"
-#include "rk_debug.h"
-#include "ag_profiler.h"
+#include <a3d_frustum.h>
+#include <basic_debug.h>
+#include <basic_profiler.h>
 
 /////////////////////////////////////////////////////////////////////
 // AntPlane

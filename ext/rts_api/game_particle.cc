@@ -1,12 +1,12 @@
-#include "ant_renderer.h"
-#include "scene.h"
-#include "ant_particle.h"
-#include "ag_texturecache.h"
-#include "ag_rendercontext.h"
-#include "ag_main.h"
-#include "map.h"
-#include "ag_config.h"
-#include "ag_profiler.h"
+#include <a3d_renderer.h>
+#include <a3d_scene.h>
+#include <game_particle.h>
+#include <gui_texturecache.h>
+#include <gui_rendercontext.h>
+#include <gui_main.h>
+#include <game_map.h>
+#include <gui_config.h>
+#include <basic_profiler.h>
 
 static bool gParticle=true;
 static long lastParticleTest=0;

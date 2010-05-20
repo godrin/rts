@@ -18,12 +18,12 @@
  * License along with this program.
  */
 
-#include "rk_debug.h"
-#include "ag_edit.h"
-#include "ag_listbox.h"
-#include "ag_theme.h"
-#include "ag_scroller.h"
-#include "ag_stringstream.h"
+#include <basic_debug.h>
+#include <gui_edit.h>
+#include <gui_listbox.h>
+#include <gui_theme.h>
+#include <gui_scroller.h>
+#include <basic_stringstream.h>
 
 #include <sstream>
 

@@ -18,17 +18,17 @@
  * License along with this program.
  */
 
-#include <rk_debug.h>
-#include <ag_draw.h>
-#include <ag_fontengine.h>
-#include <ag_glscreen.h>
-#include <ag_painter.h>
-#include <ag_profiler.h>
-#include <ag_sdlsurface.h>
-#include <ag_texture.h>
+#include <basic_debug.h>
+#include <gui_draw.h>
+#include <gui_fontengine.h>
+#include <gui_glscreen.h>
+#include <gui_painter.h>
+#include <basic_profiler.h>
+#include <gui_sdlsurface.h>
+#include <gui_texture.h>
 #include <cmath>
-#include <ag_geometry.h>
-#include "ag_video.h"
+#include <gui_geometry.h>
+#include <gui_video.h>
 
 #include <stdexcept>
 

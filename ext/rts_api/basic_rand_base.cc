@@ -1,4 +1,4 @@
-#include <ag_rand_base.h>
+#include <basic_rand_base.h>
 #include <stdlib.h>
 
 float AGRandomizerBase::operator()(float f)

@@ -1,9 +1,9 @@
-#include "water.h"
-#include "ag_vdebug.h"
-#include "ag_kill.h"
-#include "ag_rendercontext.h"
-#include "ag_profiler.h"
-#include "ag_config.h"
+#include <game_water.h>
+#include <gui_vdebug.h>
+#include <basic_kill.h>
+#include <gui_rendercontext.h>
+#include <basic_profiler.h>
+#include <gui_config.h>
 
 AntWaterShader *gWaterShader=0;
 AntWaterShader *getWaterShader()

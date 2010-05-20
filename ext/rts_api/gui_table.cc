@@ -18,8 +18,8 @@
  * License along with this program.
  */
 
-#include "ag_table.h"
-#include "rk_debug.h"
+#include <gui_table.h>
+#include <basic_debug.h>
 
 AGTable::AGTable(AGWidget *pWidget,const AGRect2 &pRect):
   AGWidget(pWidget,pRect),

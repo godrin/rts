@@ -1,7 +1,7 @@
-#include "ag_frame.h"
-#include "ag_screen.h"
+#include <gui_frame.h>
+#include <gui_screen.h>
 
-#include "rk_debug.h"
+#include <basic_debug.h>
 
 AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,int pWidth,int pWidthH):AGWidget(pParent,pRect),
 mWidth(pWidth),mBorder(0),mWidthH(pWidthH<0?pWidth:pWidthH),mTexture((int)width(),(int)height())

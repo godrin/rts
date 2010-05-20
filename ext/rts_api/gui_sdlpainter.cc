@@ -1,6 +1,6 @@
-#include "ag_sdlpainter.h"
+#include <gui_sdlpainter.h>
 #include <cmath>
-#include "ag_sgeexport.h"
+#include <gui_sgeexport.h>
 
 namespace AGSDLPainter
 {

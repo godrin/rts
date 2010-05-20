@@ -1,6 +1,6 @@
-#include "mesh_2d.h"
-#include <rk_debug.h>
-#include <ag_painter.h>
+#include <a3d_mesh_2d.h>
+#include <basic_debug.h>
+#include <gui_painter.h>
 
 Mesh2D::Mesh2D(Scene2D *pScene):
   MeshBase(pScene,AGVector4(),AGBox3())

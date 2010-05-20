@@ -18,16 +18,16 @@
  * License along with this program.
  */
 
-#include "ag_edit.h"
+#include <gui_edit.h>
 
-#include "rk_debug.h"
-#include "rk_tools.h"
+#include <basic_debug.h>
+#include <basic_tools.h>
 
-#include "ag_fontengine.h"
-#include "ag_theme.h"
-#include "ag_menu.h"
-#include "ag_sgeexport.h"
-#include "ag_glscreen.h"
+#include <gui_fontengine.h>
+#include <gui_theme.h>
+#include <gui_menu.h>
+#include <gui_sgeexport.h>
+#include <gui_glscreen.h>
 
 
 AGEditLine::AGEditLine(const AGStringUtf8 &pText,AGFont pFont,bool pHardEnd):

@@ -1,9 +1,9 @@
-#include "terrain.h"
-#include <ag_texturecache.h>
-#include <ag_rendercontext.h>
-#include <ag_profiler.h>
-#include <ag_config.h>
-#include <ag_vdebug.h>
+#include <game_terrain.h>
+#include <gui_texturecache.h>
+#include <gui_rendercontext.h>
+#include <basic_profiler.h>
+#include <gui_config.h>
+#include <gui_vdebug.h>
 
 static bool gUse3dTextures=true;
 void setUsing3dTextures(bool use3dTextures)

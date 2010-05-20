@@ -18,8 +18,8 @@
  * License along with this program.
  */
 
-#include "rk_tools.h"
-#include "rk_debug.h"
+#include <basic_tools.h>
+#include <basic_debug.h>
 
 #include <sstream>
 #include <stdlib.h>

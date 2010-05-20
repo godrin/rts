@@ -18,14 +18,14 @@
  * License along with this program.
  */
 
-#include "ag_fontengine.h"
-#include "rk_debug.h"
-#include "ag_texture.h"
-#include "ag_fs.h"
-#include "ag_sgeexport.h"
-#include "ag_profiler.h"
+#include <gui_fontengine.h>
+#include <basic_debug.h>
+#include <gui_texture.h>
+#include <basic_fs.h>
+#include <gui_sgeexport.h>
+#include <basic_profiler.h>
 
-#include "ag_surface_internal.h"
+#include <gui_surface_internal.h>
 
 #include <SDL_ttf.h>
 
@@ -380,8 +380,8 @@ int AGFontEngine::getHeight(const AGFont &pFont,const AGStringUtf8 &pText)
 
 void AGFontEngine::mark() throw()
   {
-    for(std::map<std::pair<AGFont,AGStringUtf8>,AGTexture*>::iterator i=fontCache.begin();i!=fontCache.end();i++)
-      markObject(i->second);
+    //    for(std::map<std::pair<AGFont,AGStringUtf8>,AGTexture*>::iterator i=fontCache.begin();i!=fontCache.end();i++)
+      //      markObject(i->second);
 
   }
 

@@ -1,9 +1,9 @@
-#include "basic_algebra.h"
+#include <basic_algebra.h>
 
-#include "rk_debug.h"
+#include <basic_debug.h>
 
-#include "ag_gauss.h"
-#include "ag_stringstream.h"
+#include <basic_gauss.h>
+#include <basic_stringstream.h>
 
 // convert from AGMatrix4
 AGMatrixN::AGMatrixN(const AGMatrix4 &p):m(4*4,0),

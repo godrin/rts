@@ -1,6 +1,6 @@
-#include "scenenode.h"
-#include "scene.h"
-#include "rk_debug.h"
+#include <a3d_scenenode.h>
+#include <a3d_scene.h>
+#include <basic_debug.h>
 
 SceneNode::SceneNode(SceneBase *s,const AGVector4 &pPos,const AGBox3 &b):
   mPos(pPos),mBBox(b)

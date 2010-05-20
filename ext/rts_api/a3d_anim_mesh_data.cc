@@ -1,7 +1,7 @@
 #include <a3d_anim_mesh_data.h>
 #include <gui_texturecache.h>
 #include <gui_config.h>
-#include <gui_xml.h>
+#include <basic_xml.h>
 
 #include <basic_serial.h>
 

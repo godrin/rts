@@ -18,13 +18,13 @@
  * License along with this program.
  */
 
-#include "ag_xml.h"
+#include <basic_xml.h>
 #include <basic_fs.h>
 
-#include "rk_debug.h"
-#include "rk_rubyobj.h"
+#include <basic_debug.h>
+#include <basic_rubyobj.h>
 
-#include "ag_profiler.h"
+#include <basic_profiler.h>
 
 /**
    Node is used for xml-tags, but not for attributes (as in dom)

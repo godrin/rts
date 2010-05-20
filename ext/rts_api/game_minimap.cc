@@ -1,9 +1,9 @@
-#include "minimap.h"
-#include <ag_layoutfactory.h>
-#include <ag_screen.h>
-#include <ag_profiler.h>
-#include "ant_app.h"
-#include "entity.h"
+#include <game_minimap.h>
+#include <gui_layoutfactory.h>
+#include <gui_screen.h>
+#include <basic_profiler.h>
+#include <game_app.h>
+#include <game_entity.h>
 
 #define MAP_BORDER
 

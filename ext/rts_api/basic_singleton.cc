@@ -5,7 +5,7 @@
  * Created on 16. Februar 2009, 17:47
  */
 
-#include "rk_singleton.h"
+#include <basic_singleton.h>
 #include <set>
 #include <typeinfo>
 #include <stdlib.h>

@@ -18,10 +18,10 @@
  * License along with this program.
  */
 
-#include "ag_screen.h"
-#include "ag_screenwidget.h"
-#include "ag_surface.h"
-#include "ag_theme.h"
+#include <gui_screen.h>
+#include <gui_screenwidget.h>
+#include <gui_surface.h>
+#include <gui_theme.h>
 
 
 AGScreenWidget::AGScreenWidget():

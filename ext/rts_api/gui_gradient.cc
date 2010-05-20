@@ -18,7 +18,7 @@
  * License along with this program.
  */
 
-#include "ag_gradient.h"
+#include <gui_gradient.h>
 
 AGGradient::AGGradient()
   {}

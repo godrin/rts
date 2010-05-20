@@ -24,7 +24,7 @@
 #include <gui_screen.h>
 #include <gui_main.h>
 #include <gui_menu.h>
-#include <gui_kill.h>
+#include <basic_kill.h>
 #include <map>
 #include <iostream>
 #include <algorithm>

@@ -18,18 +18,18 @@
  * License along with this program.
  */
 
-#include "scene.h"
-#include "ag_rand.h"
-#include "map.h"
-#include "entity.h"
+#include <a3d_scene.h>
+#include <basic_rand.h>
+#include <game_map.h>
+#include <game_entity.h>
 #include <math.h>
-#include <rk_debug.h>
-#include "mesh.h"
-#include "terrain.h"
-#include "quadtree.h"
-#include "anim_mesh.h"
-#include "mesh_2d.h"
-#include "ag_profiler.h"
+#include <basic_debug.h>
+#include <a3d_mesh.h>
+#include <game_terrain.h>
+#include <a3d_quadtree.h>
+#include <a3d_anim_mesh.h>
+#include <a3d_mesh_2d.h>
+#include <basic_profiler.h>
 
 #include <algorithm>
 #include <vector>

@@ -19,11 +19,11 @@
  */
 
 
-#include "ag_scroller.h"
-#include "ag_button.h"
-#include "ag_border.h"
-#include "ag_background.h"
-#include "rk_debug.h"
+#include <gui_scroller.h>
+#include <gui_button.h>
+#include <gui_border.h>
+#include <gui_background.h>
+#include <basic_debug.h>
 
 AGScroller::AGScroller(AGWidget *pParent,const AGRect2 &pRect,bool pHor):
   AGWidget(pParent,pRect),

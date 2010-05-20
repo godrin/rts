@@ -18,9 +18,9 @@
  * License along with this program.
  */
 
-#include "jobs.h"
-#include "entity.h"
-#include "map.h"
+#include <game_jobs.h>
+#include <game_entity.h>
+#include <game_map.h>
 #include <math.h>
 
 

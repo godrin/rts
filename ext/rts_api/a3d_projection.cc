@@ -1,6 +1,6 @@
-#include "ant_projection.h"
+#include <a3d_projection.h>
 
-#include <rk_debug.h>
+#include <basic_debug.h>
 
 #include <GL/glu.h>
 

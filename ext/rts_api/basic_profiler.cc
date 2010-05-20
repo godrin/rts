@@ -6,9 +6,9 @@
 #include <list>
 #include <set>
 
-#include "ag_profiler.h"
+#include <basic_profiler.h>
 
-#include "rk_debug.h"
+#include <basic_debug.h>
 
 #include <SDL.h>
 

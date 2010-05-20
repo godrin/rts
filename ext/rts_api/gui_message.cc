@@ -1,5 +1,5 @@
-#include "ag_message.h"
-#include "rk_debug.h"
+#include <gui_message.h>
+#include <basic_debug.h>
 
 AGMessageData::AGMessageData(size_t pID):
   mID(pID)

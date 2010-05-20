@@ -2,7 +2,7 @@
 #define RK_CONFIG_H
 
 #include <string>
-#include "rk_singleton.h"
+#include <basic_singleton.h>
 
 #include <map>
 
