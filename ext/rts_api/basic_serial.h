@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <ag_fs.h>
+#include <basic_fs.h>
 #include <SDL.h>
 #include <sstream>
 

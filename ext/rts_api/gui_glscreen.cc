@@ -18,12 +18,12 @@
  * License along with this program.
  */
 
-#include "ag_glscreen.h"
-#include "ag_color.h"
-#include "rk_debug.h"
-#include "ag_vdebug.h"
-#include "ag_fontengine.h"
-#include "ag_surfacemanager.h"
+#include <gui_glscreen.h>
+#include <gui_color.h>
+#include <basic_debug.h>
+#include <gui_vdebug.h>
+#include <gui_fontengine.h>
+#include <gui_surfacemanager.h>
 #include <GL/gl.h>
 #include <GL/glext.h>
 #include <GL/glu.h>
@@ -31,20 +31,20 @@
 #include <set>
 #include <map>
 #include <vector>
-#include "ag_sgeexport.h"
-#include "SDL_image.h"
+#include <gui_sgeexport.h>
+#include <SDL_image.h>
 
-#include "ag_surface_internal.h"
+#include <gui_surface_internal.h>
 
-#include <ag_rendercontext.h>
+#include <gui_rendercontext.h>
 #include <SDL.h>
 
-#include <ag_fs.h>
+#include <basic_fs.h>
 
-#include <ag_geometry.h>
-#include <ag_texture.h>
-#include <ag_profiler.h>
-#include <ag_glpainter.h>
+#include <gui_geometry.h>
+#include <gui_texture.h>
+#include <basic_profiler.h>
+#include <gui_glpainter.h>
 
 std::set<SDL_Surface *> glTestSurfaces;
 

@@ -23,13 +23,13 @@
 #ifndef AG_THEME_H
 #define AG_THEME_H
 
-#include "rk_base.h"
-#include "ag_font.h"
-#include "ag_surface.h"
+#include <basic_base.h>
+#include <gui_font.h>
+#include <gui_surface.h>
 
-#include "ag_border.h"
-#include "ag_gradient.h"
-#include "ag_background.h"
+#include <gui_border.h>
+#include <gui_gradient.h>
+#include <gui_background.h>
 
 #include <map>
 

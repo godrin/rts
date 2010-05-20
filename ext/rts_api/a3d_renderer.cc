@@ -1,9 +1,9 @@
-#include "ant_renderer.h"
-#include "scene.h"
-#include "ag_vdebug.h"
-#include "ag_config.h"
-#include "ag_fbo.h"
-#include "ag_kill.h"
+#include <a3d_renderer.h>
+#include <a3d_scene.h>
+#include <gui_vdebug.h>
+#include <gui_config.h>
+#include <gui_fbo.h>
+#include <basic_kill.h>
 
 Renderer *gRenderer=0;
 

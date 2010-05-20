@@ -18,11 +18,11 @@
  * License along with this program.
  */
 
-#include "ag_texture.h"
-#include "ag_texturecache.h"
-#include "ag_png.h"
-#include "ag_kill.h"
-#include "ag_geometry.h"
+#include <gui_texture.h>
+#include <gui_texturecache.h>
+#include <gui_png.h>
+#include <basic_kill.h>
+#include <gui_geometry.h>
 
 AGTextureCache *mTextureCache=0;
 AGTextureCache *getTextureCache()

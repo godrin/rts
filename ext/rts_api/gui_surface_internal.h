@@ -21,9 +21,9 @@
 #ifndef AG_SURFACE_INTERNAL
 #define AG_SURFACE_INTERNAL
 
-#include "rk_base.h"
+#include <basic_base.h>
 
-#include "ag_gltexture.h"
+#include <gui_gltexture.h>
 
 class AGGLTexture;
 

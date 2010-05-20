@@ -23,11 +23,11 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <rk_rubyobj.h>
+#include <basic_rubyobj.h>
 
-#include <ag_geometry.h>
-#include <ag_color.h>
-#include <ag_font.h>
+#include <gui_geometry.h>
+#include <gui_color.h>
+#include <gui_font.h>
 
 class AGSurface;
 class AGTexture;

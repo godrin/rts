@@ -23,7 +23,7 @@
 #ifndef AG_COMBO_H
 #define AG_COMBO_H
 
-#include <ag_widget.h>
+#include <gui_widget.h>
 
 class AGEdit;
 class AGButton;

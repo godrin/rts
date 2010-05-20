@@ -23,13 +23,15 @@
 #ifndef AG_MESSAGEOBJECT_H
 #define AG_MESSAGEOBJECT_H
 
+
+#include <basic_rubyobj.h>
+#include <basic_string.h>
+
+#include <gui_geometry.h>
+
 #include <SDL.h>
 #include <string>
 #include <set>
-
-#include "ag_geometry.h"
-#include "rk_rubyobj.h"
-#include "rk_string.h"
 
 #if SDL_COMPILEDVERSION>1300
 #define MSDLMod Uint16

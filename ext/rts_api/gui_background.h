@@ -23,10 +23,11 @@
 #ifndef AG_BACKGROUND_H
 #define AG_BACKGROUND_H
 
+#include <gui_geometry.h>
+#include <gui_texture.h>
+#include <gui_color.h>
+
 #include <string>
-#include "ag_geometry.h"
-#include "ag_texture.h"
-#include "ag_color.h"
 
 class AGPainter;
 class AGLocalTheme;

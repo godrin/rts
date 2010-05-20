@@ -20,30 +20,26 @@
 
 #include <iostream>
 
-#include "ag_surface.h"
-#include "ag_texture.h"
-#include "ag_color.h"
-#include "rk_debug.h"
-#include "ag_vdebug.h"
-#include "ag_draw.h"
-#include "ag_sgeexport.h"
-#include "ag_png.h"
-#include "ag_glscreen.h"
-#include "ag_sdlpainter.h"
-#include "ag_surfacemanager.h"
-#include "ag_surface_internal.h"
+#include <gui_surface.h>
+#include <gui_texture.h>
+#include <gui_color.h>
+#include <basic_debug.h>
+#include <gui_vdebug.h>
+#include <gui_draw.h>
+#include <gui_sgeexport.h>
+#include <gui_png.h>
+#include <gui_glscreen.h>
+#include <gui_sdlpainter.h>
+#include <gui_surfacemanager.h>
+#include <gui_surface_internal.h>
 
 #include <SDL_image.h>
 
 #include <sstream>
 #include <cmath>
 
-#include <ag_fs.h>
+#include <basic_fs.h>
 
-bool gDRM=false;
-
-
-AGDecryptor *AGSurface::mDecryptor=0;
 
 ///////////////////////////////////////////////////////////////////////
 // Tools
@@ -172,8 +168,6 @@ AGSurface::~AGSurface() throw()
 
 void AGSurface::save(const std::string &pName) const
 {
-  if(gDRM==true)
-    throw std::runtime_error("saving disabled - because of DRM!");
   assert(s);
   assert(s->surface);
   std::string png=toPNG(s->surface);
@@ -369,36 +363,6 @@ AGSurface AGSurface::load(const std::string &pFilename) throw (FileNotFound)
 
   n.s->surface=s;
   return n;
-}
-
-AGSurface AGSurface::loadDRM(const std::string &pName) throw(FileNotFound)
-{
-  assert(mDecryptor);
-
-  AGSurface n;
-  if(!mDecryptor)
-    return n;
-
-  n.s=new AGInternalSurface;
-  std::string file=loadFile(pName);
-  if(file.length()==0)
-    throw FileNotFound(pName);
-
-  file=mDecryptor->decrypt(file,pName);
-  gDRM=true;
-
-  cdebug("FIRST:"<<int(file[0])<<","<<int(file[1])<<","<<int(file[2]));
-
-  SDL_Surface *s=IMG_Load_RW(SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length()),false);
-  assertGL;
-  if(s==0)
-  {
-    cdebug("Load file failed:"<<pName);
-  }
-  assert(s);
-  n.s->surface=s;
-  return n;
-
 }
 
 
@@ -649,17 +613,7 @@ void AGSurface::drawLine(const AGVector2 &pp0,const AGVector2 &pp1,const AGColor
 
 
 
- void AGSurface::setDecryptor(AGDecryptor *pDecryptor)
- {
-   mDecryptor=pDecryptor;
- }
-
-
- AGDecryptor *toDecryptor(AGPlugin *p)
- {
-   return (AGDecryptor*)(p);
- }
-
+ 
  std::ostream &operator<<(std::ostream &o,SDL_PixelFormat *f)
  {
    o<<"(";

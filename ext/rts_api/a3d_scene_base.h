@@ -3,8 +3,8 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "ant_camera.h"
-#include "scenenode.h"
+#include <game_camera.h>
+#include <a3d_scenenode.h>
 
 /**
    some helper structure, which is used for storing

@@ -1,7 +1,7 @@
-#include "heuristic.h"
-#include <rk_debug.h>
-#include <ag_profiler.h>
-#include "ag_serial_vec.h"
+#include <game_heuristic.h>
+#include <basic_debug.h>
+#include <basic_profiler.h>
+#include <gui_serial_vec.h>
 
 #include <set>
 

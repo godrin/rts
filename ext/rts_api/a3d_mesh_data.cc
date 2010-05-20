@@ -1,11 +1,11 @@
-#include "mesh_data.h"
-#include <ag_texturecache.h>
-#include "mesh_optimizer.h"
-#include <ag_rendercontext.h>
+#include <a3d_mesh_data.h>
+#include <gui_texturecache.h>
+#include <a3d_mesh_optimizer.h>
+#include <gui_rendercontext.h>
 
-#include <ag_serial.h>
-#include <ag_main.h>
-#include <ag_vdebug.h>
+#include <basic_serial.h>
+#include <gui_main.h>
+#include <gui_vdebug.h>
 
 //////////////////////////////////////////////////////////////////////
 // MeshData

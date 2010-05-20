@@ -18,10 +18,10 @@
  * License along with this program.
  */
 
-#include "ag_screen.h"
-#include "rk_debug.h"
-#include "ag_surface.h"
-#include "ag_texture.h"
+#include <gui_screen.h>
+#include <basic_debug.h>
+#include <gui_surface.h>
+#include <gui_texture.h>
 
 ////////////////////////////////////////////////////////////////////////
 // AGScreen

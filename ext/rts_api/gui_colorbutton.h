@@ -23,8 +23,8 @@
 #ifndef AG_COLORBUTTON_H
 #define AG_COLORBUTTON_H
 
-#include "ag_widget.h"
-#include "ag_color.h"
+#include <gui_widget.h>
+#include <gui_color.h>
 #include <vector>
 
 class AGEXPORT AGColorButton:public AGWidget

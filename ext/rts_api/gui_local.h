@@ -23,9 +23,10 @@
 #ifndef AG_LOCAL_H
 #define AG_LOCAL_H
 
-#include <rk_rubyobj.h>
-#include <rk_string.h>
-#include <ag_string_utf8.h>
+#include <basic_rubyobj.h>
+#include <basic_string.h>
+
+#include <basic_string_utf8.h>
 
 class AGEXPORT AGLocalizer:public AGRubyObject
 {

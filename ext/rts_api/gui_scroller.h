@@ -23,7 +23,7 @@
 #ifndef __AG_SCROLLER_H
 #define __AG_SCROLLER_H
 
-#include <ag_widget.h>
+#include <gui_widget.h>
 
 class AGButton;
 class AGBorder;

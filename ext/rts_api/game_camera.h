@@ -23,11 +23,11 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <rk_rubyobj.h>
+#include <basic_rubyobj.h>
 
-#include "ag_gl.h"
-#include <ant_frustum.h>
-#include <ant_projection.h>
+#include <gui_gl.h>
+#include <a3d_frustum.h>
+#include <a3d_projection.h>
 
 /**
    \brief a camera object for moving over a height map

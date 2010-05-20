@@ -1,7 +1,7 @@
-#include "ag_serial.h"
+#include <basic_serial.h>
 #include <iostream>
-#include <rk_debug.h>
-#include "rk_rubyobj.h"
+#include <basic_debug.h>
+#include <basic_rubyobj.h>
 
 // INTEL is little endian
 

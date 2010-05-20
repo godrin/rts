@@ -24,8 +24,8 @@
 #define __AG_RENDERCONTEXT_H
 
 
-#include "ag_geometry.h"
-#include "ag_gltexture.h"
+#include <gui_geometry.h>
+#include <gui_gltexture.h>
 
 class AGShaderProgram;
 

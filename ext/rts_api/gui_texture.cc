@@ -18,20 +18,20 @@
  * License along with this program.
  */
 
-#include "ag_texture.h"
-#include "ag_glscreen.h"
-#include "rk_debug.h"
-#include "ag_rendercontext.h"
-#include "ag_sgeexport.h"
-#include "ag_surfacemanager.h"
-#include "ag_profiler.h"
-#include "ag_glpainter.h"
-#include "ag_fbo.h"
-#include "ag_main.h"
-#include "ag_sdlpainter.h"
-#include "ag_video.h"
+#include <gui_texture.h>
+#include <gui_glscreen.h>
+#include <basic_debug.h>
+#include <gui_rendercontext.h>
+#include <gui_sgeexport.h>
+#include <gui_surfacemanager.h>
+#include <basic_profiler.h>
+#include <gui_glpainter.h>
+#include <gui_fbo.h>
+#include <gui_main.h>
+#include <gui_sdlpainter.h>
+#include <gui_video.h>
 
-#include "ag_surface_internal.h"
+#include <gui_surface_internal.h>
 
 #include <stdexcept>
 

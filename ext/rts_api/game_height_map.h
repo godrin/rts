@@ -3,12 +3,11 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "scene.h"
-#include <ag_geometry.h>
-#include <ag_xml.h>
-#include "entptr.h"
-#include <ag_messageobject.h>
-#include <ag_serial.h>
+#include <a3d_scene.h>
+#include <gui_geometry.h>
+#include <basic_xml.h>
+#include <gui_messageobject.h>
+#include <basic_serial.h>
 
 class AntEntity;
 class AntEntityPtr;

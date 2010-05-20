@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <ag_texture.h>
+#include <gui_texture.h>
 
 class AGEXPORT Mesh2DData:public AGRubyObject
 {

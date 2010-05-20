@@ -21,7 +21,7 @@
 #ifndef __ANTARGISGUI_EXCEPTION_H__
 #define __ANTARGISGUI_EXCEPTION_H__
 
-#include <rk_base.h>
+#include <basic_base.h>
 #include <stdexcept>
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing

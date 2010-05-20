@@ -23,10 +23,10 @@
 #ifndef __TEXTURE_CACHE_H__
 #define __TEXTURE_CACHE_H__
 
-#include "rk_debug.h"
+#include <basic_debug.h>
 
-#include "ag_surface.h"
-#include <ag_fs.h>
+#include <gui_surface.h>
+#include <basic_fs.h>
 
 #include <string>
 #include <map>

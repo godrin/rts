@@ -19,11 +19,11 @@
  */
 
 
-#include "ag_text.h"
-#include "rk_debug.h"
-#include "ag_surface.h"
-#include "ag_fontengine.h"
-#include "ag_geometry.h"
+#include <gui_text.h>
+#include <basic_debug.h>
+#include <gui_surface.h>
+#include <gui_fontengine.h>
+#include <gui_geometry.h>
 
 #include <iostream>
 

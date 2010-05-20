@@ -23,7 +23,7 @@
 #ifndef ANT_FRUSTUM_H
 #define ANT_FRUSTUM_H
 
-#include "ag_geometry.h"
+#include <gui_geometry.h>
 
 class AGEXPORT AntPlane
 {

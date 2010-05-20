@@ -23,14 +23,15 @@
 #ifndef AG_WIDGET_H
 #define AG_WIDGET_H
 
-#include "rk_base.h"
-#include "ag_geometry.h"
-#include "ag_messageobject.h"
-#include "ag_projection.h"
+#include <basic_base.h>
+#include <gui_geometry.h>
+#include <gui_messageobject.h>
+#include <gui_projection.h>
+
+#include "gui_painter.h"
 
 #include <list>
 
-#include "ag_painter.h"
 
 class AGTooltip;
 class AGLayout;

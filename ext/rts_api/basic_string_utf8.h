@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <rk_base.h>
+#include <basic_base.h>
 
 #include <string>
 #include <vector>

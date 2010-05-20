@@ -3,13 +3,13 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "scene.h"
-#include "mesh_base.h"
-#include "vertex_array.h"
+#include <a3d_scene.h>
+#include <a3d_mesh_base.h>
+#include <a3d_vertex_array.h>
 
 #include <map>
 
-#include "mesh_data.h"
+#include <a3d_mesh_data.h>
 
 /** A mesh is a scenenode, that displays a mesh ;)
     ok, now for the real info.

@@ -18,26 +18,26 @@
  * License along with this program.
  */
 
-#include "ag_layout.h"
-#include "ag_xml.h"
-#include "rk_tools.h"
-#include "ag_theme.h"
-#include "ag_listbox.h"
-#include "ag_combo.h"
-#include "ag_image.h"
-#include "ag_frame.h"
+#include <gui_layout.h>
+#include <basic_xml.h>
+#include <basic_tools.h>
+#include <gui_theme.h>
+#include <gui_listbox.h>
+#include <gui_combo.h>
+#include <gui_image.h>
+#include <gui_frame.h>
 
-#include "ag_button.h"
-#include "ag_edit.h"
-#include "ag_window.h"
-#include "ag_text.h"
-#include "ag_main.h"
-#include "ag_video.h"
+#include <gui_button.h>
+#include <gui_edit.h>
+#include <gui_window.h>
+#include <gui_text.h>
+#include <gui_main.h>
+#include <gui_video.h>
 
-#include "ag_layoutfactory.h"
+#include <gui_layoutfactory.h>
 
 // keep in mind: ag_local.h must be included after ruby.h!!!
-#include "ag_local.h"
+#include <gui_local.h>
 
 AGLayout::AGLayout(AGWidget *pgParent):
   AGWidget(pgParent,AGRect2(0,0,0,0))

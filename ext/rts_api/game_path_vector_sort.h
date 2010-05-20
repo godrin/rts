@@ -1,7 +1,7 @@
 #ifndef PATH_VECTOR_SORT_H
 #define PATH_VECTOR_SORT_H
 
-#include <ag_geometry.h>
+#include <gui_geometry.h>
 
 class DistanceOrder
 {

@@ -23,11 +23,11 @@
 #ifndef __AG_FONT_H
 #define __AG_FONT_H
 
-#include <rk_base.h>
-#include <rk_utf8.h>
-#include <ag_color.h>
+#include <basic_base.h>
+#include <basic_utf8.h>
+#include <gui_color.h>
 
-#include <ag_string_utf8.h>
+#include <basic_string_utf8.h>
 
 class AGEXPORT AGFont
 {

@@ -23,7 +23,7 @@
 #ifndef AG_CONFIG_H
 #define AG_CONFIG_H
 
-#include <rk_string.h>
+#include <basic_string.h>
 
 #include <map>
 

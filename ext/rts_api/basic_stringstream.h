@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <rk_string.h>
+#include <basic_string.h>
 
 #include <SDL.h>
 

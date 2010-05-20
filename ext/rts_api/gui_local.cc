@@ -18,8 +18,8 @@
  * License along with this program.
  */
 
-#include "ag_local.h"
-#include "rk_debug.h"
+#include <gui_local.h>
+#include <basic_debug.h>
 
 
 AGLocalizer *gLocalizer=0;

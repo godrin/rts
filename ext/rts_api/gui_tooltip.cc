@@ -18,13 +18,13 @@
  * License along with this program.
  */
 
-#include "ag_tooltip.h"
-#include "ag_theme.h"
-#include "ag_screen.h"
-#include "ag_edit.h"
+#include <gui_tooltip.h>
+#include <gui_theme.h>
+#include <gui_screen.h>
+#include <gui_edit.h>
 
-#include "rk_debug.h"
-#include "rk_tools.h"
+#include <basic_debug.h>
+#include <basic_tools.h>
 
 AGTooltip::AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText):
   AGWidget(0,pRect),

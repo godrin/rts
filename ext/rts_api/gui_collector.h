@@ -1,8 +1,8 @@
 #ifndef AG_COLLECTOR_H
 #define AG_COLLECTOR_H
 
-#include <rk_base.h>
-#include <rk_rubyobj.h>
+#include <basic_base.h>
+#include <basic_rubyobj.h>
 
 #include <set>
 

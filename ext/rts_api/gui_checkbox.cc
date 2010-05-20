@@ -18,13 +18,13 @@
  * License along with this program.
  */
 
-#include "ag_checkbox.h"
-#include "ag_image.h"
-#include "ag_text.h"
-#include "ag_theme.h"
-#include "rk_debug.h"
-#include "ag_layoutfactory.h"
-#include "ag_local.h"
+#include <gui_checkbox.h>
+#include <gui_image.h>
+#include <gui_text.h>
+#include <gui_theme.h>
+#include <basic_debug.h>
+#include <gui_layoutfactory.h>
+#include <gui_local.h>
 
 AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect2 pRect):
   AGButton(pParent,pRect,"")

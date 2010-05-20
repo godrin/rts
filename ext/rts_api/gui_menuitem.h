@@ -23,8 +23,8 @@
 #ifndef AG_MENUITEM_H
 #define AG_MENUITEM_H
 
-#include "ag_text.h"
-#include "ag_table.h"
+#include <gui_text.h>
+#include <gui_table.h>
 
 class AGMenu;
 

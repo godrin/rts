@@ -23,13 +23,15 @@
 #ifndef AG_LAYOUTFACTORY_H
 #define AG_LAYOUTFACTORY_H
 
-#include <ag_singleton.h>
-#include <rk_utf8.h>
-#include <ag_widget.h>
-#include <ag_xml.h>
-#include <ag_layout.h>
+#include <basic_utf8.h>
 
-class AGEXPORT AGLayoutCreator:public AGSingleton
+#include <basic_singleton.h>
+#include <gui_widget.h>
+#include <basic_xml.h>
+#include <gui_layout.h>
+
+class AGEXPORT AGLayoutCreator
+//:public AGSingleton
 {
  public:
   AGLayoutCreator();//const AGString &pName);
@@ -76,12 +78,6 @@ class AGEXPORT AGLayoutFactory
 };
 
 AGEXPORT AGLayoutFactory *getLayoutFactory();
-/*
-#define IMPLEMENT_COMPONENT_FACTORY(CLASS) \
-AG##CLASS##LayoutCreator factory_##CLASS
-
-#define REGISTER_COMPONENT(CLASS,NAME) AG##CLASS##LayoutCreator():AGLayoutCreator(NAME){}
-*/
 
 #define IMPLEMENT_COMPONENT_FACTORY(CLASS)
 #define REGISTER_COMPONENT(CLASS,NAME)

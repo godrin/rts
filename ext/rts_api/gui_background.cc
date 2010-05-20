@@ -18,12 +18,12 @@
  * License along with this program.
  */
 
-#include "ag_background.h"
-#include "ag_draw.h"
-#include "ag_theme.h"
-#include "rk_debug.h"
-#include "ag_painter.h"
-#include "ag_texturecache.h"
+#include <gui_background.h>
+#include <gui_draw.h>
+#include <gui_theme.h>
+#include <basic_debug.h>
+#include <gui_painter.h>
+#include <gui_texturecache.h>
 
 /** sets a uniform background of color pColor
     @param pColor an rgba-color. so you can use transparent backgrounds,too.

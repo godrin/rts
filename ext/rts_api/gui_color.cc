@@ -18,10 +18,10 @@
  * License along with this program.
  */
 
-#include "ag_color.h"
-#include "ag_surface.h"
-#include "rk_tools.h"
-#include "ag_surface_internal.h"
+#include <gui_color.h>
+#include <gui_surface.h>
+#include <basic_tools.h>
+#include <gui_surface_internal.h>
 
 #include <sstream>
 

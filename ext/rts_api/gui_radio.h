@@ -23,7 +23,7 @@
 #ifndef AG_RADIO_H
 #define AG_RADIO_H
 
-#include "ag_checkbox.h"
+#include <gui_checkbox.h>
 
 class AGRadioGroup;
 

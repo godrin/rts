@@ -4,8 +4,8 @@
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
 #include <vector>
-#include <rk_string.h>
-#include <ag_geometry.h>
+#include <basic_string.h>
+#include <gui_geometry.h>
 
 class AGEXPORT AGMatrixN
 {

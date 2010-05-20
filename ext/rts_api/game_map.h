@@ -23,8 +23,8 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "height_map.h"
-#include "heuristic.h"
+#include <game_height_map.h>
+#include <game_heuristic.h>
 
 /**
  * \defgroup GameEngine BoA Game-Engine

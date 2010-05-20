@@ -1,7 +1,7 @@
-#include "ag_config.h"
-#include "ag_xml.h"
-#include "ag_fs.h"
-#include "rk_rubyobj.h"
+#include <gui_config.h>
+#include <basic_xml.h>
+#include <basic_fs.h>
+#include <basic_rubyobj.h>
 
 // TODO: AGConfig should switch to a ruby-based configuration (maybe YAML)
 // TODO: commenting should be possible !! (no overwriting)

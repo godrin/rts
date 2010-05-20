@@ -3,10 +3,10 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "scenenode.h"
-#include "scene_2d.h"
-#include "mesh_base.h"
-#include "mesh_2d_data.h"
+#include <a3d_scenenode.h>
+#include <a3d_scene_2d.h>
+#include <a3d_mesh_base.h>
+#include <a3d_mesh_2d_data.h>
 
 class AGEXPORT Mesh2D:public MeshBase
 {

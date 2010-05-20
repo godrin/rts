@@ -3,10 +3,10 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "scenenode.h"
-#include "mesh_data.h"
-#include "vertex_array.h"
-#include "ag_texture.h"
+#include <a3d_scenenode.h>
+#include <a3d_mesh_data.h>
+#include <a3d_vertex_array.h>
+#include <gui_texture.h>
 
 // Mesh organizing
 

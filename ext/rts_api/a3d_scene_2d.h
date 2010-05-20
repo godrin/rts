@@ -1,7 +1,7 @@
 #ifndef SCENE_2D_H
 #define SCENE_2D_H
 
-#include "scene_base.h"
+#include <a3d_scene_base.h>
 
 class AGPainter;
 

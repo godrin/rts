@@ -1,7 +1,7 @@
 #ifndef AG_MUTEX
 #define AG_MUTEX
 
-#include <rk_base.h>
+#include <basic_base.h>
 #include <SDL.h>
 #include <SDL_thread.h>
 

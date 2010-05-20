@@ -23,12 +23,12 @@
 #ifndef ANT_ENTITY_H
 #define ANT_ENTITY_H
 
-#include <rk_string.h>
+#include <basic_string.h>
 
-#include "scene.h"
-#include <ag_xml.h>
-#include <ag_geometry.h>
-#include <ag_color.h>
+#include <a3d_scene.h>
+#include <basic_xml.h>
+#include <gui_geometry.h>
+#include <gui_color.h>
 
 #include <set>
 #include <vector>
@@ -38,7 +38,7 @@ class SceneNode;
 class Job;
 class AntMap;
 
-#include "resource.h"
+#include <game_resource.h>
 
 class AGEXPORT AntEntity:public AGRubyObject
   {

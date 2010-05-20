@@ -25,8 +25,8 @@
 
 #include <SDL.h>
 #include <iostream>
-#include <rk_base.h>
-#include <rk_string.h>
+#include <basic_base.h>
+#include <basic_string.h>
 
 class AGSurface;
 class AGVector4;

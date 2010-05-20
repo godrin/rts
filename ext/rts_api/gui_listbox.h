@@ -23,11 +23,12 @@
 #ifndef __AG_LISTBOX_H
 #define __AG_LISTBOX_H
 
+#include <gui_widget.h>
+#include <gui_background.h>
+
 #include <string>
 #include <vector>
 #include <map>
-#include "ag_widget.h"
-#include "ag_background.h"
 
 class AGEdit;
 class AGScroller;

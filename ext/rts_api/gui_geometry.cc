@@ -18,17 +18,17 @@
  * License along with this program.
  */
 
-#include <ag_geometry.h>
-#include <rk_tools.h>
-#include <rk_debug.h>
+#include <gui_geometry.h>
+#include <basic_tools.h>
+#include <basic_debug.h>
 
 #include <assert.h>
 #include <cmath>
 #include <map>
 #include <list>
-#include <ag_xml.h>
-#include <ag_stringstream.h>
-#include <ag_gauss.h>
+#include <basic_xml.h>
+#include <basic_stringstream.h>
+#include <basic_gauss.h>
 
 #include <ruby.h>
 

@@ -18,15 +18,15 @@
  * License along with this program.
  */
 
-#include "GLee.h"
-#include "ag_glpainter.h"
-#include "ag_color.h"
-#include "ag_profiler.h"
-#include "ag_texture.h"
-#include "ag_rendercontext.h"
-#include "rk_debug.h"
-#include "ag_vdebug.h"
-#include "ag_projection.h"
+#include <GLee.h>
+#include <gui_glpainter.h>
+#include <gui_color.h>
+#include <gui_profiler.h>
+#include <gui_texture.h>
+#include <gui_rendercontext.h>
+#include <basic_debug.h>
+#include <gui_vdebug.h>
+#include <gui_projection.h>
 
 namespace AGGLPainter
   {

@@ -23,7 +23,7 @@
 #ifndef AG_TABLE_H
 #define AG_TABLE_H
 
-#include "ag_widget.h"
+#include <gui_widget.h>
 
 #include <vector>
 

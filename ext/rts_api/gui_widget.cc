@@ -18,24 +18,24 @@
  * License along with this program.
  */
 
-#include "rk_debug.h"
+#include <basic_debug.h>
 
-#include "ag_widget.h"
-#include "ag_screen.h"
-#include "ag_main.h"
-#include "ag_menu.h"
-#include "ag_kill.h"
+#include <gui_widget.h>
+#include <gui_screen.h>
+#include <gui_main.h>
+#include <gui_menu.h>
+#include <gui_kill.h>
 #include <map>
 #include <iostream>
 #include <algorithm>
 #include <typeinfo>
-#include "ag_tooltip.h"
-#include "ag_application.h"
-#include "ag_layout.h"
-#include "ag_config.h"
-#include "ag_clip.h"
-#include "ag_painter.h"
-#include "basic_algebra.h"
+#include <gui_tooltip.h>
+#include <gui_application.h>
+#include <gui_layout.h>
+#include <gui_config.h>
+#include <gui_clip.h>
+#include <gui_painter.h>
+#include <basic_algebra.h>
 
 
 #define FOCUS_BY_SORT

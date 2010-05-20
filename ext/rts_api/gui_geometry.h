@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005 by David Kamphausen. All rights reserved.
+ * copyright (c) 2005 by David Kamphausen. All rights reserved.
  *
  * ag_geometry.h
  * by David Kamphausen (david.kamphausen@web.de)
@@ -23,14 +23,15 @@
 #ifndef AG_TRIANGLE_H
 #define AG_TRIANGLE_H
 
-#include <ag_geometry_exception.h>
+#include <gui_geometry_exception.h>
+
+#include <basic_base.h>
+#include <basic_string.h>
 
 #include <SDL.h>
 #include <iostream>
 #include <list>
 #include <vector>
-#include <rk_base.h>
-#include <rk_string.h>
 #include <stdexcept>
 
 
@@ -185,7 +186,7 @@ public:
   AGVector3 & operator+=(const AGVector3 &p);
   AGVector3 & operator-=(const AGVector3 &p);
 
-  float operator*(const AGVector3 &p) const;
+  inline float operator*(const AGVector3 &p) const;
 #ifndef SWIG
   AGVector3 & operator*=(float f);
   AGVector3 & operator/=(float f);
@@ -747,7 +748,7 @@ public:
   bool collides(const AGMatrix4 &frustum) const;
 
   std::vector<AGVector3> getVertices() const;
-  void calcVertices(std::vector<AGVector3> &vs) const;
+  inline void calcVertices(std::vector<AGVector3> &vs) const;
 
   AGBox3 operator+(const AGVector3 &v) const;
   AGBox3 operator-(const AGVector3 &v) const;
@@ -764,13 +765,12 @@ AGEXPORT std::ostream & operator<<(std::ostream &o, const AGVector3&v);
 AGEXPORT std::ostream & operator<<(std::ostream &o, const AGVector4&v);
 AGEXPORT std::ostream & operator<<(std::ostream &o, const AGRect2&v);
 AGEXPORT std::ostream & operator<<(std::ostream &o, const AGBox3&v);
-
 AGEXPORT std::ostream & operator<<(std::ostream &o, const AGMatrix3&v);
 AGEXPORT std::ostream & operator<<(std::ostream &o, const AGMatrix4&v);
 #endif
+void hupe();
+#include <gui_geometry_inline.cc>
 
-#include "ag_geometry_inline.cc"
-
-#include <ag_serial_vec.h>
+#include <gui_serial_vec.h>
 
 #endif

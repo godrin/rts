@@ -23,9 +23,9 @@
 #ifndef AG_TEXTURE_H
 #define AG_TEXTURE_H
 
-#include "ag_surface.h"
-#include "ag_gltexture.h"
-#include "ag_painttarget.h"
+#include <gui_surface.h>
+#include <gui_gltexture.h>
+#include <gui_painttarget.h>
 
 class AGFBO;
 

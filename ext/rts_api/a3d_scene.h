@@ -3,17 +3,17 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "ag_geometry.h"
+#include <a3d_scenenode.h>
+#include <a3d_scene_base.h>
+//#include <a3d_ant_camera.h>
 
-#include "ag_gl.h"
+#include <gui_geometry.h>
+#include <gui_gl.h>
 
 #include <vector>
 #include <set>
 #include <map>
 
-#include "scenenode.h"
-#include "scene_base.h"
-#include "ant_camera.h"
 
 /**
    \defgroup Engine3d 3d-engine of BoA

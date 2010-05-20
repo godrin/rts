@@ -23,7 +23,7 @@
 #ifndef AG_SCROLLINGWIDGET_H
 #define AG_SCROLLINGWIDGET_H
 
-#include "ag_widget.h"
+#include <gui_widget.h>
 
 class AGScrollingWidget:public AGWidget
   {

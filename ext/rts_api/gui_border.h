@@ -24,8 +24,8 @@
 #define __AG_BORDER_H__
 
 #include <string>
-#include "ag_texture.h"
-#include "ag_geometry.h"
+#include <gui_texture.h>
+#include <gui_geometry.h>
 
 class AGPainter;
 

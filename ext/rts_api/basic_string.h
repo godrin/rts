@@ -1,7 +1,7 @@
 #ifndef AG_STRING
 #define AG_STRING
 
-#include <rk_base.h>
+#include <basic_base.h>
 #include <string>
 #include <vector>
 #include <SDL.h>

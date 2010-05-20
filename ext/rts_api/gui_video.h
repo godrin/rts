@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <ag_video_base.h>
+#include <gui_video_base.h>
 
 #include <string>
 class AGScreen;

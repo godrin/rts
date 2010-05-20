@@ -20,7 +20,7 @@
 
 #ifndef ANT_JOBS_H
 #define ANT_JOBS_H
-#include <ag_geometry.h>
+#include <gui_geometry.h>
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 

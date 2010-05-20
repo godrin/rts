@@ -1,23 +1,23 @@
-#include <ag_button.h>
-#include <ag_checkbox.h>
-#include <ag_colorbutton.h>
-#include <ag_combo.h>
-#include <ag_edit.h>
-#include <ag_frame.h>
-#include <ag_image.h>
-#include <ag_layout.h>
-#include <ag_listbox.h>
-#include <ag_local.h>
-#include <ag_radio.h>
-#include <ag_radiogroup.h>
-#include <ag_table.h>
-#include <ag_theme.h>
-#include <ag_window.h>
-#include <ag_screenwidget.h>
-#include <ag_cell.h>
-#include <ag_scrollingwidget.h>
+#include <gui_button.h>
+#include <gui_checkbox.h>
+#include <gui_colorbutton.h>
+#include <gui_combo.h>
+#include <gui_edit.h>
+#include <gui_frame.h>
+#include <gui_image.h>
+#include <gui_layout.h>
+#include <gui_listbox.h>
+#include <gui_local.h>
+#include <gui_radio.h>
+#include <gui_radiogroup.h>
+#include <gui_table.h>
+#include <gui_theme.h>
+#include <gui_window.h>
+#include <gui_screenwidget.h>
+#include <gui_cell.h>
+#include <gui_scrollingwidget.h>
 
-#include "ag_layoutfactory.h"
+#include <gui_layoutfactory.h>
 
 AGWidget *parseNode(AGWidget *pParent,const Node &pNode);
 

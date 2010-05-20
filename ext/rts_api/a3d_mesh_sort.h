@@ -1,8 +1,8 @@
 #ifndef MESH_SORT_H
 #define MESH_SORT_H
 
-#include <ag_geometry.h>
-#include "scenenode.h"
+#include <gui_geometry.h>
+#include <a3d_scenenode.h>
 
 /**
    The class is for sorting purpose only. It provides the operator() function, that's needed

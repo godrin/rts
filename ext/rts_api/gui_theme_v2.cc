@@ -18,13 +18,13 @@
  * License along with this program.
  */
 
-#include "ag_theme_v2.h"
+#include <gui_theme_v2.h>
 
-#include "rk_debug.h"
-#include "rk_tools.h"
+#include <basic_debug.h>
+#include <basic_tools.h>
 
-#include "ag_xml.h"
-#include "ag_config.h"
+#include <basic_xml.h>
+#include <gui_config.h>
 #include <gui_exceptions.h>
 
 #include <iostream>

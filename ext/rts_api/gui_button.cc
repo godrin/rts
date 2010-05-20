@@ -18,15 +18,15 @@
  * License along with this program.
  */
 
-#include "ag_button.h"
-#include "ag_draw.h"
-#include "ag_edit.h"
-#include "ag_theme.h"
-#include "rk_debug.h"
-#include "ag_image.h"
-#include "ag_border.h"
-#include "ag_glscreen.h"
-#include "ag_video.h"
+#include <gui_button.h>
+#include <gui_draw.h>
+#include <gui_edit.h>
+#include <gui_theme.h>
+#include <basic_debug.h>
+#include <gui_image.h>
+#include <gui_border.h>
+#include <gui_glscreen.h>
+#include <gui_video.h>
 
 using namespace std;
 

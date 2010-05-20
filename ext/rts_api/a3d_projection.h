@@ -3,8 +3,8 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "ag_gl.h"
-#include <ant_frustum.h>
+#include <gui_gl.h>
+#include <a3d_frustum.h>
 
 struct AGEXPORT Viewport
 {

@@ -1,7 +1,7 @@
-#include "rk_debug.h"
+#include <basic_debug.h>
 
-#include "ag_glwidget.h"
-#include "ag_screen.h"
+#include <gui_glwidget.h>
+#include <gui_screen.h>
 #include <GL/glu.h>
 
 AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect2 &r):

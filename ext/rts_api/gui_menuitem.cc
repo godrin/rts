@@ -18,11 +18,11 @@
  * License along with this program.
  */
 
-#include "ag_menuitem.h"
-#include "ag_draw.h"
-#include "ag_theme.h"
-#include "ag_image.h"
-#include "ag_menu.h"
+#include <gui_menuitem.h>
+#include <gui_draw.h>
+#include <gui_theme.h>
+#include <gui_image.h>
+#include <gui_menu.h>
 
 AGMenuItem::AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText):
   AGTable(pParent,AGRect2(0,0,0,0)),mText(pText),mMouseOver(false),mSelected(false)

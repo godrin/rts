@@ -1,7 +1,7 @@
-#include "glsl.h"
-#include "ag_vdebug.h"
-#include "ag_main.h"
-#include "scene.h"
+#include <a3d_glsl.h>
+#include <gui_vdebug.h>
+#include <gui_main.h>
+#include <a3d_scene.h>
 /*
 std::map<std::string,AntVertexProgram*> mVertexPrograms2;
 std::map<std::string,AntFragProgram*> mFragPrograms2;

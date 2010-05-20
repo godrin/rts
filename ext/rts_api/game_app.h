@@ -19,14 +19,17 @@
 
 
 
-#include "scene.h"
-#include "ant_renderer.h"
+#include <a3d_scene.h>
+#include <a3d_renderer.h>
+
+#include <gui_application.h>
+#include <gui_main.h>
+#include <gui_geometry.h>
+
+#include <basic_debug.h>
+
 #include <iostream>
 #include <fstream>
-#include <ag_application.h>
-#include <rk_debug.h>
-#include <ag_main.h>
-#include <ag_geometry.h>
 
 #ifndef SWIG
 extern std::ofstream out;

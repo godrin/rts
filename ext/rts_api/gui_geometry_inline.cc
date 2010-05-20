@@ -1,9 +1,7 @@
 #ifndef AG_GEOMETRY_INLINE
 #define AG_GEOMETRY_INLINE
 
-
-#include "ag_geometry.h"
-
+#include "gui_geometry.h"
 
 inline void AGBox3::calcVertices(std::vector<AGVector3> &vs) const
 {

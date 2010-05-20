@@ -23,10 +23,10 @@
 #ifndef AG_SCREEN_H
 #define AG_SCREEN_H
 
-#include <rk_base.h>
+#include <basic_base.h>
 
-#include <ag_config.h>
-#include <ag_painttarget.h>
+#include <gui_config.h>
+#include <gui_painttarget.h>
 
 // this is virtually a pure virtual class ;-)
 // because swig directors have problems with this otherwise

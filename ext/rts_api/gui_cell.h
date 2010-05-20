@@ -23,7 +23,7 @@
 #ifndef AG_CELL_H
 #define AG_CELL_H
 
-#include "ag_widget.h"
+#include <gui_widget.h>
 
 class AGCell:public AGWidget
   {

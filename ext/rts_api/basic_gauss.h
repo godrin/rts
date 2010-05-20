@@ -1,7 +1,7 @@
 #ifndef AG_GAUSS_H
 #define AG_GAUSS_H
 
-#include <ag_geometry_exception.h>
+#include <gui_geometry_exception.h>
 
 #include <math.h>
 

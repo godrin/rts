@@ -23,13 +23,14 @@
 #ifndef __MY_SIMPLE_XML
 #define __MY_SIMPLE_XML
 
-#include <rk_tools.h>
-#include <rk_utf8.h>
-#include "rk_debug.h"
+#include <basic_tools.h>
+#include <basic_utf8.h>
+#include <basic_debug.h>
+
+#include <basic_stringstream.h>
 
 #include <vector>
 #include <map>
-#include <ag_stringstream.h>
 #include <sstream>
 
 

@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <rk_rubyobj.h>
+#include <basic_rubyobj.h>
 
 class AGEXPORT AGRandomizerBase:public AGRubyObject
 {

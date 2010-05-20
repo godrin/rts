@@ -3,11 +3,11 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "height_map.h"
-#include "heuristic.h"
+#include <game_height_map.h>
+#include <game_heuristic.h>
 
-#include <ag_serial.h>
-#include <ag_surface.h>
+#include <gui_serial.h>
+#include <gui_surface.h>
 
 /**
    The purpose of this file is some path-finding-algorithm based upon "A-star". (A*)

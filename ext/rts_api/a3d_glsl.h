@@ -1,11 +1,11 @@
 #ifndef ANT_GLSL_H
 #define ANT_GLSL_H
 
-#include "rk_tools.h"
+#include <basic_tools.h>
 
-#include "ant_renderer.h"
-#include "ag_geometry.h"
-#include "ag_glscreen.h"
+#include <a3d_renderer.h>
+#include <gui_geometry.h>
+#include <gui_glscreen.h>
 
 #include <map>
 

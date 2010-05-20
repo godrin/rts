@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "scene.h"
+#include <a3d_scene.h>
 
 #include <map>
 

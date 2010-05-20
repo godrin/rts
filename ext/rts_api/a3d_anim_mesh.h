@@ -3,16 +3,17 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "scene.h"
-#include "mesh_base.h"
-#include "ag_surface.h"
-#include "ag_geometry.h"
-#include "scenenode.h"
+#include <a3d_scene.h>
+#include <a3d_mesh_base.h>
+#include <a3d_scenenode.h>
+
+#include <gui_surface.h>
+#include <gui_geometry.h>
 
 #include <vector>
 #include <map>
 
-#include "anim_mesh_data.h"
+#include <a3d_anim_mesh_data.h>
 
 class AntEntity;
 

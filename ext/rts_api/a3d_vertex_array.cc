@@ -1,10 +1,10 @@
-#include "vertex_array.h"
+#include <a3d_vertex_array.h>
 #include <SDL_opengl.h>
 #include <assert.h>
-#include <ag_vdebug.h>
-#include <ag_profiler.h>
-#include <ag_config.h>
-#include <ag_main.h>
+#include <gui_vdebug.h>
+#include <basic_profiler.h>
+#include <gui_config.h>
+#include <gui_main.h>
 
 static bool useVBO()
   {

@@ -24,8 +24,7 @@
 #define AG_SOUND_H
 
 #include <string>
-#include "ag_messageobject.h"
-#include "ag_decryptor.h" // for decryptor
+#include <gui_messageobject.h>
 
 class AGEXPORT AGSound:public AGMessageObject
 {
@@ -33,7 +32,6 @@ class AGEXPORT AGSound:public AGMessageObject
   AGSound(); // NEVER use this! - it's only provided due to swig
   ~AGSound() throw();
   bool playMp3(const std::string &pFilename);
-  bool playMp3DRM(const std::string &pFilename,AGDecryptor &pDec);
 
   bool isMusicPlaying() const;
 

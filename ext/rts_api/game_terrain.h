@@ -3,19 +3,21 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
+
+#include <gui_geometry.h>
+#include <gui_surface.h>
+
+#include <a3d_scene.h>
+#include <a3d_vertex_array.h>
+
+#include <basic_xml.h>
+
+#include <game_map.h>
+#include <game_water.h>
+
+
 #include <vector>
-
-#include "scene.h"
-#include "ag_geometry.h"
-#include <ag_surface.h>
 #include <math.h>
-
-#include "vertex_array.h"
-#include "water.h"
-
-#include <ag_xml.h>
-
-#include "map.h"
 
 using namespace std;
 

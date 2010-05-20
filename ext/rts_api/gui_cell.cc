@@ -18,7 +18,7 @@
  * License along with this program.
  */
 
-#include "ag_cell.h"
+#include <gui_cell.h>
 
 AGCell::AGCell(AGWidget *pParent,const AGRect2 &pRect)
 :AGWidget(pParent,pRect)

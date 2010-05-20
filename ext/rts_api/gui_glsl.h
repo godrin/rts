@@ -21,9 +21,10 @@
 #ifndef AG_GLSL_H
 #define AG_GLSL_H
 
-#include "ag_gl.h"
-#include "rk_tools.h"
-#include "ag_geometry.h"
+#include <basic_tools.h>
+
+#include <gui_gl.h>
+#include <gui_geometry.h>
 
 #include <map>
 

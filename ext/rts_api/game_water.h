@@ -3,13 +3,13 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "glsl.h"
-#include "scene.h"
-#include "ag_texturecache.h"
-#include "ag_geometry.h"
-#include "ag_texture.h"
-#include "vertex_array.h"
-#include "map.h"
+#include <a3d_glsl.h>
+#include <a3d_scene.h>
+#include <gui_texturecache.h>
+#include <gui_geometry.h>
+#include <gui_texture.h>
+#include <a3d_vertex_array.h>
+#include <game_map.h>
 #include <math.h>
 
 class AntWaterShader;

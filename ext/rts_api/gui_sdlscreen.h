@@ -21,7 +21,7 @@
 #ifndef __GUI_SDLSURFACE_H
 #define __GUI_SDLSURFACE_H
 
-#include "ag_screen.h"
+#include <gui_screen.h>
 
 class AGSDLScreen:public AGScreen
 {

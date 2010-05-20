@@ -23,8 +23,8 @@
 #ifndef AG_LAYOUT_H
 #define AG_LAYOUT_H
 
-#include "ag_widget.h"
-#include "ag_xml.h"
+#include <gui_widget.h>
+#include <basic_xml.h>
 
 class AGTable;
 

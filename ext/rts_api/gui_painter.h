@@ -23,14 +23,14 @@
 #ifndef __AG_PAINTER_H
 #define __AG_PAINTER_H
 
-#include <rk_base.h>
+#include <basic_base.h>
 
-#include <ag_color.h>
-#include <ag_surface.h>
-#include <ag_geometry.h>
-#include <ag_font.h>
-#include <ag_painttarget.h>
-#include <ag_clip.h>
+#include <gui_color.h>
+#include <gui_surface.h>
+#include <gui_geometry.h>
+#include <gui_font.h>
+#include <gui_painttarget.h>
+#include <gui_clip.h>
 
 #include <list>
 

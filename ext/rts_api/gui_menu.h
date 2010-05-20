@@ -23,8 +23,8 @@
 #ifndef AG_MENU_H
 #define AG_MENU_H
 
-#include "ag_table.h"
-#include "ag_texture.h"
+#include <gui_table.h>
+#include <gui_texture.h>
 
 class AGEXPORT AGMenu:public AGTable
 {

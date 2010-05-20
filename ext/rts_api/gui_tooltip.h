@@ -23,7 +23,7 @@
 #ifndef AG_TOOLTIP_H
 #define AG_TOOLTIP_H
 
-#include <ag_widget.h>
+#include <gui_widget.h>
 
 class AGEXPORT AGTooltip:public AGWidget
 {

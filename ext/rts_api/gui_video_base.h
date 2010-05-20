@@ -3,9 +3,11 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <ag_singleton.h>
+#include <basic_base.h>
+#include <basic_singleton.h>
 
-class AGEXPORT AGVideoBase:public AGSingleton
+class AGEXPORT AGVideoBase
+// FIXME:public RKSingleton<AGVideoBase>
 {
  public:
   virtual ~AGVideoBase() throw();

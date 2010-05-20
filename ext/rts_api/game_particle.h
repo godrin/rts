@@ -3,8 +3,8 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "scenenode.h"
-#include "ag_texture.h"
+#include <a3d_scenenode.h>
+#include <gui_texture.h>
 
 /**
    some very simple particle engine for displaying

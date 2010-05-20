@@ -23,7 +23,7 @@
 #ifndef AG_RADIOGROUP_H
 #define AG_RADIOGROUP_H
 
-#include <ag_widget.h>
+#include <gui_widget.h>
 
 class AGRadio;
 

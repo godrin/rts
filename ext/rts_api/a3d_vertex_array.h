@@ -1,14 +1,15 @@
 #ifndef __vertex_array_h
 #define __vertex_array_h
 
-#include "scene.h"
-#include "glsl.h"
-#include <ag_geometry.h>
+#include <a3d_scene.h>
+#include <a3d_glsl.h>
+
+#include <gui_geometry.h>
+#include <gui_surface.h>
+
 #include <vector>
 #define GL_GLEXT_PROTOTYPES
 #include <SDL_opengl.h>
-
-#include <ag_surface.h>
 
 /**
    VertexArray is for fast drawing meshes (3d-models).

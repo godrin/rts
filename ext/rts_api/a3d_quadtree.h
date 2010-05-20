@@ -21,8 +21,8 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-#include <ag_geometry.h>
-#include <rk_debug.h>
+#include <gui_geometry.h>
+#include <basic_debug.h>
 
 #include <set>
 

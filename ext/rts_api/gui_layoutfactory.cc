@@ -18,9 +18,9 @@
  * License along with this program.
  */
 
-#include "ag_layoutfactory.h"
-#include "rk_debug.h"
-#include "ag_kill.h"
+#include <gui_layoutfactory.h>
+#include <basic_debug.h>
+#include <basic_kill.h>
 
 AGLayoutCreator::AGLayoutCreator():mWidget(0),mClient(0)
 {
@@ -61,8 +61,8 @@ void AGLayoutCreator::clearResult()
 
 void AGLayoutCreator::mark() throw()
   {
-    if(mWidget)
-      markObject(mWidget);
+    //    if(mWidget)
+    //  markObject(mWidget);
   }
 
 

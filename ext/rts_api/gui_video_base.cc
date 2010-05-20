@@ -1,4 +1,4 @@
-#include <ag_video_base.h>
+#include <gui_video_base.h>
 
 AGVideoBase::~AGVideoBase() throw()
 {

@@ -1,7 +1,7 @@
 #ifndef AG_SDLPAINTER_H
 #define AG_SDLPAINTER_H
 
-#include <ag_surface.h>
+#include <gui_surface.h>
 
 namespace AGSDLPainter
 {

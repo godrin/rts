@@ -1,4 +1,4 @@
-#include "resource.h"
+#include <game_resource.h>
 
 
 // RESOURCE

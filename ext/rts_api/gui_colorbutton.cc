@@ -18,8 +18,8 @@
  * License along with this program.
  */
 
-#include "ag_colorbutton.h"
-#include "ag_layoutfactory.h"
+#include <gui_colorbutton.h>
+#include <gui_layoutfactory.h>
 
 AGColorButton::AGColorButton(AGWidget *pParent,const AGRect2 &r,int x,int y):
   AGWidget(pParent,r),gridx(x),gridy(y),mColors(x*y)

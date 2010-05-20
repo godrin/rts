@@ -26,12 +26,13 @@
 #include <map>
 #include <string>
 
-#include <ag_font.h>
-#include <ag_geometry.h>
-#include <ag_singleton.h>
-#include <ag_surface.h>
+#include <gui_font.h>
+#include <gui_geometry.h>
+#include <basic_singleton.h>
+#include <gui_surface.h>
 
-class AGEXPORT AGFontEngine:public AGSingleton
+class AGEXPORT AGFontEngine
+//:public AGSingleton
 {
  public:
   AGFontEngine();

@@ -18,10 +18,10 @@
  * License along with this program.
  */
 
-#include "ag_border.h"
-#include "ag_painter.h"
-#include "ag_theme.h"
-#include "ag_texturecache.h"
+#include <gui_border.h>
+#include <gui_painter.h>
+#include <gui_theme.h>
+#include <gui_texturecache.h>
 
 AGBorder::AGBorder(const AGString &pTheme)
   {

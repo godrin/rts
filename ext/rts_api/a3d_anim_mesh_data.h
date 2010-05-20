@@ -3,9 +3,9 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "vertex_array.h"
-#include "glsl.h"
-#include "ag_texture.h"
+#include <a3d_vertex_array.h>
+#include <a3d_glsl.h>
+#include <gui_texture.h>
 
 struct AGEXPORT KeyFrame
 {

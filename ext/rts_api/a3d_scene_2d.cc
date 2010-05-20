@@ -1,9 +1,9 @@
 #ifndef NO
 
-#include "scene_2d.h"
-#include "mesh_2d.h"
-#include "mesh_sort.h"
-#include <rk_debug.h>
+#include <a3d_scene_2d.h>
+#include <a3d_mesh_2d.h>
+#include <a3d_mesh_sort.h>
+#include <basic_debug.h>
 #include <algorithm>
 
 Scene2D::Scene2D(int w,int h):

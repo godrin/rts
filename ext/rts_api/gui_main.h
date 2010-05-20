@@ -23,12 +23,13 @@
 #ifndef __AG_MAIN
 #define __AG_MAIN
 
-#include <string>
-#include <rk_rubyobj.h>
-#include <ag_collector.h>
-#include <ag_rand_base.h>
-#include <ag_video_base.h>
+#include <basic_rubyobj.h>
 
+#include <gui_collector.h>
+#include <gui_rand_base.h>
+#include <gui_video_base.h>
+
+#include <string>
 
 /**
  * \defgroup AntargisGUI AntargisGUI

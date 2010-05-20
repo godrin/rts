@@ -23,12 +23,12 @@
 #ifndef __AG_EDIT_H
 #define __AG_EDIT_H
 
-#include "ag_widget.h"
-#include "ag_font.h"
-#include "ag_surface.h"
-#include "ag_background.h"
-#include "rk_utf8.h"
-#include "ag_string_utf8.h"
+#include <gui_widget.h>
+#include <gui_font.h>
+#include <gui_surface.h>
+#include <gui_background.h>
+#include <basic_utf8.h>
+#include <basic_string_utf8.h>
 
 enum AGAlign {EDIT_LEFT,EDIT_RIGHT,EDIT_JUSTIFY,EDIT_CENTER};
 enum AGVAlign {EDIT_TOP,EDIT_BOTTOM,EDIT_VCENTER};

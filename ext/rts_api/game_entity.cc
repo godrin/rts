@@ -18,12 +18,12 @@
  * License along with this program.
  */
 
-#include "entity.h"
-#include "map.h"
-#include "rk_debug.h"
-#include "jobs.h"
-#include "mesh.h"
-#include "anim_mesh.h"
+#include <game_entity.h>
+#include <game_map.h>
+#include <basic_debug.h>
+#include <game_jobs.h>
+#include <a3d_mesh.h>
+#include <a3d_anim_mesh.h>
 
 AntEntity::AntEntity(AntMap *pMap):mMap(pMap),mPos(0,0,0)
   {

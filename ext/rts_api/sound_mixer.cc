@@ -18,13 +18,13 @@
  * License along with this program.
  */
 
-#include "ag_mixer.h"
-#include "ag_kill.h"
-#include "rk_debug.h"
-#include "ag_mutex.h"
-#include "ag_fs.h"
-#include "ag_config.h"
-#include "ag_main.h"
+#include <sound_mixer.h>
+#include <basic_kill.h>
+#include <basic_debug.h>
+#include <basic_mutex.h>
+#include <basic_fs.h>
+#include <gui_config.h>
+#include <gui_main.h>
 
 #define USE_RWOPS
 
@@ -203,82 +203,6 @@ bool AGSound::isMusicPlaying() const
 {
   return mMusicFinished;
 }
-
-
-bool AGSound::playMp3DRM(const std::string &pFilename,AGDecryptor &pDec)
-  {
-    //  assertGL;
-    if(mNoSound)
-      return false;
-    // must decrypt and write to disc :-(((
-    std::string file=loadFile(pFilename);
-
-    file=pDec.decrypt(file,pFilename);
-
-    /*  return playMp3(findFile("file.ogg"));
-  playWave(findFile("file.wav"),1);
-  return true;*/
-
-#ifndef OLDDEC
-    cdebug("ok decrypting");
-    if(!saveFile("drm.dat",file))
-      {
-        cdebug("error before playing!");
-        return false;
-      }
-    cdebug("playing");
-
-
-
-
-
-    return playMp3(findFile("drm.dat"));
-#else
-
-    SDL_RWops* rw=SDL_RWFromMem(const_cast<char*>(file.c_str()),file.length());
-
-
-    initSoundEngine();
-    // load the MP3 file "music.mp3" to play as music
-    mMusic=Mix_LoadMUS_RW(rw);
-    if(!mMusic) {
-      printf("Mix_LoadMUS_RW(\"%s\"): %s\n",pFilename.c_str(), Mix_GetError());
-      //    assertGL;
-      return false;
-    }
-
-    //  assertGL;
-    // this might be a critical error...
-
-
-
-    // play music forever
-    // Mix_Music *music; // I assume this has been loaded already
-    // -1 is forever
-    // 0 is never
-    // 1 is once
-    if(Mix_PlayMusic(mMusic, 1)==-1) {
-      printf("Mix_PlayMusic: %s\n", Mix_GetError());
-      // well, there's no music, but most games don't break without music...
-    }
-
-
-    //  assertGL;
-
-    mMusicFinished=false;
-
-    // set hook
-
-    return true;
-
-
-
-
-
-
-#endif
-  }
-
 
 
 void AGSound::stopMp3()

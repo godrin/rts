@@ -20,12 +20,12 @@
 
 #include <iostream>
 
-#include "rk_base.h"
-#include "rk_debug.h"
-#include "rk_tools.h"
+#include <basic_base.h>
+#include <basic_debug.h>
+#include <basic_tools.h>
 
-#include "ag_main.h"
-#include "ag_fs.h"
+#include <gui_main.h>
+#include <basic_fs.h>
 
 #include <ruby.h>
 
@@ -44,22 +44,6 @@ bool quited=false;
 // singleton-management
 void newInstanceKiller();
 void deleteInstanceKiller();
-
-#ifdef DRMUSER
-std::string gUserName=DRMUSER;
-bool gDRMok=false;
-#endif
-
-//FIXME: discard this function!
-bool hasQuit()
-  {
-    return quited;
-  }
-/*
-bool glMode()
-{
-  return lastGL;
-}*/
 
 
 /**
@@ -93,15 +77,13 @@ AGMain::AGMain():
 AGMain::~AGMain() throw()
   {
     CTRACE;
-    saveDelete(mVideo);
+    delete mVideo;
     deleteInstanceKiller();
     mAGMain=0;
     cdebug("QUIT");
     SDL_Quit();
     quited=true;
     setQuitting();
-
-    //  saveDelete(mRand);
 
 
     setRubyRaising(true);

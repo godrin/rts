@@ -23,19 +23,17 @@
 #ifndef __GUI_SURFACE_H
 #define __GUI_SURFACE_H
 
-#include "rk_exception.h"
+#include <basic_exception.h>
 
 #include <string>
 #include <set>
 #include <list>
 #include <SDL.h>
-#include "ag_gl.h"
-#include "ag_geometry.h"
-#include "ag_painttarget.h"
-#include "ag_gltexture.h"
-#include "rk_exception.h"
-#include <ag_plugin.h>
-#include "ag_decryptor.h"
+#include <gui_gl.h>
+#include <gui_geometry.h>
+#include <gui_painttarget.h>
+#include <gui_gltexture.h>
+#include <basic_exception.h>
 
 class AGColor;
 class AGSurface;
@@ -99,11 +97,8 @@ class AGEXPORT AGSurface:public AGPaintTarget
   void save(const std::string &pName) const;
 
   static AGSurface load(const std::string &pName) throw(FileNotFound);
-  static AGSurface loadDRM(const std::string &pName) throw(FileNotFound);
 
   AGInternalSurface *surface() const;
-
-  static void setDecryptor(AGDecryptor *pDecryptor);
 
   AGVector2 shrink2Fit(int alphaThresh=20);
 
@@ -125,7 +120,6 @@ class AGEXPORT AGSurface:public AGPaintTarget
   friend class AntTextureData;
   size_t mVersion;
 
-  static AGDecryptor *mDecryptor;
 };
 
 AGEXPORT void AGFreeSurface(SDL_Surface *s);

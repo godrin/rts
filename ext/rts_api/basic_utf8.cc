@@ -1,5 +1,5 @@
-#include "rk_utf8.h"
-#include "rk_debug.h"
+#include <basic_utf8.h>
+#include <basic_debug.h>
 #include <string>
 
 #include <SDL.h>

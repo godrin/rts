@@ -4,7 +4,7 @@
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
 #include <map>
-#include <ag_xml.h>
+#include <basic_xml.h>
 
 
 

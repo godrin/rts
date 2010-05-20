@@ -19,7 +19,7 @@
  */
 
 #include "ag_xml.h"
-#include "ag_fs.h"
+#include <basic_fs.h>
 
 #include "rk_debug.h"
 #include "rk_rubyobj.h"

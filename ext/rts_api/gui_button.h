@@ -23,10 +23,10 @@
 #ifndef AG_BUTTON_H
 #define AG_BUTTON_H
 
-#include "ag_widget.h"
-#include "ag_surface.h"
-#include "ag_background.h"
-#include "ag_border.h"
+#include <gui_widget.h>
+#include <gui_surface.h>
+#include <gui_background.h>
+#include <gui_border.h>
 
 #include <iostream>
 #include <map>

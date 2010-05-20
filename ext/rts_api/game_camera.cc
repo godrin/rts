@@ -18,12 +18,12 @@
  * License along with this program.
  */
 
-#include "ant_camera.h"
-#include "ant_renderer.h"
+#include <game_camera.h>
+#include <a3d_renderer.h>
 #include <SDL_opengl.h>
 #include <cmath>
 
-#include "rk_debug.h"
+#include <basic_debug.h>
 
 AntCamera::AntCamera(int w,int h)
   {

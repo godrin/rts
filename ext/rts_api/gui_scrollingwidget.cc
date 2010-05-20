@@ -18,9 +18,9 @@
  * License along with this program.
  */
 
-#include "ag_scrollingwidget.h"
-#include "ag_layoutfactory.h"
-#include "ag_painter.h"
+#include <gui_scrollingwidget.h>
+#include <gui_layoutfactory.h>
+#include <gui_painter.h>
 
 AGScrollingWidget::AGScrollingWidget(AGWidget *pParent, const AGRect2& pRect):
   AGWidget(pParent,pRect),

@@ -21,9 +21,9 @@
 #ifndef AG_DRAW_H
 #define AG_DRAW_H
 
-#include "ag_surface.h"
-#include "ag_geometry.h"
-#include "ag_color.h"
+#include <gui_surface.h>
+#include <gui_geometry.h>
+#include <gui_color.h>
 /*
 void AGDrawGradient(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);
 void AGDrawGradientAlpha(SDL_Surface *surface, const AGRect2& prect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr);

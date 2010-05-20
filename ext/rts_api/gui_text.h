@@ -23,8 +23,8 @@
 #ifndef AG_TEXT_H
 #define AG_TEXT_H
 
-#include "ag_widget.h"
-#include "ag_font.h"
+#include <gui_widget.h>
+#include <gui_font.h>
 
 class AGEXPORT AGText:public AGWidget
 {

@@ -3,8 +3,8 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "ag_geometry.h"
-#include "vertex_array.h"
+#include <gui_geometry.h>
+#include <a3d_vertex_array.h>
 
 #include <map>
 

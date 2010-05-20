@@ -1,20 +1,20 @@
-#include "ant_renderer.h"
-#include "scene.h"
+#include <a3d_renderer.h>
+#include <a3d_scene.h>
 
 #include <SDL_opengl.h>
 
-#include <rk_debug.h>
-#include <ag_vdebug.h>
-#include <ag_video.h>
-#include <ag_rendercontext.h>
+#include <basic_debug.h>
+#include <gui_vdebug.h>
+#include <gui_video.h>
+#include <gui_rendercontext.h>
 #include <algorithm>
 
 #include <cmath>
 
-#include "quadtree.h"
-#include "ag_profiler.h"
-#include "ag_main.h"
-#include "mesh_sort.h"
+#include <a3d_quadtree.h>
+#include <basic_profiler.h>
+#include <gui_main.h>
+#include <a3d_mesh_sort.h>
 
 bool PickNode::operator<(const PickNode &n) const
 {

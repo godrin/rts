@@ -24,7 +24,7 @@
 #define AG_CHECK_BOX_H
 
 //#include "ag_vtiler.h"
-#include "ag_button.h"
+#include <gui_button.h>
 
 class AGImage;
 

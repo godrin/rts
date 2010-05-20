@@ -23,7 +23,7 @@
 #ifndef AG_WINDOW_H
 #define AG_WINDOW_H
 
-#include "ag_table.h"
+#include <gui_table.h>
 
 class AGEXPORT AGWindow:public AGTable
 {

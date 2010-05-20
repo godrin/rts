@@ -18,13 +18,13 @@
  * License along with this program.
  */
 
-#include "ag_application.h"
-#include "ag_button.h"
-#include "ag_combo.h"
-#include "rk_debug.h"
-#include "ag_edit.h"
-#include "ag_listbox.h"
-#include "ag_theme.h"
+#include <gui_application.h>
+#include <gui_button.h>
+#include <gui_combo.h>
+#include <basic_debug.h>
+#include <gui_edit.h>
+#include <gui_listbox.h>
+#include <gui_theme.h>
 
 AGComboBox::AGComboBox(AGWidget *pParent,const AGRect2 &pRect):
   AGWidget(pParent,pRect),sigSelect(this,"sigSelect")

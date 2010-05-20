@@ -21,7 +21,7 @@
 #ifndef AG_GRADIENT_H
 #define AG_GRADIENT_H
 
-#include "ag_color.h"
+#include <gui_color.h>
 
 class AGGradient
   {

@@ -1,9 +1,9 @@
-#include "anim_mesh_data.h"
-#include "ag_texturecache.h"
-#include "ag_config.h"
-#include "ag_xml.h"
+#include <a3d_anim_mesh_data.h>
+#include <gui_texturecache.h>
+#include <gui_config.h>
+#include <gui_xml.h>
 
-#include <ag_serial.h>
+#include <basic_serial.h>
 
 void setRotation(AGMatrix4 &m,const AGVector3 &angles); // from anim_mesh.cc
 void setTranslation(AGMatrix4 &m,const AGVector3 &t);

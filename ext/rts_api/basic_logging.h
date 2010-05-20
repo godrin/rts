@@ -10,8 +10,8 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "rk_base.h"
-#include "rk_singleton.h"
+#include <basic_base.h>
+#include <basic_singleton.h>
 
 #include <fstream>
 #include <sstream>

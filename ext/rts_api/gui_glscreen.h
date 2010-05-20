@@ -23,11 +23,11 @@
 #ifndef __GUI_GLSURFACE_H
 #define __GUI_GLSURFACE_H
 
-#include <rk_base.h>
+#include <basic_base.h>
 
-#include <ag_geometry.h>
-#include "ag_screen.h"
-#include "ag_gl.h"
+#include <gui_geometry.h>
+#include <gui_screen.h>
+#include <gui_gl.h>
 
 #include <string>
 #include <map>

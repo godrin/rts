@@ -1,6 +1,6 @@
-#include "ant_app.h"
-#include "ag_vdebug.h"
-#include "ag_profiler.h"
+#include <game_app.h>
+#include <gui_vdebug.h>
+#include <basic_profiler.h>
 
 GLApp::GLApp(int w,int h):scene(new Scene(w,h))
 {

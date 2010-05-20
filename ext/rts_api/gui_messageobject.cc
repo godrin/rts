@@ -18,13 +18,13 @@
  * License along with this program.
  */
 
-#include "ag_messageobject.h"
+#include <gui_messageobject.h>
 
-#include "rk_debug.h"
+#include <basic_debug.h>
 
-#include "ag_main.h"
-#include "ag_stringstream.h"
-#include "ag_widget.h"
+#include <gui_main.h>
+#include <basic_stringstream.h>
+#include <gui_widget.h>
 
 SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
 

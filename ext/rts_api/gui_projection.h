@@ -3,8 +3,8 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <rk_base.h>
-#include <ag_geometry.h>
+#include <basic_base.h>
+#include <gui_geometry.h>
 
 
 class AGEXPORT AGProjection2D

@@ -3,7 +3,7 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <ag_geometry.h>
+#include <gui_geometry.h>
 
 class AGEXPORT AGClipping
 {

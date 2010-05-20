@@ -1,10 +1,10 @@
-#include "height_map.h"
-#include "terrain.h"
-#include <ag_serial.h>
-#include <ag_main.h>
-#include <ag_rand.h>
+#include <game_height_map.h>
+#include <game_terrain.h>
+#include <basic_serial.h>
+#include <gui_main.h>
+#include <gui_rand.h>
 
-#include <rk_rtools.h>
+#include <basic_rtools.h>
 
 //////////////////////////////////////////////////////////////////////////
 // HeightMap

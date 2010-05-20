@@ -3,9 +3,9 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include "map.h"
-#include <ag_widget.h>
-#include <ag_texture.h>
+#include <game_map.h>
+#include <gui_widget.h>
+#include <gui_texture.h>
 
 class SceneBase;
 

@@ -23,8 +23,8 @@
 #ifndef AG_IMAGE_H
 #define AG_IMAGE_H
 
-#include "ag_widget.h"
-#include "ag_texture.h"
+#include <gui_widget.h>
+#include <gui_texture.h>
 
 class AGEXPORT AGImage:public AGWidget
 {
