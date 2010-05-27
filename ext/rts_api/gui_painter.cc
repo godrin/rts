@@ -196,23 +196,19 @@ AGLine2 AGPaintProjection::clipLine(AGLine2 l) const {
 /////////////////////////////////////////////////////////////////////////////////
 
 AGPainter::AGPainter() : mCurrent(getScreen().getRect()), mTarget(&getScreen()) {
-  CTRACE;
   mTarget->beginPaint();
 }
 
 AGPainter::AGPainter(const AGPainter &p) : ps(p.ps), mCurrent(p.mCurrent), mTarget(p.mTarget) {
-  CTRACE;
   mTarget->beginPaint();
 }
 
 AGPainter::AGPainter(AGPaintTarget &pTarget) : mCurrent(pTarget.getRect()), mTarget(&pTarget) {
-  CTRACE;
   mTarget->beginPaint();
 }
 
 AGPainter::~AGPainter() throw () {
-  CTRACE;
-  if (mTarget.valid()) {
+  if (mTarget) {
     mTarget->unclip();
     mTarget->endPaint();
   }
@@ -294,7 +290,7 @@ void AGPainter::tile(const AGTexture &pSource, const AGRect2 &pDest) {
 void AGPainter::tile(const AGTexture &pSource, const AGRect2 &pDest, const AGRect2 &pSrc) {
   STACKTRACE;
   float x, y;
-  if (!dynamic_cast<AGGLScreen*> (mTarget.getPtr())) {
+  if (!dynamic_cast<AGGLScreen*> (mTarget)) {
 #warning "remove this and implement in agtexture*"
     for (y = pDest.y0(); y < pDest.y1(); y += pSrc.h())
       for (x = pDest.x0(); x < pDest.x1(); x += pSrc.w()) {
@@ -386,7 +382,7 @@ void AGPainter::renderText(const AGStringUtf8 &pText, const AGVector2 &p, const 
 void AGPainter::drawBorder(const AGRect2& pRect, int width, const AGColor& c1, const AGColor& c2) {
   STACKTRACE;
   // GL-screen has its own implementation
-  AGGLScreen *glScreen = dynamic_cast<AGGLScreen*> (mTarget.getPtr());
+  AGGLScreen *glScreen = dynamic_cast<AGGLScreen*> (mTarget);
   if (glScreen) {
     glScreen->clip(mCurrent.clip);
     glScreen->drawBorder(mCurrent.project(pRect), width, c1, c2);
@@ -551,12 +547,11 @@ AGRect2 AGPainter::getRect() const {
 }
 
 void AGPainter::clip(const AGClipping &clip) {
-  CTRACE;
   throw std::runtime_error("NOT IMPLEMENTED !");
 }
 
 AGPaintTarget *AGPainter::getTarget() {
-  return mTarget.getPtr();
+  return mTarget;
 }
 
 void AGPainter::debugOutput() {

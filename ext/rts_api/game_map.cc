@@ -18,9 +18,9 @@
  * License along with this program.
  */
 
+#include <game_map.h>
 #include <a3d_scene.h>
 #include <basic_rand.h>
-#include <game_map.h>
 #include <game_entity.h>
 #include <math.h>
 #include <basic_debug.h>
@@ -28,7 +28,6 @@
 #include <game_terrain.h>
 #include <a3d_quadtree.h>
 #include <a3d_anim_mesh.h>
-#include <a3d_mesh_2d.h>
 #include <basic_profiler.h>
 
 #include <algorithm>
@@ -39,6 +38,15 @@
 // AntMap
 //////////////////////////////////////////////////////////////////////////
 
+
+class EntityRectGetter:public QuadTree<AntMap::PAntEntity>::RectGetter {
+  public:
+        virtual AGRect2 getRect(const AntMap::PAntEntity&t) {
+	  return t.get()->getRect();
+	}
+
+};
+
 AntMap *myAntargisMap=0;
 AntMap *getMap()
   {
@@ -47,8 +55,8 @@ AntMap *getMap()
   }
 
 AntMap::AntMap(SceneBase *pScene,int w,int h):
-  HeightMap(pScene,w,h),
-  mEntQuad(new QuadTree<AntEntity>(AGRect2(0,0,w,h))),
+  GameHeightMap(pScene,w,h),
+  mEntQuad(new QuadTree<AntMap::PAntEntity>(AGRect2(0,0,w,h),new EntityRectGetter())),
   mHeuristicFunction(0)
   {
     myAntargisMap=this;
@@ -66,13 +74,11 @@ AGVector3 AntMap::getPos(const AGVector2 &pPos) const
   return AGVector3(pPos[0],pPos[1],getHeight(pPos[0],pPos[1]));
 }
 
-
-
-AntEntity *AntMap::getEntity(int id) const
+AntMap::PAntEntity AntMap::getEntity(int id) const throw (EntityNotFound)
 {
   EntityMap::const_iterator i=mEntityMap.find(id);
   if(i==mEntityMap.end())
-    return 0;
+    throw EntityNotFound();
   return i->second;
 }
 
@@ -90,9 +96,9 @@ void AntMap::useID(int id)
 
 void AntMap::saveXML(Node &node) const
 {
-  HeightMap::saveXML(node);
+  GameHeightMap::saveXML(node);
   // entities
-  std::list<AntEntity*>::const_iterator i=mEntities.begin();
+  std::list<PAntEntity>::const_iterator i=mEntities.begin();
   for(;i!=mEntities.end();i++)
     {
       AGString s=(*i)->xmlName();
@@ -106,7 +112,7 @@ void AntMap::saveXML(Node &node) const
 bool AntMap::loadXML(const Node &node)
   {
     bool seemsok;
-    seemsok=HeightMap::loadXML(node);
+    seemsok=GameHeightMap::loadXML(node);
 
     Node::const_iterator i=node.begin();
     for(;i!=node.end();i++)
@@ -115,25 +121,26 @@ bool AntMap::loadXML(const Node &node)
         processXMLNode(*n);
       }
     // tell entities, that map has changed
-    std::list<AntEntity*>::iterator k=mEntities.begin();
+    EntityList::iterator k=mEntities.begin();
     for(;k!=mEntities.end();k++)
       (*k)->eventMapChanged();
 
     return seemsok;
   }
 
-void AntMap::insertEntity(AntEntity *e)
+void AntMap::insertEntity(PAntEntity e)
   {
+    
     //  cdebug("INSERTING:"<<e);
     mEntities.push_back(e);
     //  mEntList.push_back(e);
-    mEntityMap[e->getID()]=e;
+    mEntityMap.insert(std::make_pair(e.get()->getID(),e));
     mEntQuad->insert(e);
     //  entsChanged();
     //  mByType[e->getType()].insert(e);
   }
 
-void AntMap::removeEntity(AntEntity *p)
+void AntMap::removeEntity(PAntEntity p)
   {
       {
         EntityList::iterator i=std::find(mToDel.begin(),mToDel.end(),p);
@@ -161,7 +168,7 @@ void AntMap::move(float pTime)
     STACKTRACE;
     //return;
     // first remove entities, which shall be deleted
-    std::list<AntEntity*>::iterator d=mToDel.begin();
+    EntityList::iterator d=mToDel.begin();
     for(;d!=mToDel.end();d++)
       {
         EntityList::iterator i=std::find(mEntities.begin(),mEntities.end(),*d);
@@ -173,7 +180,7 @@ void AntMap::move(float pTime)
         mEntQuad->remove(*i);
         //      mByType[(*d)->getType()].erase(*d);
 
-        saveDelete(*d);
+        saveDelete(d->get());
       }
     mToDel.clear();
 
@@ -211,21 +218,21 @@ std::vector<AntEntityPtr> AntMap::getAllEntitiesV()
 }
  */
 
-std::vector<AntEntity*> AntMap::getEntities(const AGString &pName)
+AntMap::EntityList AntMap::getEntities(const AGString &pName)
   {
-    std::vector<AntEntity*> v;
+    EntityList v;
     for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
       if((*i)->provides(pName))
         v.push_back(*i);
     return v;
   }
 
-std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,size_t atLeast)
+AntMap::EntityList AntMap::getNextList(AntMap::PAntEntity me,const AGString &pType,size_t atLeast)
   {
     // reachability is checked through heuristic
     // optimization using quadtree is not possible, because heuristic cannot be used then
 
-    std::multimap<float,AntEntity*> ents;
+    std::multimap<float,PAntEntity> ents;
 
 
     EntityList::iterator i=mEntities.begin();
@@ -247,12 +254,12 @@ std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,
           }
       }
 
-    std::vector<AntEntity*> vec;
+    EntityList vec;
 
     // take one of the nearest, but no farer away than 30% of nearest
     if(ents.size())
       {
-        std::multimap<float,AntEntity*>::iterator j=ents.begin();
+        std::multimap<float,PAntEntity>::iterator j=ents.begin();
         float nearest=j->first;
         for(;j!=ents.end();j++)
           {
@@ -261,16 +268,17 @@ std::vector<AntEntity*> AntMap::getNextList(AntEntity *me,const AGString &pType,
           }
       }
 
-    return vec;
+
+return vec;
   }
 
 
 /// works like getNextList, but returns only one random entity on the list
-AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
+AntMap::PAntEntity AntMap::getNext(PAntEntity me,const AGString &pType,size_t atLeast)  throw (EntityNotFound)
   {
     assert(me);
 
-    std::multimap<float,AntEntity*> ents;
+    std::multimap<float,PAntEntity> ents;
 
     EntityList::iterator i=mEntities.begin();
     AGVector2 p=me->getPos2D();
@@ -295,10 +303,9 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
 
 
     // take one of the nearest, but no farer away than 30% of nearest
-    AntEntity *e=0;
     if(ents.size())
       {
-        std::multimap<float,AntEntity*>::iterator j=ents.begin();
+        std::multimap<float,PAntEntity>::iterator j=ents.begin();
         float nearest=j->first;
         int r=agRand(std::min((int)ents.size(),5));
         while(r>0 && (j->first<=nearest*1.3 || j->first<2000*2000))
@@ -309,10 +316,9 @@ AntEntity *AntMap::getNext(AntEntity *me,const AGString &pType,size_t atLeast)
         if(r>0)
           j--;
         assert((j!=ents.end()));
-        e=j->second;
+        return j->second;
       }
-
-    return e;
+    throw EntityNotFound();
   }
 
 void AntMap::setHeuristic(HeuristicFunction *pFunction)
@@ -321,7 +327,7 @@ void AntMap::setHeuristic(HeuristicFunction *pFunction)
   }
 
 
-AntEntity *AntMap::getByName(const AGString &pName)
+AntMap::PAntEntity AntMap::getByName(const AGString &pName) throw (EntityNotFound)
   {
     EntityList::iterator i=mEntities.begin();
 
@@ -330,7 +336,7 @@ AntEntity *AntMap::getByName(const AGString &pName)
         if((*i)->getName()==pName)
           return *i;
       }
-    return 0;
+    throw EntityNotFound();
   }
 
 bool AntMap::loadMapFromMemory(const AGString &pMem)
@@ -373,25 +379,14 @@ void AntMap::saveMap(const AGString &pFilename)
 
 void AntMap::clear() throw()
   {
-    //  getScene()->clear();
-    CTRACE;
-    //  mPlayers.clear();
-
     mEntQuad->clear();
     mEntityMap.clear();
-
-    // save delete entities
-    for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
-      saveDelete(*i);
-
-
     mEntities.clear();
-
   }
 
 void AntMap::mapChanged()
   {
-    HeightMap::mapChanged();
+    GameHeightMap::mapChanged();
     // send info to entitites
     for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
       (*i)->setPos((*i)->getPos2D());
@@ -413,7 +408,7 @@ AntEntity *AntMap::getEntity(const MeshBase &pMesh)
 
 */
 
-AntEntity *AntMap::getEntity(const Mesh &pMesh)
+AntMap::PAntEntity AntMap::getEntity(const Mesh &pMesh) throw (EntityNotFound)
   {
     for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
       {
@@ -421,10 +416,10 @@ AntEntity *AntMap::getEntity(const Mesh &pMesh)
         if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
           return *i;
       }
-    return 0;
+    throw EntityNotFound();
   }
 
-AntEntity *AntMap::getEntity(const AnimMesh &pMesh)
+AntMap::PAntEntity AntMap::getEntity(const AnimMesh &pMesh) throw (EntityNotFound)
   {
     for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
       {
@@ -432,18 +427,7 @@ AntEntity *AntMap::getEntity(const AnimMesh &pMesh)
         if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
           return *i;
       }
-    return 0;
-  }
-
-AntEntity *AntMap::getEntity(const Mesh2D &pMesh)
-  {
-    for(EntityList::iterator i=mEntities.begin();i!=mEntities.end();i++)
-      {
-        AntEntity::Meshes meshes=(*i)->getMesh();
-        if(std::find(meshes.begin(),meshes.end(),&pMesh)!=meshes.end())
-          return *i;
-      }
-    return 0;
+    throw EntityNotFound();
   }
 
 
@@ -451,20 +435,20 @@ void AntMap::mark() throw()
   {
     //  cout<<"AntMap::mark()"<<std::endl;
     CTRACE;
-    HeightMap::mark();
     AntMap::EntityList::iterator i=mEntities.begin();
 
-    for(;i!=mEntities.end();i++)
-      markObject(*i);
+    for(;i!=mEntities.end();i++) {
+      i->mark();
+    }
 
     // mark to del, too, otherwise it crashes when tidying before move() is called
     for(i=mToDel.begin();i!=mToDel.end();i++)
-      markObject(*i);
+      i->mark();
   }
 
 
 void AntMap::newMap(int w,int h)
   {
     clear();
-    HeightMap::newMap(w,h);
+    GameHeightMap::newMap(w,h);
   }

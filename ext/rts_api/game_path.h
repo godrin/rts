@@ -55,7 +55,7 @@ class AGEXPORT PathWeighter:public AGRubyObject
 class AGEXPORT MapPathWeighter:public PathWeighter
 {
  public:
-  MapPathWeighter(HeightMap *pMap,bool pWaterPassable);
+  MapPathWeighter(GameHeightMap *pMap,bool pWaterPassable);
   virtual float weight(const AGVector2 &a,const AGVector2 &b);
   virtual bool accessible(const AGVector2 &a);
  private:
@@ -65,7 +65,7 @@ class AGEXPORT MapPathWeighter:public PathWeighter
   /// compute a weight for a flank. Compares the heights a and b. used by complexWeight
   virtual float weightHeight(float a,float b) const;
 
-  HeightMap *mMap;
+  GameHeightMap *mMap;
 };
 
 
@@ -224,7 +224,7 @@ class AGEXPORT SimpleGraph:public AGRubyObject
 
 };
 
-AGEXPORT SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res=1);
+AGEXPORT SimpleGraph *makeGraph(GameHeightMap *pMap, MapPathWeighter *pWeighter,size_t res=1);
 AGEXPORT HeuristicFunction *computeHeuristic(SimpleGraph *g);
 
 

@@ -383,11 +383,6 @@ bool AnimMesh::setAnimation(const AGString &pName)
     return true;
   }
 
-void AnimMesh::mark() throw()
-  {
-    markObject(mData);
-  }
-
 size_t AnimMesh::getTriangles() const
 {
   return mData->indices.size()/3;

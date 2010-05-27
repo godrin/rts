@@ -14,7 +14,7 @@ char TerrainNames[][20]={"water","sand","earth","grass","grass2","forest","rock"
 
 std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight);
 
-HeightMap::HeightMap(SceneBase *pScene,int w,int h):
+GameHeightMap::GameHeightMap(SceneBase *pScene,int w,int h):
   sigMapChanged(this,"mapChanged"),
   sigMapChangedComplete(this,"mapChangedComplete"),
   mTerrainTypes(LASTTERRAIN+1),
@@ -43,19 +43,18 @@ HeightMap::HeightMap(SceneBase *pScene,int w,int h):
     checkTerrain();
   }
 
-HeightMap::~HeightMap() throw()
+GameHeightMap::~GameHeightMap() throw()
   {
-    if(mTerrain)
-      saveDelete(mTerrain);
+    delete mTerrain;
   }
 
-void HeightMap::initTerrainMesh()
+void GameHeightMap::initTerrainMesh()
   {
     if(videoInited() && mScene)
       mTerrain=new Terrain(mScene,*this);
   }
 
-void HeightMap::setTerrain(TerrainBase *pTerrain)
+void GameHeightMap::setTerrain(TerrainBase *pTerrain)
   {
     assert(pTerrain);
     assert(!mTerrain);
@@ -63,7 +62,7 @@ void HeightMap::setTerrain(TerrainBase *pTerrain)
   }
 
 
-void HeightMap::setHeight(float height)
+void GameHeightMap::setHeight(float height)
   {
     for(size_t y=0;y<mH+2;y++)
       for(size_t x=0;x<mW+2;x++)
@@ -75,7 +74,7 @@ void HeightMap::setHeight(float height)
     mapChanged();
   }
 
-void HeightMap::addChange(const AGVector2 &v)
+void GameHeightMap::addChange(const AGVector2 &v)
   {
     mChanges++;
     if(mChanges==1)
@@ -86,13 +85,13 @@ void HeightMap::addChange(const AGVector2 &v)
       mChangeRect.include(v);
   }
 
-AGRect2 HeightMap::getChangeRect() const
+AGRect2 GameHeightMap::getChangeRect() const
 {
   return mChangeRect;
 }
 
 
-void HeightMap::setTerrain(size_t x,size_t y,TerrainType t,float v)
+void GameHeightMap::setTerrain(size_t x,size_t y,TerrainType t,float v)
   {
     size_t p=x+y*(mW+2);
 
@@ -119,16 +118,16 @@ void HeightMap::setTerrain(size_t x,size_t y,TerrainType t,float v)
     addChange(AGVector2(x,y));
   }
 
-float HeightMap::getTerrain(size_t x,size_t y,TerrainType t) const
+float GameHeightMap::getTerrain(size_t x,size_t y,TerrainType t) const
 {
   size_t p=x+y*(mW+2);
-  return const_cast<HeightMap*>(this)->mTerrainTypes[t][p];
+  return const_cast<GameHeightMap*>(this)->mTerrainTypes[t][p];
 }
 
 
 
 
-void HeightMap::set(size_t x,size_t y,float height)
+void GameHeightMap::set(size_t x,size_t y,float height)
   {
     assert(x>=0);
     assert(y>=0);
@@ -138,7 +137,7 @@ void HeightMap::set(size_t x,size_t y,float height)
     addChange(AGVector2(x,y));
   }
 
-void HeightMap::loadBinary(BinaryIn &is)
+void GameHeightMap::loadBinary(BinaryIn &is)
   {
     CTRACE;
     //  cdebug("file:"<<pName);
@@ -183,7 +182,7 @@ void HeightMap::loadBinary(BinaryIn &is)
     checkTerrain();
   }
 
-void HeightMap::saveBinary(BinaryOut &os) const
+void GameHeightMap::saveBinary(BinaryOut &os) const
 {
   CTRACE;
   //  BinaryFileOut os(pName);
@@ -206,13 +205,13 @@ void HeightMap::saveBinary(BinaryOut &os) const
         {
           for(size_t x=0;x<mW+2;x++)
             {
-              os<<const_cast<HeightMap*>(this)->mTerrainTypes[TerrainType(i)][x+y*(mW+2)]; // trust me - I'm const
+              os<<const_cast<GameHeightMap*>(this)->mTerrainTypes[TerrainType(i)][x+y*(mW+2)]; // trust me - I'm const
             }
         }
     }
 }
 
-bool HeightMap::loadXML(const Node &node)
+bool GameHeightMap::loadXML(const Node &node)
   {
     CTRACE;
     AGString filename=node.get("filename");
@@ -300,7 +299,7 @@ bool HeightMap::loadXML(const Node &node)
     return true;
   }
 
-void HeightMap::newMap(int w,int h)
+void GameHeightMap::newMap(int w,int h)
   {
     mW=w;
     mH=h;
@@ -322,7 +321,7 @@ void HeightMap::newMap(int w,int h)
   }
 
 
-void HeightMap::mapChanged()
+void GameHeightMap::mapChanged()
   {
       {
         CTRACE;
@@ -338,7 +337,7 @@ void HeightMap::mapChanged()
   }
 
 
-void HeightMap::saveXML(Node &node) const
+void GameHeightMap::saveXML(Node &node) const
 {
   node.set("width",AGString(mW));
   node.set("height",AGString(mH));
@@ -419,7 +418,7 @@ std::vector<float> genSomeHeights(int mW,int mH,float mMaxHeight)
   return h;
 }
 
-float HeightMap::get(size_t x,size_t y) const
+float GameHeightMap::get(size_t x,size_t y) const
 {
   assert(x>=0);
   assert(y>=0);
@@ -432,12 +431,12 @@ float HeightMap::get(size_t x,size_t y) const
   return mHeights[x+y*(mW+2)];
 }
 
-AGVector4 HeightMap::getVertex(int x,int y)
+AGVector4 GameHeightMap::getVertex(int x,int y)
   {
     return AGVector4(x,y,getHeight(x,y),1);
   }
 
-float HeightMap::getHeight(float x,float y) const
+float GameHeightMap::getHeight(float x,float y) const
 {
   int mx=(int)(x);
   int my=(int)(y);
@@ -455,7 +454,7 @@ float HeightMap::getHeight(float x,float y) const
 
 }
 
-AGVector3 HeightMap::getNormalF(float x,float y) const
+AGVector3 GameHeightMap::getNormalF(float x,float y) const
 {
   AGVector4 v1,v2;
   if(x>2)
@@ -475,7 +474,7 @@ AGVector3 HeightMap::getNormalF(float x,float y) const
 }
 
 
-AGVector3 HeightMap::getNormal(int x,int y) const
+AGVector3 GameHeightMap::getNormal(int x,int y) const
 {
   AGVector4 v1=AGVector4(1,0,get(x+1,y)-get(x,y),0);
   AGVector4 v2=AGVector4(0,1,get(x,y+1)-get(x,y),0);
@@ -486,14 +485,14 @@ AGVector3 HeightMap::getNormal(int x,int y) const
   return AGVector3(v3[0],v3[1],v3[2]);
 }
 
-AGVector2 HeightMap::truncPos(const AGVector2 &p) const
+AGVector2 GameHeightMap::truncPos(const AGVector2 &p) const
 {
   AGVector2 maxPos(mW+0.5,mH+0.5);
   return AGVector2(std::max(0.0f,std::min(maxPos[0],p[0])),
       std::max(0.0f,std::min(maxPos[1],p[1])));
 }
 
-AGVector3 HeightMap::truncPos(const AGVector3 &p) const
+AGVector3 GameHeightMap::truncPos(const AGVector3 &p) const
 {
   AGVector2 maxPos(mW+0.5,mH+0.5);
   return AGVector3(std::max(0.0f,std::min(maxPos[0],p[0])),
@@ -501,12 +500,12 @@ AGVector3 HeightMap::truncPos(const AGVector3 &p) const
       p[2]);
 }
 
-void HeightMap::setTerrainScale(TerrainType t,float s)
+void GameHeightMap::setTerrainScale(TerrainType t,float s)
   {
     mTerrainScale[t]=s;
   }
 
-float HeightMap::getTerrainValue(float x,float y,TerrainType t)
+float GameHeightMap::getTerrainValue(float x,float y,TerrainType t)
   {
     int mx=(int)(x);
     int my=(int)(y);
@@ -523,7 +522,7 @@ float HeightMap::getTerrainValue(float x,float y,TerrainType t)
     return h;
   }
 
-TerrainType HeightMap::getTerrain(float x,float y)
+TerrainType GameHeightMap::getTerrain(float x,float y)
   {
     TerrainType t=FIRSTTERRAIN;
     float mmax=0.0f;
@@ -540,7 +539,7 @@ TerrainType HeightMap::getTerrain(float x,float y)
   }
 
 // mean value
-float HeightMap::getTerrainWeight(float x,float y)
+float GameHeightMap::getTerrainWeight(float x,float y)
   {
     float mean=0;
     for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
@@ -551,7 +550,7 @@ float HeightMap::getTerrainWeight(float x,float y)
     return mean/(LASTTERRAIN-FIRSTTERRAIN);
   }
 
-float HeightMap::getMean(float x,float y)
+float GameHeightMap::getMean(float x,float y)
   {
     float mean=0;
     for(int i=FIRSTTERRAIN;i<LASTTERRAIN;i++)
@@ -564,7 +563,7 @@ float HeightMap::getMean(float x,float y)
   }
 
 
-float HeightMap::getTerrainScale(float x,float y)
+float GameHeightMap::getTerrainScale(float x,float y)
   {
     TerrainType t=getTerrain(x,y),t2;
 
@@ -589,12 +588,12 @@ float HeightMap::getTerrainScale(float x,float y)
     return s1*(1-mean)+s2*mean;
   }
 
-SceneBase *HeightMap::getScene()
+SceneBase *GameHeightMap::getScene()
   {
     return mScene;
   }
 
-AGVector2 HeightMap::getNextPlaceAbove(const AGVector2 &p,float height) const
+AGVector2 GameHeightMap::getNextPlaceAbove(const AGVector2 &p,float height) const
 {
   int x=(int)p[0];
   int y=(int)p[1];
@@ -631,22 +630,13 @@ AGVector2 HeightMap::getNextPlaceAbove(const AGVector2 &p,float height) const
   return found;
 }
 
-void HeightMap::mark() throw()
-  {
-    //  std::cout<<"HeightMap::mark tihs:"<<this<<" scene:"<<mScene<<std::endl;
-    if(mScene)
-      markObject(mScene);
-    if(mTerrain)
-      markObject(mTerrain);
-  }
-
-void HeightMap::checkTerrain()
+void GameHeightMap::checkTerrain()
   {
     if(!mTerrain)
       initTerrainMesh();
   }
 
-std::string HeightMap::hash() const
+std::string GameHeightMap::hash() const
 {
   BinaryStringOut s;
   for(std::vector<float>::const_iterator i=mHeights.begin();i!=mHeights.end();i++)
@@ -661,7 +651,7 @@ std::string HeightMap::hash() const
  * FIXME: this is for testing-purpose only and shouldn't be used at all (?)
  * it could be, that HeightMap introduced more than 1 mesh at some time
  * */
-TerrainBase *HeightMap::getTerrainMesh()
+TerrainBase *GameHeightMap::getTerrainMesh()
   {
     return mTerrain;
   }

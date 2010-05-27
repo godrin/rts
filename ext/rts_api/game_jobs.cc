@@ -18,9 +18,9 @@
  * License along with this program.
  */
 
+#include <game_map.h>
 #include <game_jobs.h>
 #include <game_entity.h>
-#include <game_map.h>
 #include <math.h>
 
 
@@ -295,7 +295,7 @@ void FightJob::move(AntEntity *e,float ptime)
     assert(e);
     if(mTarget==0)
       {
-        mTarget=e->getMap()->getEntity(mTargetID);
+        mTarget=e->getMap()->getEntity(mTargetID).get();
         if(!mTarget)
           {
             cdebug("Could not find id:"<<mTargetID);

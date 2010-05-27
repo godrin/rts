@@ -46,11 +46,12 @@ AGApplication::AGApplication() :
   sigFrameFinished(this,"sigFrameFinished"),
   mRunning(true), mIdleCalls(true), mainWidget(0), mTooltip(0), mOverlay(0)
   {
+    cdebug("MUH");
     assertGL;
     SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY,SDL_DEFAULT_REPEAT_INTERVAL);
     if (videoInited())
       {
-        setCursor(getTextureCache()->get("blue_cursor.png"));
+       // setCursor(getTextureCache()->get("blue_cursor.png"));
         setNormalCursor();
       }
     mDemoTime=-1;
@@ -312,8 +313,7 @@ void AGApplication::draw()
     if (delCue.size()>0)
       {
         for (std::list<AGWidget*>::iterator i=delCue.begin(); i!=delCue.end(); i++)
-          if (*i)
-            saveDelete(*i);
+          checkedDelete(*i);
         delCue.clear();
       }
 
@@ -478,15 +478,15 @@ void AGApplication::mark() throw()
   {
 //    CTRACE;
     if (mainWidget)
-      markObject(mainWidget);
+      mainWidget->mark();
     if (mTooltip)
-      markObject(mTooltip);
+      mTooltip->mark();
   }
 
 /// this function sets the current tooltip, which is display above all widgets
 void AGApplication::setTooltip(AGTooltip *pTooltip)
   {
-    saveDelete( mTooltip );
+    checkedDelete( mTooltip );
     mTooltip=pTooltip;
 
   }
@@ -497,7 +497,7 @@ void AGApplication::resetTooltip(AGTooltip *pTooltip)
   {
     if (pTooltip==mTooltip)
       {
-        saveDelete(mTooltip);
+        checkedDelete(mTooltip);
         mTooltip=0;
       }
   }

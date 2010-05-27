@@ -116,7 +116,7 @@ class AGEXPORT AGEvent:public AGRubyObject
    facilities.
    @see AGEvent
 */
-class AGEXPORT AGListener:public AGRubyObject
+class AGEXPORT AGListener
 {
  public:
   AGListener();

@@ -2,7 +2,8 @@
 #include <gui_vdebug.h>
 #include <basic_profiler.h>
 
-GLApp::GLApp(int w,int h):scene(new Scene(w,h))
+
+GameApp::GameApp():scene(new Scene(800,600))
 {
   CTRACE;
   shadow=true;
@@ -13,21 +14,32 @@ GLApp::GLApp(int w,int h):scene(new Scene(w,h))
   hx=hy=-1;
 }
 
-GLApp::~GLApp() throw()
+GameApp::GameApp(int w,int h):scene(new Scene(w,h))
+{
+  CTRACE;
+  shadow=true;
+  mx=my=0;
+  omx=-1;
+  frameTime=0;
+  frameCount=0;
+  hx=hy=-1;
+}
+
+GameApp::~GameApp() throw()
   {
     CTRACE;
-    saveDelete(scene);
+    delete scene;
   }
 
 
-void GLApp::draw()
+void GameApp::draw()
   {
     STACKTRACE;
     drawGL();
     AGApplication::draw();
   }
 
-void GLApp::drawGL()
+void GameApp::drawGL()
   {
     STACKTRACE;
     glEnable(GL_DEPTH_TEST); // enable depth test
@@ -38,7 +50,7 @@ void GLApp::drawGL()
     assertGL;
   }
 
-bool GLApp::eventFrame(float t)
+bool GameApp::eventFrame(float t)
   {
     if(hx>=0)
       {
@@ -52,7 +64,7 @@ bool GLApp::eventFrame(float t)
     return true;
   }
 
-bool GLApp::eventMouseButtonDown(AGEvent *e)
+bool GameApp::eventMouseButtonDown(AGEvent *e)
   {
     mMayClick=true;
 
@@ -75,7 +87,7 @@ bool GLApp::eventMouseButtonDown(AGEvent *e)
       }
     return AGApplication::eventMouseButtonDown(e);
   }
-bool GLApp::eventMouseButtonUp(AGEvent *e)
+bool GameApp::eventMouseButtonUp(AGEvent *e)
   {
     CTRACE;
     omx=-1;
@@ -102,16 +114,16 @@ bool GLApp::eventMouseButtonUp(AGEvent *e)
     return AGApplication::eventMouseButtonUp(e);
   }
 
-void GLApp::eventClick(const PickResult &pNodes,int button)
+void GameApp::eventClick(const PickResult &pNodes,int button)
   {
   }
 
-void GLApp::eventHover(const PickResult &pNodes,int button)
+void GameApp::eventHover(const PickResult &pNodes,int button)
   {
   }
 
 
-bool GLApp::eventMouseMotion(AGEvent *e)
+bool GameApp::eventMouseMotion(AGEvent *e)
   {
     if(e->isSDLEvent() && omx>=0)
       {
@@ -140,17 +152,17 @@ bool GLApp::eventMouseMotion(AGEvent *e)
     return AGApplication::eventMouseMotion(e);
   }
 
-AGVector2 GLApp::getCamera() const
+AGVector2 GameApp::getCamera() const
 {
   return scene->getCamera().dim2();
 }
 
-void GLApp::setCamera(const AGVector2 &p)
+void GameApp::setCamera(const AGVector2 &p)
   {
     scene->setCamera(AGVector4(p[0],p[1],getCameraHeight(p)));
   }
 
-bool GLApp::eventKeyDown(AGEvent *e)
+bool GameApp::eventKeyDown(AGEvent *e)
   {
     if(e->isSDLEvent())
       {
@@ -162,20 +174,14 @@ bool GLApp::eventKeyDown(AGEvent *e)
     return AGApplication::eventKeyDown(e);
   }
 
-Scene &GLApp::getScene()
+Scene &GameApp::getScene()
   {
     assert(scene);
     return *scene;
   }
 
-void GLApp::mark() throw()
-  {
-    //CTRACE;
-    markObject(scene);
-    AGApplication::mark();
-  }
 
-float GLApp::getCameraHeight(const AGVector2&p)
+float GameApp::getCameraHeight(const AGVector2&p)
   {
     return 0;
   }

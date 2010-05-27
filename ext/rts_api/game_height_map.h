@@ -19,11 +19,11 @@ enum TerrainType { WATER=0, SAND, EARTH, GRASS, GRASS2, FOREST, ROCK, ROCK2, LAS
 
 #define FIRSTTERRAIN WATER
 
-class AGEXPORT HeightMap:public AGMessageObject
+class AGEXPORT GameHeightMap:public AGMessageObject
 {
  public:
-  HeightMap(SceneBase *pScene,int w,int h);
-  virtual ~HeightMap() throw();
+  GameHeightMap(SceneBase *pScene,int w,int h);
+  virtual ~GameHeightMap() throw();
 
   // get status
 
@@ -84,8 +84,6 @@ class AGEXPORT HeightMap:public AGMessageObject
 
   /// override this function to include another terrain-mesh-type (like 2d-terrain)
   virtual void initTerrainMesh();
-
-  void mark() throw();
 
   /// to be used by initTerrainMesh() - not otherwise !!!
   void setTerrain(TerrainBase *pTerrain);

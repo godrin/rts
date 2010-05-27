@@ -43,10 +43,6 @@ class AGEXPORT AGLayout:public AGWidget
 
   static void registerLayouts();
 
-protected:
-#ifndef SWIG
-  virtual void mark() throw();
-#endif
  private:
   void insertTempWidget(AGWidget *pWidget);
    

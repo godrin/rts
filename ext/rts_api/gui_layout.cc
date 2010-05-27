@@ -237,9 +237,3 @@ void AGLayout::insertTempWidget(AGWidget *pWidget)
   }
 
 
-void AGLayout::mark() throw()
-  {
-    AGWidget::mark();
-    for(std::set<AGWidget*>::iterator i=mTempWidgets.begin();i!=mTempWidgets.end();i++)
-      markObject(*i);
-  }

@@ -2,6 +2,7 @@
 *.so
 *~
 *.log
+*log.txt
 rk_log.txt
 debug.txt
 .directory

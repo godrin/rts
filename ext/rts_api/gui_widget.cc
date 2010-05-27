@@ -54,8 +54,6 @@ bool getNewClippingTechnique()
     return gNewClippingTechnique;
   }
 
-std::set<AGWidget*> AGWidget::allWidgets;
-
 
 AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   sigMouseEnter(this,"sigMouseEnter"),
@@ -69,10 +67,8 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
   mHasFocus(false),mFocus(0)
 
     {
-      allWidgets.insert(this);
 
       mEventsInited=false;
-      CTRACE;
       if(mParent)
         mParent->addChildRef(this);
 
@@ -82,46 +78,24 @@ AGWidget::AGWidget(AGWidget *pParent,const AGRect2 &r):
       mTooltipWidget=0;
       mModal=false;
 
-      getMain()->getCollector()->insertGlobal(this);
     }
 
 AGWidget::~AGWidget() throw()
   {
-    allWidgets.erase(this);
-    CTRACE;
-
-    if(hasMain())
-      getMain()->getCollector()->removeGlobal(this);
-
     std::list<AGWidget*>::iterator i=mChildren.begin();
     for(;i!=mChildren.end();i++)
       {
-        if(valid(*i))
-          {
             (*i)->setParent(0);
-          }
       }
     for(std::set<AGWidget*>::iterator i=mRefChildren.begin();i!=mRefChildren.end();i++)
       {
-        if(valid(*i))
-          {
             (*i)->setParent(0);
-          }
       }
 
     if(getParent())
       {
-        if(valid(getParent()))
-          {
             getParent()->eventChildrenDeleted(this);
-          }
       }
-  }
-
-bool AGWidget::valid(AGWidget *pWidget)
-  {
-    return (allWidgets.find(pWidget)!=allWidgets.end());
-
   }
 
 
@@ -179,7 +153,7 @@ void AGWidget::delObjects()
         for(;i!=mToClear.end();i++)
           {
             (*i)->setParent(0); // lets play it safe
-            saveDelete(*i);
+            delete *i;
           }
         mToClear.clear();
       }
@@ -695,8 +669,6 @@ void AGWidget::setParent(AGWidget *pParent)
         mParent=pParent;
         if(mParent==0 && old!=0)
           old->eventChildrenDeleted(this);
-        if(hasMain())
-          getMain()->getCollector()->removeGlobal(this);
       }
 
     mParent=pParent;
@@ -998,24 +970,13 @@ void AGWidget::setModal(bool pModal)
     mModal=pModal;
   }
 
+/// descend down tree, but dont mark itself !
 void AGWidget::mark() throw()
   {
     for(std::list<AGWidget*>::iterator i=mChildren.begin();i!=mChildren.end();i++)
       {
-        markObject(*i);
+        (*i)->mark();
       }
-
-    // mark mToClear also - as it can be that they are still used on stack
-    for(std::list<AGWidget*>::iterator i=mToClear.begin();i!=mToClear.end();i++)
-      markObject(*i);
-
-
-    for(std::set<AGWidget*>::iterator i=mRefChildren.begin();i!=mRefChildren.end();i++)
-      {
-        assert((*i));
-        markObject(*i);
-      }
-
   }
 
 

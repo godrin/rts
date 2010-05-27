@@ -23,6 +23,9 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
+#include "rice/Data_Object.hpp"
+
+
 #include <game_height_map.h>
 #include <game_heuristic.h>
 
@@ -39,17 +42,21 @@ class AnimMesh;
 class Mesh2D;
 class MeshBase;
 
-class AGEXPORT AntMap:public HeightMap
+class AGEXPORT AntMap:public GameHeightMap
 {
  public:
-  typedef std::list<AntEntity*> EntityList;
-  typedef AntEntity*PAntEntity;
+   
+   class EntityNotFound {
+   };
+   
+  typedef Rice::Data_Object<AntEntity> PAntEntity;
+  typedef std::list<PAntEntity> EntityList;
 
   AntMap(SceneBase *pScene,int w,int h);
   ~AntMap() throw();
 
-  virtual void insertEntity(AntEntity *e);
-  virtual void removeEntity(AntEntity *p);
+  virtual void insertEntity(PAntEntity e);
+  virtual void removeEntity(PAntEntity p);
   void clear() throw();
 
   int getNewID();
@@ -58,21 +65,20 @@ class AGEXPORT AntMap:public HeightMap
   void newMap(int w,int h);
 
   EntityList getEntities(const AGRect2&r);
-  std::list<AntEntity*> getAllEntities();
-  std::vector<AntEntity*> getEntities(const AGString &pName);
+  EntityList getAllEntities();
+  EntityList getEntities(const AGString &pName);
 
 
   //AntEntity *getEntity(const MeshBase &pMesh);
   
-  AntEntity *getEntity(const Mesh &pMesh);
-  AntEntity *getEntity(const AnimMesh &pMesh);
-  AntEntity *getEntity(const Mesh2D &pMesh);
+  PAntEntity getEntity(const Mesh &pMesh) throw (EntityNotFound);
+  PAntEntity getEntity(const AnimMesh &pMesh) throw (EntityNotFound);
    
-  AntEntity *getEntity(int id) const;
-  AntEntity *getByName(const AGString &pName);
+  PAntEntity getEntity(int id) const throw (EntityNotFound);
+  PAntEntity getByName(const AGString &pName) throw (EntityNotFound);
 
-  AntEntity *getNext(AntEntity *me,const AGString &pType,size_t atLeast=0);
-  std::vector<PAntEntity> getNextList(AntEntity *me,const AGString &pType,size_t atLeast=0);
+  PAntEntity getNext(PAntEntity me,const AGString &pType,size_t atLeast=0) throw (EntityNotFound);
+  EntityList getNextList(PAntEntity me,const AGString &pType,size_t atLeast=0);
 
   void setHeuristic(HeuristicFunction *pFunction);
 
@@ -93,15 +99,13 @@ class AGEXPORT AntMap:public HeightMap
   virtual void mapChanged();
 
  protected:
-#ifndef SWIG
   virtual void mark() throw();
-#endif
  private:
-  typedef std::map<size_t,AntEntity*> EntityMap;
+  typedef std::map<size_t,PAntEntity> EntityMap;
 
   EntityList mEntities;
   EntityMap mEntityMap;
-  QuadTree<AntEntity> *mEntQuad;
+  QuadTree<PAntEntity> *mEntQuad;
 
   EntityList mToDel;
 

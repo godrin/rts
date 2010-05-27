@@ -5,6 +5,8 @@
 #include <basic_profiler.h>
 #include <gui_config.h>
 
+#include <game_height_map.h>
+
 AntWaterShader *gWaterShader=0;
 AntWaterShader *getWaterShader()
   {
@@ -28,7 +30,7 @@ bool useWaterAnimation()
   }
 
 
-WaterPiece::WaterPiece(SceneBase *pScene,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos):
+WaterPiece::WaterPiece(SceneBase *pScene,GameHeightMap &map,int x,int y,int w,int h,const AGVector4 &pos):
   SceneNode(pScene,pos,AGBox3()),
   mX(x),mY(y),mW(w),mH(h),mMap(&map)
   {

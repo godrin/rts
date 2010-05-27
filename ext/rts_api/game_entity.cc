@@ -18,8 +18,8 @@
  * License along with this program.
  */
 
-#include <game_entity.h>
 #include <game_map.h>
+#include <game_entity.h>
 #include <basic_debug.h>
 #include <game_jobs.h>
 #include <a3d_mesh.h>
@@ -81,12 +81,11 @@ void AntEntity::init()
 
 AntEntity::~AntEntity() throw()
   {
-    CTRACE;
     //#error called several times
     for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
-      saveDelete(*i);
+      delete *i;
     mMeshes.clear();
-    checkedDelete(mJob);
+    delete mJob;
     removeOldJobs();
   }
 
@@ -380,7 +379,7 @@ void AntEntity::setMesh(SceneNode *m)
   {
     // clear meshes from scene
     for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
-      saveDelete(*i);
+      delete *i;
 
     mMeshes.clear();
     mMeshPos.clear();
@@ -646,29 +645,6 @@ AGRect2 AntEntity::getRect() const
 
 
 
-void AntEntity::mark() throw()
-  {
-    AGRubyObject::mark();
-    for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
-      {
-        markObject(*i);
-      }
-
-    if(mJob)
-      {
-        MoveJob *mj=dynamic_cast<MoveJob*>(mJob);
-        FightJob *fj=dynamic_cast<FightJob*>(mJob);
-        if(mj)
-          if(mj->getTarget())
-            markObject(mj->getTarget(),false);
-        if(fj)
-          if(fj->getTarget())
-            markObject(fj->getTarget(),false);
-
-      }
-  }
-
-
 void AntEntity::clear() throw()
   {
     clearMeshes();
@@ -679,7 +655,7 @@ void AntEntity::clearMeshes()
   {
     for(Meshes::iterator i=mMeshes.begin();i!=mMeshes.end();i++)
       {
-        saveDelete(*i);
+        delete *i;
       }
     mMeshes.clear();
   }

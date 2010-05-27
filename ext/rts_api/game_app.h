@@ -35,7 +35,7 @@
 extern std::ofstream out;
 #endif
 
-class AGEXPORT GLApp:public AGApplication
+class AGEXPORT GameApp:public AGApplication
 {
   bool shadow;
   float mx,my;
@@ -53,8 +53,9 @@ protected:
   Scene *scene;
 
 public:
-  GLApp(int w,int h);
-  ~GLApp() throw();
+  GameApp();
+  GameApp(int w,int h);
+  ~GameApp() throw();
 
   virtual void draw();
   void drawGL();
@@ -75,7 +76,6 @@ public:
   virtual void setCamera(const AGVector2&p);
   AGVector2 getCamera() const;
 
-  void mark() throw();
 };
 
 

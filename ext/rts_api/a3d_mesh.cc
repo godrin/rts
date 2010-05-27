@@ -142,12 +142,6 @@ bool Mesh::transparent()
   }
 
 
-void Mesh::mark() throw()
-  {
-    markObject(getData());
-  }
-
-
 void Mesh::setColor(const AGVector4 &pColor)
   {
     mColor=pColor;

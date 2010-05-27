@@ -19,7 +19,7 @@ bool use3dTextures()
 //////////////////////////////////////////////////////////////////////////
 // TerrainPiece
 //////////////////////////////////////////////////////////////////////////
-TerrainPiece::TerrainPiece(SceneBase *pScene,Terrain *t,HeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos,int scale):
+TerrainPiece::TerrainPiece(SceneBase *pScene,Terrain *t,GameHeightMap &map,int xs,int ys,int w,int h,const AGVector4 &pPos,int scale):
   SceneNode(pScene,AGVector4(),AGBox3()),
   mXs(xs),mYs(ys),mW(w),mH(h),
   mMap(&map)
@@ -221,7 +221,7 @@ int getTerrainDownScaleZ()
 ////////////////////////////////////////////////////////////////////////////
 
 
-TerrainBase::TerrainBase(SceneBase *pScene,HeightMap &map):
+TerrainBase::TerrainBase(SceneBase *pScene,GameHeightMap &map):
   mMap(&map),mScene(pScene)
   {
     map.sigMapChanged.connect(slot(this,&TerrainBase::slotMapChanged));
@@ -249,7 +249,7 @@ SceneBase *TerrainBase::getScene()
     return mScene;
   }
 
-HeightMap *TerrainBase::getMap()
+GameHeightMap *TerrainBase::getMap()
   {
     return mMap;
   }
@@ -267,7 +267,7 @@ void TerrainBase::mapChangedComplete()
 // Terrain
 ////////////////////////////////////////////////////////////////////////////
 
-Terrain::Terrain(SceneBase *pScene,HeightMap &map):
+Terrain::Terrain(SceneBase *pScene,GameHeightMap &map):
   TerrainBase(pScene,map),
   m3D(getTextureCache()->get3D("data/textures/terrain/new3d.png",getTerrainDownScale(),getTerrainDownScaleZ())),
   mGrass(getTextureCache()->get("data/textures/terrain/grass4.png"))
@@ -282,7 +282,7 @@ void Terrain::init()
     int tilesize=16;
     size_t tiles=0;
 
-    HeightMap *map=getMap();
+    GameHeightMap *map=getMap();
 
     for(y=0; y<map->getH();y+=tilesize)
       for(x=0;x<map->getW();x+=tilesize)
@@ -303,9 +303,9 @@ void Terrain::init()
 void Terrain::mapChangedComplete()
   {
     for(Pieces::iterator i=pieces.begin();i!=pieces.end();i++)
-      saveDelete(*i);
+      delete *i;
     for(WPieces::iterator i=water.begin();i!=water.end();i++)
-      saveDelete(*i);
+      delete *i;
 
     pieces.clear();
     water.clear();
@@ -319,7 +319,7 @@ void Terrain::mapChangedComplete()
 Terrain::~Terrain() throw()
   {
     for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-      saveDelete(*i);
+      delete *i;
   }
 
 void Terrain::mapChanged()
@@ -344,9 +344,3 @@ AGTexture *Terrain::getGrassTexture()
     return &mGrass;
   }
 
-void Terrain::mark() throw()
-  {
-    //  std::cout<<"Terrain::mark()"<<std::endl;
-    for(Nodes::iterator i=mNodes.begin();i!=mNodes.end();i++)
-      markObject(*i);
-  }

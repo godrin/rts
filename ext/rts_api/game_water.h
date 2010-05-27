@@ -3,16 +3,17 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
+//#include <game_map.h>
 #include <a3d_glsl.h>
 #include <a3d_scene.h>
 #include <gui_texturecache.h>
 #include <gui_geometry.h>
 #include <gui_texture.h>
 #include <a3d_vertex_array.h>
-#include <game_map.h>
 #include <math.h>
 
 class AntWaterShader;
+class GameHeightMap;
 
 /**
    A waterpiece is a scenenode, that displays some small patch of water. Water has
@@ -25,7 +26,7 @@ class AGEXPORT WaterPiece:public SceneNode
 {
   AGTexture tex;
  public:
-  WaterPiece(SceneBase *pScene,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pos);
+  WaterPiece(SceneBase *pScene,GameHeightMap &map,int x,int y,int w,int h,const AGVector4 &pos);
   virtual ~WaterPiece() throw();
 
   /// draw in normal mode
@@ -50,7 +51,7 @@ class AGEXPORT WaterPiece:public SceneNode
   int mY;
   int mW;
   int mH;
-  HeightMap *mMap;
+  GameHeightMap *mMap;
   int step;
   AntWaterShader *mShader;
 };

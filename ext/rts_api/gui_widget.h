@@ -158,10 +158,7 @@ public:
   void hide();
   void close();
 
-protected:
-  #ifndef SWIG
   virtual void mark() throw();
-  #endif
 public:
 
   virtual void addChild(AGWidget *w);
@@ -288,8 +285,6 @@ private:
 
   void checkFocus();
 
-  static bool valid(AGWidget *pWidget);
-
   std::list<AGWidget*> mToClear;
 
   AGRect2 mRect,mClientWorld;
@@ -326,9 +321,6 @@ private:
 
 protected:
   std::list<AGWidget*> mChildren;
-
-private:
-  static std::set<AGWidget*> allWidgets;
 
 };
 

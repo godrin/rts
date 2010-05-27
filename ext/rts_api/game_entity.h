@@ -257,8 +257,6 @@ class AGEXPORT AntEntity:public AGRubyObject
     void eventMapChanged();
     void move(float pTime); // move entity FIXME: del move
 
-    void mark() throw();
-
     void clear() throw();
     void clearMeshes();
 

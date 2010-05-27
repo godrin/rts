@@ -71,7 +71,6 @@ AGGLTexture::AGGLTexture(size_t W,size_t H,GLint format):w(W),h(H),d(1),m3d(fals
     assertGL;
     glGenTextures( 1, &mID);
     assertGL;
-    bool inited=false;
     mTarget=GL_TEXTURE_2D;
 
     //cdebug(w<<":"<<h);

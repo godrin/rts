@@ -6,8 +6,15 @@
 
 #include <algorithm>
 
+class SceneNodeRectGetter:public QuadTree<SceneBase::PSceneNode>::RectGetter {
+  public:
+  virtual AGRect2 getRect(const SceneBase::PSceneNode &t) {
+    return t->getRect();
+  }
+};
+
 SceneBase::SceneBase(int w,int h):
-  mTree(new QuadTree<SceneNode>(AGRect2(AGVector2(),AGVector2(w,h)))),
+  mTree(new QuadTree<PSceneNode>(AGRect2(AGVector2(),AGVector2(w,h)),new SceneNodeRectGetter())),
   mCamera(w,h)
   {
   }
@@ -122,18 +129,6 @@ float SceneBase::height() const
 {
   return mCamera.getHeight();
 }
-
-void SceneBase::mark() throw()
-  {
-    //  std::cout<<"SceneBase::mark()"<<std::endl;
-    SceneBase::Nodes::iterator i=mNodes.begin();
-
-    for(;i!=mNodes.end();i++)
-      {
-        //  std::cout<<"scenebase-mark:"<< this<<"  "<<*i<<std::endl;
-        markObject(*i);
-      }
-  }
 
 AGVector4 SceneBase::getCamera() const
 {

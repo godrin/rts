@@ -41,16 +41,25 @@
 template<class T>
 class QuadTree
 {
+  public:
+  class RectGetter
+  {
+    public:
+    virtual AGRect2 getRect(const T&t)=0;
+  };
+  private:
   // ignore this node-structure - it works ;-)
   struct Node
   {
-    std::set
-    <T*> ts;
+    std::set<T> ts;
+    QuadTree *tree;
     std::list<Node*> children;
     AGRect2 r;
 
-    Node(AGRect2 R):r(R)
-    {}
+    Node(AGRect2 R,QuadTree *qt):r(R)
+    {
+      tree=qt;
+    }
 
     ~Node()
       {
@@ -72,9 +81,9 @@ class QuadTree
           (*i)->getAll(l);
       }
 
-    void get(const AGRect2 &pr,std::list<T*> &l)
+    void get(const AGRect2 &pr,std::list<T> &l)
       {
-        typename std::set<T*>::iterator i=ts.begin();
+        typename std::set<T>::iterator i=ts.begin();
         for(;i!=ts.end();i++)
           l.push_back(*i);
 
@@ -84,13 +93,13 @@ class QuadTree
             (*j)->get(pr,l);
       }
 
-    void insert(T* t)
+    void insert(T t)
       {
         if(children.size())
           {
             typename std::list<Node*>::iterator i=children.begin();
             for(;i!=children.end();i++)
-              if((*i)->r.contains(t->getRect()))
+              if((*i)->r.contains(tree->rgetter->getRect(t)))
                 {
                   (*i)->insert(t);
                   return;
@@ -118,22 +127,21 @@ class QuadTree
     void split()
       {
         std::set
-        <T*> ot=ts;
+        <T> ot=ts;
         ts.clear();
         std::list<AGRect2> rs=r.split();
         std::list<AGRect2>::iterator i=rs.begin();
         for(;i!=rs.end();i++)
           {
-            children.push_back(new Node(*i));
+            children.push_back(new Node(*i,tree));
           }
-        typename std::set
-        <T*>::iterator j=ot.begin();
+        typename std::set<T>::iterator j=ot.begin();
         for(;j!=ot.end();j++)
           insert(*j);
       }
 
     bool remove
-    (T* t)
+    (T t)
       {
         if(ts.find(t)!=ts.end())
           {
@@ -155,6 +163,7 @@ class QuadTree
   };
 
   Node *root;
+  RectGetter *rgetter;
 
 public:
 
@@ -164,21 +173,25 @@ public:
    * @param r Starting rectangle, that gets tiled. This should contain everything that you want to store here. But don't make this
    *  rectangle too big, because otherwise must be tiled several times before even one object can be inserted.
    */
+  
 
-  QuadTree(AGRect2 r)
+  QuadTree(AGRect2 r,RectGetter *prgetter)
     {
-      root=new Node(r);
+      rgetter=prgetter;
+      root=new Node(r,this);
+      
     }
   ~QuadTree()
     {
       checkedDelete(root);
+      delete rgetter;
     }
 
   /**
        insert an object
        @param t the object you want to insert
    */
-  void insert(T* t)
+  void insert(const T &t)
     {
       root->insert(t);
     }
@@ -192,16 +205,16 @@ public:
   }
 
   /// this one you should call - get all objects, that intersect (or are included in) this rectangle
-  std::list<T*> get(const AGRect2 &r)
+  std::list<T> get(const AGRect2 &r)
   {
-    std::list<T*> l;
+    std::list<T> l;
     root->get(r,l);
     return l;
   }
 
   /// remove some object
   bool remove
-  (T* t)
+  (T t)
     {
       if(t)
         return root->remove(t);

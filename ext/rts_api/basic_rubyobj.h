@@ -109,33 +109,6 @@ public:
     }
 };
 
-
-/**
- * gc_ptr<T> is a managed ptr to a (possibly) garbage-collected object
- * it will be redirected to 0, if the targeted object is destroyed. So
- * you'll get a null-pointer exception when the object is not longer
- * present. This prevents you from accessing random memory.
- */
-template<class T>
-class AGEXPORT gc_ptr:public AGBaseObject
-{
-public:
-  gc_ptr(T*t):AGBaseObject(t)
-  {
-  }
-
-  T*operator->()
-    {
-      return (T*)mp;
-    }
-  T* getPtr()
-  {
-    if(!mp)
-      throw std::runtime_error("mp not defined!");
-    return (T*)mp;
-  }
-};
-
 /**
  *
  * */
@@ -164,7 +137,6 @@ public:
 
 #endif
   friend void general_markfunc(void *ptr);
-  friend bool saveDelete(AGRubyObject *o);
 
   void addRef(AGBaseObject *o);
   void deleteRef(AGBaseObject *o);

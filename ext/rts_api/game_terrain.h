@@ -12,9 +12,8 @@
 
 #include <basic_xml.h>
 
-#include <game_map.h>
+#include <game_height_map.h>
 #include <game_water.h>
-
 
 #include <vector>
 #include <math.h>
@@ -31,7 +30,7 @@ class Terrain;
 class AGEXPORT TerrainPiece:public SceneNode
 {
  public:
-  TerrainPiece(SceneBase *pScene,Terrain *t,HeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
+  TerrainPiece(SceneBase *pScene,Terrain *t,GameHeightMap &map,int x,int y,int w,int h,const AGVector4 &pPos,int scale);
   virtual ~TerrainPiece() throw();
 
   void draw();
@@ -54,19 +53,19 @@ class AGEXPORT TerrainPiece:public SceneNode
   size_t mXs,mYs;
   size_t mW,mH;
   int mScale;
-  HeightMap *mMap;
+  GameHeightMap *mMap;
 
   VertexArray m3dArray;
 };
 
 
-class AGEXPORT TerrainBase:public AGRubyObject
+class AGEXPORT TerrainBase
 {
  public:
-  TerrainBase(SceneBase *pScene,HeightMap &map);
+  TerrainBase(SceneBase *pScene,GameHeightMap &map);
   virtual ~TerrainBase() throw();
 
-  HeightMap *getMap();
+  GameHeightMap *getMap();
   SceneBase *getScene();
 
   /// some parts of the map are changed
@@ -81,7 +80,7 @@ class AGEXPORT TerrainBase:public AGRubyObject
 
  private:
   /// the height-map
-  HeightMap *mMap;
+  GameHeightMap *mMap;
   
   SceneBase *mScene;
 };
@@ -112,7 +111,7 @@ class AGEXPORT Terrain:public TerrainBase
 
 
 public:
-  Terrain(SceneBase *pScene,HeightMap &map);
+  Terrain(SceneBase *pScene,GameHeightMap &map);
 
   virtual ~Terrain() throw();
 

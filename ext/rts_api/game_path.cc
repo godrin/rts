@@ -145,7 +145,7 @@ bool PathWeighter::isWaterPassable() const
 // MapPathWeighter
 ///////////////////////////////////////////////////////////////////////
 
-MapPathWeighter::MapPathWeighter(HeightMap *pMap,bool pWaterPassable):
+MapPathWeighter::MapPathWeighter(GameHeightMap *pMap,bool pWaterPassable):
   PathWeighter(pWaterPassable),
   mMap(pMap)
   {
@@ -711,7 +711,7 @@ std::list<std::pair<size_t,size_t> > getPossibleNeighbors(size_t w,size_t h,cons
 
 
 
-SimpleGraph *makeGraph(HeightMap *pMap, MapPathWeighter *pWeighter,size_t res)
+SimpleGraph *makeGraph(GameHeightMap *pMap, MapPathWeighter *pWeighter,size_t res)
   {
     size_t x,y;
     SimpleGraph *graph=new SimpleGraph;

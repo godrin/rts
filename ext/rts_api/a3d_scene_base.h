@@ -29,7 +29,7 @@ class QuadTree;
 typedef std::vector<PickNode> PickResult;
 typedef std::list<SceneNode*> SceneNodeList;
 
-class AGEXPORT SceneBase:public AGRubyObject
+class AGEXPORT SceneBase
 {
  public:
   //
@@ -69,20 +69,19 @@ class AGEXPORT SceneBase:public AGRubyObject
   float width() const;
   float height() const;
 
-  void mark() throw();
-
-
   /** get currently visible nodes */
   virtual SceneNodeList getCurrentNodes();
 
   //  void setEnabled(bool p);
+  typedef SceneNode*PSceneNode;
 
  protected:
 
   typedef std::vector<SceneNode*> Nodes;
   typedef std::set<SceneNode*> NodeSet;
 
-  typedef QuadTree<SceneNode> Tree;
+  
+  typedef QuadTree<PSceneNode> Tree;
 
   Tree *mTree;
 

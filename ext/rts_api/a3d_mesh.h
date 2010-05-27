@@ -46,8 +46,6 @@ class AGEXPORT Mesh:public MeshBase
 
   MeshData *getData();
 
-  void mark() throw();
-
   virtual bool transparent();
 
 

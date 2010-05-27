@@ -343,6 +343,7 @@ AGMessageObject::AGMessageObject():
   sigVideoResize(this,"sigVideoResize"),
   mCanReceiveMessages(true)
         {
+	  
         }
 
 AGMessageObject::~AGMessageObject() throw()

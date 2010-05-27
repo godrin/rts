@@ -142,7 +142,7 @@ class AGEXPORT AGPainter:public AGRubyObject
 
   AGPaintProjection mCurrent;
 
-  gc_ptr<AGPaintTarget> mTarget;
+  AGPaintTarget * mTarget;
 };
 
 #endif

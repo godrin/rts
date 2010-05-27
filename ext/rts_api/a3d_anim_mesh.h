@@ -60,10 +60,6 @@ public:
   void setEntity(AntEntity *e);
 
   virtual size_t getTriangles() const;
-protected:
-#ifndef SWIG
-  virtual void mark() throw();
-#endif
 
 private:
 

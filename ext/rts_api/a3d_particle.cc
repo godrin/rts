@@ -1,10 +1,10 @@
 #include <a3d_renderer.h>
 #include <a3d_scene.h>
-#include <game_particle.h>
+#include <a3d_particle.h>
 #include <gui_texturecache.h>
 #include <gui_rendercontext.h>
 #include <gui_main.h>
-#include <game_map.h>
+//#include <game_map.h>
 #include <gui_config.h>
 #include <basic_profiler.h>
 
