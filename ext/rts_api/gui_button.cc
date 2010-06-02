@@ -39,7 +39,7 @@ using namespace std;
  * @param id      currently not any longer used id
  */
 
-AGButton::AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText,int id):
+AGButton::AGButton(const GUIWidgetPtr &pParent,const AGRect2 &r,const AGStringUtf8&pText,int id):
   AGWidget(pParent,r),
   mText(pText),mID(id),mState(NORMAL),mTextW(0)
   {
@@ -119,6 +119,7 @@ void AGButton::setTexture(const AGTexture &pTexture)
 
 void AGButton::draw(AGPainter &p)
   {
+    CTRACE;
     assert(mTextW);
     p.pushMatrix();
     p.transform(AGRect2(0,0,width(),height()).shrink(borderWidth));
@@ -251,7 +252,7 @@ void AGButton::setHeight(float h)
 
 void AGButton::updateClientRects()
   {
-    std::list<AGWidget*>::iterator i=mChildren.begin();
+    Children::iterator i=mChildren.begin();
     for(;i!=mChildren.end();i++)
       (*i)->setRect(getRect().origin().shrink(borderWidth));
   }

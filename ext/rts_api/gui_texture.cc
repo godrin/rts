@@ -143,7 +143,7 @@ AGTexture::~AGTexture() throw()
   {
     if(getSurfaceManager())
       getSurfaceManager()->deregisterMe(this);
-    checkedDelete(mFBO);
+    delete mFBO;
   }
 
 int AGTexture::width() const
@@ -176,7 +176,7 @@ bool AGTexture::hasTexture() const
 void AGTexture::clearTexture()
   {
     mTexture=0;
-    checkedDelete(mFBO);
+    delete mFBO;
     mFBO=0;
   }
 void AGTexture::clearTextureUsed()

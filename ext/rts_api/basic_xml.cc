@@ -22,8 +22,6 @@
 #include <basic_fs.h>
 
 #include <basic_debug.h>
-#include <basic_rubyobj.h>
-
 #include <basic_profiler.h>
 
 /**
@@ -62,7 +60,7 @@ Node::~Node()
   {
     NodeVector::iterator i=mNodes.begin();
     for(;i!=mNodes.end();i++)
-      checkedDelete(*i);
+      delete *i;
     mNodes.clear();
   }
 
@@ -358,7 +356,7 @@ Document::Document(const AGString &pFilename)
 
 Document::~Document()
   {
-    checkedDelete(mRoot);
+    delete mRoot;
   }
 
 bool Document::parseFile(const AGString &filename)

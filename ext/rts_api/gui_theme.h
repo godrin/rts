@@ -34,7 +34,7 @@
 #include <map>
 
 
-class AGEXPORT AGLocalTheme:public AGRubyObject
+class AGEXPORT AGLocalTheme
   {
   public:
     AGLocalTheme(const AGString &pTheme);
@@ -59,7 +59,7 @@ class AGEXPORT AGLocalTheme:public AGRubyObject
     AGString mTheme;
   };
 
-class AGEXPORT AGTheme:public AGRubyObject
+class AGEXPORT AGTheme
 {
  public:
   AGTheme();

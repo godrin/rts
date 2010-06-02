@@ -3,8 +3,6 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <basic_rubyobj.h>
-
 #include <gui_geometry.h>
 
 class SceneBase;

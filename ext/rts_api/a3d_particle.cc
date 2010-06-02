@@ -48,7 +48,7 @@ AntParticle::AntParticle(Scene *pScene,float f):
 AntParticle::~AntParticle() throw()
   {
     for(std::list<Piece*>::iterator i=mPieces.begin();i!=mPieces.end();i++)
-      checkedDelete(*i);    // checked - no agrubyobject
+    delete *i;    // checked - no agrubyobject
 
     mPieces.clear();
 
@@ -82,7 +82,7 @@ void AntParticle::advance(float time)
       {
         if(mPieces.back()->lived>maxtime)
           {
-            checkedDelete(mPieces.back()); // checked - no agrubyobject
+            delete mPieces.back(); // checked - no agrubyobject
             mPieces.pop_back();
           }
         else

@@ -1,9 +1,9 @@
 #ifndef AG_FRAME_H
 #define AG_FRAME_H
 
+#include <gui_widget.h>
 #include <gui_border.h>
 #include <gui_background.h>
-#include <gui_widget.h>
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 

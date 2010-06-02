@@ -95,10 +95,10 @@ void AGMenu::draw(AGPainter &p)
 
 void AGMenu::eventItemSelected(const AGString &pString)
   {
-    std::list<AGWidget*>::iterator i=mChildren.begin();
+    Children::iterator i=mChildren.begin();
     for(;i!=mChildren.end();i++)
       {
-        AGMenuItem *item=dynamic_cast<AGMenuItem*>(*i);
+        AGMenuItem *item=dynamic_cast<AGMenuItem*>(i->widget());
         //cdebug("item:"<<item);
         if(item)
           {
@@ -115,10 +115,10 @@ void AGMenu::eventItemClicked(const AGString &pString)
   {
     sigSelected(new AGEvent(this,pString));
 
-    AGMenuItem *mi=dynamic_cast<AGMenuItem*>(getParent());
+    AGMenuItem *mi=dynamic_cast<AGMenuItem*>(getParent().widget());
     if(mi)
       {
-        AGMenu *m=dynamic_cast<AGMenu*>(mi->getParent());
+        AGMenu *m=dynamic_cast<AGMenu*>(mi->getParent().widget());
         if(m)
           m->eventItemClicked(pString);
       }

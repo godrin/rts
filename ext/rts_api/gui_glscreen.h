@@ -33,6 +33,7 @@
 #include <map>
 #include <list>
 #include <SDL.h>
+#include <set>
 
 #define NEW_TEXTURES
 

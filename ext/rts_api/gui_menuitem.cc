@@ -79,7 +79,7 @@ bool AGMenuItem::eventMouseEnter()
     mSelected=true;
     eventSelect();
 
-    AGMenu *p=dynamic_cast<AGMenu*>(getParent());
+    AGMenu *p=dynamic_cast<AGMenu*>(getParent().widget());
     //  cdebug(p);
     if(p)
       {
@@ -118,7 +118,7 @@ void AGMenuItem::eventUnselect()
 
 bool AGMenuItem::eventMouseClick(AGEvent *m)
   {
-    AGMenu *me=dynamic_cast<AGMenu*>(getParent());
+    AGMenu *me=dynamic_cast<AGMenu*>(getParent().widget());
     if(me)
       {
         me->eventItemClicked(mText.toString());

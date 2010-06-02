@@ -39,7 +39,7 @@ class Heuristic;
    
    FIXME: integrate PathWeighter into MapPathWeighter!
  */
-class AGEXPORT PathWeighter:public AGRubyObject
+class AGEXPORT PathWeighter
 {
  public:
   PathWeighter(bool pWaterPassable=false);
@@ -82,7 +82,7 @@ struct AGEXPORT AGVector2Sort
 };
 
 
-class AGEXPORT SimpleGraph:public AGRubyObject
+class AGEXPORT SimpleGraph
 {
  public:
   struct Node;
@@ -286,7 +286,7 @@ class AGEXPORT PathDebugging
 };
   
 
-class AGEXPORT Pathfinder:public AGRubyObject
+class AGEXPORT Pathfinder
 {
  public:
 
@@ -296,10 +296,6 @@ class AGEXPORT Pathfinder:public AGRubyObject
   std::vector<AGVector2> computePath(const AGVector2 &from, const AGVector2 &to);
 
   std::vector<AGVector2> refinePath(const std::vector<AGVector2> &p,MapPathWeighter *pWeighter);
- protected:
-#ifndef SWIG
-  virtual void mark() throw();
-#endif
   
  private:
   SimpleGraph *mGraph;

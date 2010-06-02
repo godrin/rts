@@ -23,7 +23,9 @@
 #ifndef AG_WIDGET_H
 #define AG_WIDGET_H
 
+#include "rice/Data_Object.hpp"
 #include <basic_base.h>
+
 #include <gui_geometry.h>
 #include <gui_messageobject.h>
 #include <gui_projection.h>
@@ -31,6 +33,7 @@
 #include "gui_painter.h"
 
 #include <list>
+#include <set>
 
 
 class AGTooltip;
@@ -63,7 +66,26 @@ class AGApplication;
     the drawing and event-processing.
 
  */
+class AGWidget;
 
+class GUIWidgetPtr {
+  public:
+    GUIWidgetPtr(AGWidget *w);
+    explicit GUIWidgetPtr(const Rice::Data_Object<AGWidget> &w);
+    explicit GUIWidgetPtr(const Rice::Object &w);
+    ~GUIWidgetPtr();
+    
+    AGWidget *widget();
+    Rice::Data_Object<AGWidget> *ruby();
+    
+    (operator bool)() const;
+    //AGWidget *operator->();
+    AGWidget *operator->() const;
+    
+  private:
+    AGWidget *mWidget;
+    Rice::Data_Object<AGWidget> *mRubyWidget;
+};
 
 
 /**
@@ -79,9 +101,10 @@ class AGApplication;
 class AGEXPORT AGWidget:public AGMessageObject
 {
 public:
-  typedef std::list<AGWidget*> Children;
+  typedef std::list<GUIWidgetPtr> Children;
+  typedef std::set<GUIWidgetPtr> ChildrenSet;
 
-  AGWidget(AGWidget *pParent,const AGRect2 &r);
+  AGWidget(const GUIWidgetPtr &pParent,const AGRect2 &r);
   virtual ~AGWidget() throw();
 
   AGApplication *getApp();
@@ -98,9 +121,9 @@ public:
   virtual AGRect2 getClientRect() const;
   virtual void setRect(const AGRect2 &pRect);
 
-  virtual void setParent(AGWidget *pParent);
-  AGWidget *getParent();
-  bool isParent(AGWidget *pParent);
+  virtual void setParent(const GUIWidgetPtr&pParent);
+  GUIWidgetPtr getParent();
+  bool isParent(const GUIWidgetPtr &pParent);
 
   virtual bool eventShow();
   virtual bool eventHide();
@@ -131,6 +154,11 @@ public:
   AGSignal sigMouseLeave;
   AGSignal sigClick;
   AGSignal sigDragBy;
+  
+  AGSignal *getSigMouseEnter();
+  AGSignal *getSigMouseLeave();
+  AGSignal *getSigClick();
+  AGSignal *getSigDragBy();
 
   virtual float minWidth() const;
   virtual float minHeight() const;
@@ -161,10 +189,10 @@ public:
   virtual void mark() throw();
 public:
 
-  virtual void addChild(AGWidget *w);
-  virtual void addChildBack(AGWidget *w);
+  virtual void addChild(const GUIWidgetPtr &w);
+  virtual void addChildBack(const GUIWidgetPtr &w);
 
-  virtual void removeChild(AGWidget *w);
+  virtual void removeChild(const GUIWidgetPtr &w);
 
   // Functions for caching appearance
   virtual bool redraw() const;
@@ -211,14 +239,17 @@ public:
   // focus
 
   /** should only be called by a child */
-  void gainFocus(AGWidget *pWidget=0);
-  void gainCompleteFocus(AGWidget *pWidget=0);
+  void gainFocus(const GUIWidgetPtr &pWidget);
+  void gainCompleteFocus(const GUIWidgetPtr &pWidget);
+  void gainFocus();
+  void gainCompleteFocus();
 
 
   virtual bool eventDragBy(AGEvent *event,const AGVector2 &pDiff);
 
   bool getFocus() const;
-  bool hasFocus(const AGWidget *pWidget=0);
+  bool hasFocus(const GUIWidgetPtr &pWidget);
+  bool hasFocus();
   AGWidget *getFocusedWidget ();
 
   AGLayout *getLayout();
@@ -226,13 +257,13 @@ public:
 
   const AGString &getName() const;
   void setName(const AGString &pName);
-  AGWidget *getChild(const AGString &pName);
+  AGWidget *getChild(AGString pName);
 
   void setModal(bool pModal);
 
-  void erase(AGWidget *w);
+  void erase(const GUIWidgetPtr &w);
 
-  void eventChildrenDeleted(AGWidget *pWidget);
+  void eventChildrenDeleted(const GUIWidgetPtr &pWidget);
 
   void setTooltip(const AGStringUtf8 &pTooltip);
 
@@ -242,7 +273,7 @@ public:
   void pushChangeRect(const AGRect2 &pRect);
   void clearChangeRects();
 
-  std::list<AGWidget*> getChildren();
+  Children getChildren();
 
   bool hovered() const;
 
@@ -281,17 +312,17 @@ private:
 
   void delObjects();
 
-  void gainFocusDown(AGWidget *pWidget);
+  void gainFocusDown(const GUIWidgetPtr &pWidget);
 
   void checkFocus();
 
-  std::list<AGWidget*> mToClear;
+  Children mToClear;
 
   AGRect2 mRect,mClientWorld;
   AGProjection2D mClientProj;
   bool mUseClientRect;
 
-  AGWidget *mParent;
+  GUIWidgetPtr mParent;
   bool mChildrenEventFirst;
   bool mChildrenDrawFirst;
   bool mMouseIn;
@@ -303,7 +334,7 @@ private:
   bool mCacheTouched;
 
   bool mHasFocus;
-  AGWidget *mFocus;
+  GUIWidgetPtr mFocus;
 
   AGVector2 mOldMousePos;
 
@@ -315,12 +346,12 @@ private:
   AGStringUtf8 mTooltip;
   AGTooltip *mTooltipWidget;
 
-  std::set<AGWidget*> mRefChildren;
+  ChildrenSet mRefChildren;
 
   bool mEventsInited;
 
 protected:
-  std::list<AGWidget*> mChildren;
+  Children mChildren;
 
 };
 

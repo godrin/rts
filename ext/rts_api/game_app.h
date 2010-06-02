@@ -18,11 +18,11 @@
   */
 
 
+#include <gui_application.h>
 
 #include <a3d_scene.h>
 #include <a3d_renderer.h>
 
-#include <gui_application.h>
 #include <gui_main.h>
 #include <gui_geometry.h>
 

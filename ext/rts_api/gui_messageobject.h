@@ -24,8 +24,8 @@
 #define AG_MESSAGEOBJECT_H
 
 
-#include <basic_rubyobj.h>
 #include <basic_string.h>
+#include <basic_ruby_exposable.h>
 
 #include <gui_geometry.h>
 
@@ -59,7 +59,7 @@ class AGSignal;
     You can however derive from it and pass it through a signal.
     But you shouldn't delet it for yourself.
  */
-class AGEXPORT AGEvent:public AGRubyObject
+class AGEXPORT AGEvent
 {
  public:
   AGEvent(AGListener *pCaller,const AGString &pName,const SDL_Event &pEvent=NullEvent);
@@ -123,6 +123,14 @@ class AGEXPORT AGListener
   virtual ~AGListener() throw();
   virtual bool signal(AGEvent *m);
 
+  
+  private:
+    friend class AGSignal;
+    void addSignal(AGSignal *s);
+    void removeSignal(AGSignal *s);
+    
+    std::set<AGSignal*> mLinkedSignals;
+  
 };
 
 /**
@@ -172,7 +180,7 @@ class AGMessageObject;
     You call sigClick(event) in the button and the connected slot is automatically called.
     @see connect()
 */
-class AGEXPORT AGSignal
+class AGEXPORT AGSignal:public BasicRubyExposable
 {
  public:
   AGSignal(AGMessageObject *pCaller,const AGString &pName);

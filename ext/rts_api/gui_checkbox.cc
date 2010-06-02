@@ -26,7 +26,7 @@
 #include <gui_layoutfactory.h>
 #include <gui_local.h>
 
-AGCheckBox::AGCheckBox(AGWidget *pParent,AGRect2 pRect):
+AGCheckBox::AGCheckBox(const GUIWidgetPtr&pParent,AGRect2 pRect):
   AGButton(pParent,pRect,"")
   {
     mSurfaces[0]=mSurfaces[1]=0;
@@ -43,8 +43,8 @@ bool AGCheckBox::eventMouseClick(AGEvent *m)
 
 void AGCheckBox::setSurfaces(AGSurface pDisabledSurface,AGSurface pEnabledSurface)
   {
-    saveDelete(mSurfaces[0]);
-    saveDelete(mSurfaces[1]);
+    delete mSurfaces[0];
+    delete mSurfaces[1];
     mSurfaces[0]=new AGSurface(pDisabledSurface);
     mSurfaces[1]=new AGSurface(pEnabledSurface);
 

@@ -41,47 +41,6 @@
 
 class AGRubyObject;
 
-enum IsRubyObject {
-  RUBY_OBJECT_YES, RUBY_OBJECT_NO, RUBY_OBJECT_UNKNOWN
-};
-
-AGEXPORT IsRubyObject isRubyObject(void *o);
-AGEXPORT bool saveDelete(AGRubyObject *o);
-
-
-/** checkedDelete deletes o, but checks before if o is a AGRubyObject
- **/
-template<class T>
-bool checkedDelete(T *o) {
-  IsRubyObject iro = isRubyObject((void*) o);
-  if (iro == RUBY_OBJECT_YES) {
-    std::cerr << "Possible error in checkedDelete(.)" << std::endl;
-    return false;
-  } else if (iro == RUBY_OBJECT_NO) {
-    delete o;
-    return true;
-  } else {
-    std::cerr << "Could not check, because rubyObjects was discarded" << std::endl;
-    return false;
-  }
-}
-
-/** checkedDelete deletes o, but checks before if o is a AGRubyObject
- **/
-template<class T>
-bool checkedDeleteArray(T *o) {
-  IsRubyObject iro = isRubyObject((void*) o);
-  if (iro == RUBY_OBJECT_YES) {
-    std::cerr << "Possible error in checkedDelete(.)" << std::endl;
-    return false;
-  } else if (iro == RUBY_OBJECT_NO) {
-    delete[] o;
-    return true;
-  } else {
-    std::cerr << "Could not check, because rubyObjects was discarded" << std::endl;
-    return false;
-  }
-}
 
 #endif
 #endif

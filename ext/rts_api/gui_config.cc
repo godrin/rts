@@ -1,11 +1,6 @@
 #include <gui_config.h>
 #include <basic_xml.h>
 #include <basic_fs.h>
-#include <basic_rubyobj.h>
-
-// TODO: AGConfig should switch to a ruby-based configuration (maybe YAML)
-// TODO: commenting should be possible !! (no overwriting)
-
 AGConfig::AGConfig()
   {
     Document doc("config.xml");
@@ -98,7 +93,7 @@ AGConfig *getConfig()
 
 void updateConfig()
   {
-    checkedDelete(gConfig);
+    delete gConfig;
     gConfig=0;
     //  getConfig();
   }

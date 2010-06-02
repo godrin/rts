@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<themes>
+  <default name="antargis"/>
+	<theme name="antargis">
+		<gradients>
+		  <gradient name="button_normal"   color0='#54555b' color1='#3c3d41' color2='#3c3d41' color4='#12141c'/>
+      <gradient name="button_lighted"  color0='#515488' color1='#434674' color2='#434674' color4='#262849'/>
+      <gradient name="button_disabled" color0='#12141c' color1='#12141c' color2='#12141c' color4='#12141c'/>
+      <gradient name="button_pressed"  color0='#262849' color1='#434674' color2='#434674' color4='#515488'/>
+      <gradient name="button_checkedlighted"  color0='#856c30' color1='#6f5926' color2='#6f5926' color4='#645021'/>
+      <gradient name="button_checked"  color0='#765f27' color1='#614e20' color2='#53431b' color4='#443616'/>
+		</gradients>
+		<images>
+      <image name="button_border_normal" file="data/gui/buttontest3.png"/>
+      <image name="button_border_inset" file="data/gui/buttontest3b.png"/>
+      <image name="screen_background" file="data/gui/bigbg_tile.png"/>
+	  </images>
+	  <fonts>
+	    <font name="default" file="FreeSans.ttf" color="#000000" size="14"/>
+	    <font name="big_white" file="FreeSans.ttf" color="#FFFFFF" size="16"/>
+	    <font name="outset" file="FreeSans.ttf" size="22" color="#f3ac0e" embossed="true" borderColor="#000000" borderWidth="3" inset="false"/>
+	  </fonts>
+		<button>
+		  <font name="default"/>
+      <state name="normal">
+        <border image="button_border_normal"/>
+        <background gradient="button_normal"/>
+      </state>
+      <state name="lighted">
+        <border image="button_border_normal"/>
+        <background gradient="button_lighted"/>
+      </state>
+      <state name="disabled">
+        <border image="button_border_normal"/>
+        <background gradient="button_disabled"/>
+      </state>
+      <state name="pressed">
+        <border image="button_border_inset"/>
+        <background gradient="button_pressed"/>
+      </state>
+      <state name="checkedlighted">
+        <border image="button_border_inset"/>
+        <background gradient="button_checkedlighted"/>
+      </state>
+      <state name="checked">
+        <border image="button_border_inset"/>
+        <background gradient="button_checked"/>
+      </state>
+		</button>
+		<window>
+		  <state name="focused">
+		    <title>
+		      <font name="big_white"/>
+		      <background gradient="button_normal"/>
+		    </title>
+		  </state>
+		  <state name="normal">
+		  </state>
+		</window>
+		<screen>
+		  <background image="screen_background"/>
+		</screen>
+	</theme>
+</themes>

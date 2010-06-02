@@ -19,7 +19,6 @@
  */
 
 #include <sound_mixer.h>
-#include <basic_kill.h>
 #include <basic_debug.h>
 #include <basic_mutex.h>
 #include <basic_fs.h>
@@ -140,7 +139,7 @@ void closeSoundEngine()
           }
         //FIXME: readd this
         Mix_CloseAudio();
-        checkedDelete(mSoundMutex);
+        delete mSoundMutex;
       }
   }
 
@@ -215,7 +214,6 @@ void AGSound::stopMp3()
   }
 AGSound::AGSound():AGMessageObject(),sigMp3Finished(this,"sigMp3Finished")
 {
-  REGISTER_SINGLETON(this);
   soundVol=1.0f;
 
   mNoSound=getConfig()->get("soundEnabled")=="false";

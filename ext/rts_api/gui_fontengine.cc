@@ -173,8 +173,8 @@ void border(AGSurface &s,AGColor bc)
 
         }
 
-    checkedDeleteArray(a);
-    checkedDeleteArray(b);
+    delete [] a;
+    delete [] b;
   }
 
 void embossSurface(AGSurface &s,float depth=1.0f)
@@ -266,11 +266,11 @@ void embossSurface(AGSurface &s,float depth=1.0f)
               s.putPixel(x,y,c);
             }
         }
-    checkedDeleteArray(a);
-    checkedDeleteArray(b);
+    delete[] a;
+    delete [] b ;
 
     /*
-  static int i=0;
+  static int i=0; 
   i++;
   std::ostringstream os;
   os<<"fonttest"<<i<<".png";

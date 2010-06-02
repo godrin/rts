@@ -1,0 +1,25 @@
+<campaign image="data/gui/map1.png" name="A hero is born." description="The story of Antargis begins" order="1">
+	<cutscene>
+		<screen>
+			<text text="Strange visions cross your mind."/>
+		</screen>
+		<screen>
+			<!--<image filename="data/gui/map1.png"/>-->
+			<text text="Your head aches."/>
+		</screen>
+	</cutscene>
+	<level file="data/levels/birth/birth1.antlvl"/>
+	<cutscene>
+		<screen>
+			<image filename="data/gui/campaign/mountain_landscape_imp.png"/>
+			<text text="Your enemies have fled northward. Your mission is find and crash them."/>
+		 </screen>
+	 </cutscene>
+	 <level file="data/levels/birth/birth2.antlvl"/>
+	 <cutscene>
+		 <screen>
+			 <!--<image filename="data/gui/campaign/mountain_landscape_imp.png"/>-->
+			 <text text="Rowen's story ends here for now. Come back later and finish his adventures!"/>
+		 </screen>
+	 </cutscene>
+</campaign>

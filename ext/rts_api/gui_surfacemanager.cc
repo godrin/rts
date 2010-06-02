@@ -22,7 +22,6 @@
 #include <gui_rendercontext.h>
 #include <gui_surface.h>
 #include <gui_texture.h>
-#include <basic_kill.h>
 #include <basic_debug.h>
 #include <gui_config.h>
 #include <gui_glscreen.h>
@@ -37,8 +36,8 @@
 // AGSurfaceManager
 ////////////////////////////////////////////////////////////////////////
 
-AGSurfaceManager *mSurfaceManager=0;
-bool mSurfaceManagerDeleted=false;
+AGSurfaceManager *gSurfaceManager=0;
+bool gSurfaceManagerDeleted=false;
 
 AGSurfaceManager::AGSurfaceManager()
   {
@@ -48,15 +47,15 @@ AGSurfaceManager::~AGSurfaceManager()
     for(std::set<AGInternalSurface*>::iterator i=mSDLSurfaces.begin();i!=mSDLSurfaces.end();++i)
       {
         AGFreeSurface((*i)->surface);
-        checkedDelete(*i);
+        delete *i;
       }
     for(std::set<AGGLTexture*>::iterator i=mGLTextures.begin();i!=mGLTextures.end();++i)
       {
-        checkedDelete(*i);
+        delete *i;
       }
 
-    mSurfaceManagerDeleted=true;
-    mSurfaceManager=0;
+    gSurfaceManagerDeleted=true;
+    gSurfaceManager=0;
   }
 
 void AGSurfaceManager::clear()
@@ -112,16 +111,14 @@ void AGSurfaceManager::deregisterMe(AGGLTexture *p)
 
 AGSurfaceManager *getSurfaceManager()
   {
-    if(mSurfaceManager==0)
+    if(gSurfaceManager==0)
       {
-        if(!mSurfaceManagerDeleted)
+        if(!gSurfaceManagerDeleted)
           {
-            mSurfaceManager=new AGSurfaceManager();
-
-            REGISTER_SINGLETON(mSurfaceManager);
+            gSurfaceManager=new AGSurfaceManager();
           }
       }
-    return mSurfaceManager;
+    return gSurfaceManager;
   }
 
 long globalTexMem=-1;
@@ -217,11 +214,11 @@ void AGSurfaceManager::cleanup(bool force,bool nomem)
             std::map<AGGLTexture*,AGInternalSurface*>::iterator l=smap.find(*i);
             if(l!=smap.end())
               l->second->glTexture=0;
-            checkedDelete(*i);
+            delete *i;
             i=gls.erase(i);
             texFreed++;
           }
-        else
+        else 
           {
             texMem+=(*i)->width()*(*i)->height()*(*i)->depth()*4;
             i++;

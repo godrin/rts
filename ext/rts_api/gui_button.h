@@ -56,7 +56,7 @@ class AGEXPORT AGButton:public AGWidget
      DISABLED        //!< the button disabled (greyed)
    };
 
-  AGButton(AGWidget *pParent,const AGRect2 &r,const AGStringUtf8&pText="",int id=-1);
+  AGButton(const GUIWidgetPtr&pParent,const AGRect2 &r,const AGStringUtf8&pText="",int id=-1);
   virtual ~AGButton() throw();
 
   void setSurface(AGSurface pSurface,bool pChangeSize=false);

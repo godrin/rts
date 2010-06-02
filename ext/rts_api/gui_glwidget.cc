@@ -26,7 +26,7 @@ void AGGLWidget::drawAll(AGPainter &p)
   p2.clip(getRect().origin());
   //  p2.transform(getRect());
 
-  std::list<AGWidget*>::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+  Children::reverse_iterator i=mChildren.rbegin(); // draw from back to front
   //  AGRect2 r2=r.project(mr);
   for(;i!=mChildren.rend();i++)
     (*i)->drawAll(p2);

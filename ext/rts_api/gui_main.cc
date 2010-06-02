@@ -42,7 +42,6 @@ AGMain *mAGMain=0;
 bool quited=false;
 
 // singleton-management
-void newInstanceKiller();
 void deleteInstanceKiller();
 
 
@@ -50,14 +49,13 @@ void deleteInstanceKiller();
    creates an AGMain object.
  */
 AGMain::AGMain():
-  mCollector(0),mRand(0)
+  mRand(0)
   {
     assert(mAGMain==0);
     mAGMain=this;
 
     mRand=0;
 
-    newInstanceKiller();
 
     // Initialize SDL
     if(SDL_Init(SDL_INIT_VIDEO|SDL_INIT_NOPARACHUTE|SDL_INIT_AUDIO)<0)
@@ -83,19 +81,11 @@ AGMain::~AGMain() throw()
     cdebug("QUIT");
     SDL_Quit();
     quited=true;
-    setQuitting();
 
 
     setRubyRaising(true);
   }
 
-
-AGCollector *AGMain::getCollector()
-  {
-    if(!mCollector)
-      mCollector=new AGCollector;
-    return mCollector;
-  }
 
 
 
@@ -122,12 +112,6 @@ long AGMain::getTicks() const
   return SDL_GetTicks();
 }
 
-
-void AGMain::mark() throw()
-  {
-    markObject(getCollector());
-    markObject(mRand);
-  }
 
 void AGMain::setRand(AGRandomizerBase *pRand)
   {

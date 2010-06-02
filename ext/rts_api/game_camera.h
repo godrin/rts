@@ -23,8 +23,6 @@
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <basic_rubyobj.h>
-
 #include <gui_gl.h>
 #include <a3d_frustum.h>
 #include <a3d_projection.h>

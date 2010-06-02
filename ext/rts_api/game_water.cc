@@ -1,6 +1,5 @@
 #include <game_water.h>
 #include <gui_vdebug.h>
-#include <basic_kill.h>
 #include <gui_rendercontext.h>
 #include <basic_profiler.h>
 #include <gui_config.h>
@@ -13,7 +12,6 @@ AntWaterShader *getWaterShader()
     if(!gWaterShader)
       {
         gWaterShader=new AntWaterShader;
-        REGISTER_SINGLETON(gWaterShader);
       }
     assert(gWaterShader);
     return gWaterShader;

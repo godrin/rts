@@ -6,6 +6,8 @@
 #include <game_camera.h>
 #include <a3d_scenenode.h>
 
+#include <set>
+
 /**
    some helper structure, which is used for storing
    results when picking. it holds some information about:

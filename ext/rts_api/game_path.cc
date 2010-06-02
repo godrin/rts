@@ -470,9 +470,9 @@ SimpleGraph::~SimpleGraph() throw()
   {
     CTRACE;
     for(NodeSet::iterator i=mNodes.begin();i!=mNodes.end();i++)
-      checkedDelete(*i);
+      delete (*i);
     for(EdgeSet::iterator i=mEdges.begin();i!=mEdges.end();i++)
-      checkedDelete(*i);
+      delete (*i);
   }
 
 SimpleGraph::Node *SimpleGraph::findNearest(const AGVector2 &p)
@@ -1027,10 +1027,6 @@ Pathfinder::Pathfinder(SimpleGraph *pGraph,HeuristicFunction *pHeuristic,PathDeb
     cdebug("Simplegraph:"<<mGraph);
   }
 
-void Pathfinder::mark() throw()
-  {
-    markObject(mGraph);
-  }
 
 struct Path;
 

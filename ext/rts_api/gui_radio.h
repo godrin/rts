@@ -30,7 +30,7 @@ class AGRadioGroup;
 class AGEXPORT AGRadio:public AGCheckBox
 {
  public:
-  AGRadio(AGWidget *pParent,AGRect2 pRect);
+  AGRadio(const GUIWidgetPtr&pParent,AGRect2 pRect);
   virtual ~AGRadio() throw();
 
   void setGroup(AGRadioGroup *pGroup);

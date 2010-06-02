@@ -22,9 +22,6 @@
 #define __AG_PAINTTARGET_H
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
-
-#include <basic_rubyobj.h>
-
 #include <gui_geometry.h>
 #include <gui_color.h>
 #include <gui_font.h>
@@ -34,7 +31,7 @@ class AGTexture;
 
 #define MSTUB { throw int();}
 
-class AGEXPORT AGPaintTarget:public AGRubyObject
+class AGEXPORT AGPaintTarget
 {
  public:
   virtual ~AGPaintTarget() throw()

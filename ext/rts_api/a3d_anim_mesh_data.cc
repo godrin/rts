@@ -125,7 +125,7 @@ AnimMeshData::~AnimMeshData() throw()
 
     // delete bones
     for(std::vector<Bone*>::iterator i=bones.begin();i!=bones.end();++i)
-      checkedDelete(*i); // checked - no agrubyobject
+      delete *i; // checked - no agrubyobject
 
 
   }

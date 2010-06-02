@@ -93,8 +93,8 @@ AGScroller::AGScroller(AGWidget *pParent,const AGRect2 &pRect,bool pHor):
 
 AGScroller::~AGScroller() throw()
   {
-    checkedDelete(mBorder);
-    checkedDelete(mBackground);
+    delete mBorder;
+    delete mBackground;
   }
 
 void AGScroller::draw(AGPainter &p)

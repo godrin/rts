@@ -21,7 +21,7 @@ MiniMap::MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap):
 
 MiniMap::~MiniMap() throw()
   {
-    saveDelete(mTexture);
+    delete mTexture;
   }
 
 
@@ -153,12 +153,12 @@ void MiniMap::mapChangedP(bool forceFull=false)
             }
       }
 
-    saveDelete(p);
+    delete p;
     if(inmem)
       {
         //      mSurface.save("sicke.png");
         cdebug(mTexture);
-        saveDelete(mTexture);
+        delete mTexture;
         mTexture=new AGTexture(mSurface);
         cdebug(mTexture);
         CTRACE;

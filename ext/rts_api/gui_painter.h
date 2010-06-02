@@ -69,7 +69,7 @@ struct AGEXPORT AGPaintProjection
 #define AGEXPORT
 #endif
 
-class AGEXPORT AGPainter:public AGRubyObject
+class AGEXPORT AGPainter
 {
  public:
   AGPainter();

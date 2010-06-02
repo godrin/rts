@@ -1,11 +1,10 @@
 #ifndef AG_RAND_BASE_H
 #define AG_RAND_BASE_H
+#include <basic_base.h>
 
 // INCLUDE_SWIG - used to filter, which files are included in swig-interfacing
 
-#include <basic_rubyobj.h>
-
-class AGEXPORT AGRandomizerBase:public AGRubyObject
+class AGEXPORT AGRandomizerBase
 {
  public:
 #ifdef SWIG

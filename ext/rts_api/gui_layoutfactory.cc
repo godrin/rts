@@ -20,8 +20,6 @@
 
 #include <gui_layoutfactory.h>
 #include <basic_debug.h>
-#include <basic_kill.h>
-
 AGLayoutCreator::AGLayoutCreator():mWidget(0),mClient(0)
 {
 }
@@ -69,7 +67,6 @@ void AGLayoutCreator::mark() throw()
 
 AGLayoutFactory::AGLayoutFactory()
   {
-    REGISTER_SINGLETON(this);
   }
 
 AGLayoutFactory::~AGLayoutFactory()
@@ -99,6 +96,7 @@ std::pair<AGWidget *,AGWidget*> AGLayoutFactory::create(AGWidget *pParent,const 
 
     if(creator)
       {
+	cdebug("Creator found for :"<<pNode.getName());
         AGWidget *outer,*inner;
         creator->create(pParent,pRect,pNode);
         outer=creator->getResult();
@@ -108,6 +106,8 @@ std::pair<AGWidget *,AGWidget*> AGLayoutFactory::create(AGWidget *pParent,const 
           inner=outer;
 
         return std::make_pair(outer,inner);
+      } else {
+	cdebug("No fitting creator found for :"<<pNode.getName());
       }
     std::string name;
     if(name!="" && name!="colsize" && name!="rowsize")

@@ -39,7 +39,7 @@
 // keep in mind: ag_local.h must be included after ruby.h!!!
 #include <gui_local.h>
 
-AGLayout::AGLayout(AGWidget *pgParent):
+AGLayout::AGLayout(const GUIWidgetPtr&pgParent):
   AGWidget(pgParent,AGRect2(0,0,0,0))
   {
     CTRACE;
@@ -63,7 +63,7 @@ void AGLayout::loadXML(const std::string &pXMLData)
 
 
 
-    AGWidget *pgParent=getParent();
+    GUIWidgetPtr pgParent=getParent();
 
     AGRect2 geom;
     AGString geomS=p.root().get("geometry");
@@ -139,7 +139,7 @@ AGLayout *getLayout(AGWidget *pWidget)
     if(l)
       return l;
     else if(pWidget->getParent())
-      return getLayout(pWidget->getParent());
+      return getLayout(pWidget->getParent().widget());
     return 0;
   }
 
@@ -225,8 +225,11 @@ void parseChildren(AGWidget *pParent,const Node &pNode)
         for(;i!=pNode.end();i++)
           {
             AGWidget *w=parseNode(pParent,**i);
-            if(w)
+            if(w) {
+	      cdebug("Adding child:"<<w<<":"<<typeid(*w).name());
               pParent->addChild(w);
+	    } else
+	      cdebug("No child found!");
           }
       }
   }

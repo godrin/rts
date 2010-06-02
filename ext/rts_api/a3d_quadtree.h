@@ -64,7 +64,7 @@ class QuadTree
     ~Node()
       {
         for(typename std::list<Node*>::iterator i=children.begin();i!=children.end();++i)
-          checkedDelete(*i);
+          delete *i;
       }
 
     size_t size() const
@@ -116,7 +116,7 @@ class QuadTree
         for(;i!=children.end();i++)
           {
             (*i)->clear();
-            checkedDelete(*i);
+            delete *i;
           }
         children.clear();
 
@@ -183,7 +183,7 @@ public:
     }
   ~QuadTree()
     {
-      checkedDelete(root);
+      delete root;
       delete rgetter;
     }
 

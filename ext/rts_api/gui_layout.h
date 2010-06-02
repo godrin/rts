@@ -31,7 +31,7 @@ class AGTable;
 class AGEXPORT AGLayout:public AGWidget
 {
  public:
-  AGLayout(AGWidget *pgParent);
+  AGLayout(const GUIWidgetPtr&pgParent);
   virtual ~AGLayout() throw();
   
   virtual void loadXML(const std::string &pXMLData);

@@ -107,7 +107,7 @@ void AGVideoManager::initVideo(int w,int h,int d,bool fs,bool gl,int vw,int vh)
 
     if(mScreen)
       {
-        saveDelete(mScreen);
+        delete mScreen;
       }
 
     if(vw<w)

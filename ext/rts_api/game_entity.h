@@ -40,7 +40,7 @@ class AntMap;
 
 #include <game_resource.h>
 
-class AGEXPORT AntEntity:public AGRubyObject
+class AGEXPORT AntEntity
   {
   public:
     typedef std::list<SceneNode*> Meshes;

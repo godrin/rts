@@ -23,12 +23,11 @@
 #ifndef AG_LOCAL_H
 #define AG_LOCAL_H
 
-#include <basic_rubyobj.h>
 #include <basic_string.h>
 
 #include <basic_string_utf8.h>
 
-class AGEXPORT AGLocalizer:public AGRubyObject
+class AGEXPORT AGLocalizer
 {
  public:
   virtual ~AGLocalizer() throw();

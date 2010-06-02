@@ -289,7 +289,7 @@ void AntEntity::removeOldJobs()
   {
     std::list<Job*>::iterator i=mJobFinished.begin();
     for(;i!=mJobFinished.end();i++)
-      checkedDelete(*i);
+      delete *i;
     mJobFinished.clear();
   }
 

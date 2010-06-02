@@ -28,15 +28,15 @@
 #include <typeinfo>
 
 
-AGRadio::AGRadio(AGWidget *pParent,AGRect2 pRect):
+AGRadio::AGRadio(const GUIWidgetPtr&pParent,AGRect2 pRect):
   AGCheckBox(pParent,pRect),mGroup(0)
   {
     // search mGroup
-    AGWidget *w=pParent;
+    GUIWidgetPtr w=pParent;
     AGRadioGroup *g=0;
     while(w && g==0)
       {
-        g=dynamic_cast<AGRadioGroup*>(w);
+        g=dynamic_cast<AGRadioGroup*>(w.widget());
         w=w->getParent();
       }
     if(g)

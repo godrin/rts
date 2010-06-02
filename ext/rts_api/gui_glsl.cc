@@ -2,8 +2,6 @@
 #include <gui_glsl.h>
 #include <gui_vdebug.h>
 #include <gui_main.h>
-#include <basic_rubyobj.h>
-
 std::map<std::string,AGVertexProgram*> mVertexPrograms;
 std::map<std::string,AGFragProgram*> mFragPrograms;
 
@@ -165,7 +163,7 @@ AGShaderProgram::~AGShaderProgram()
     if(glslOk() && !hasQuit())
       glDeleteObjectARB(p);
     cdebug("name:"<<name);
-    checkedDeleteArray(matrixBuf); // checked - no agrubyobject
+    delete []matrixBuf; // checked - no agrubyobject
     cdebug("name:"<<name);
     assertGL;
 

@@ -3,8 +3,6 @@
 #include <gui_vdebug.h>
 #include <gui_config.h>
 #include <gui_fbo.h>
-#include <basic_kill.h>
-
 Renderer *gRenderer=0;
 
 bool usePlainGL=true;
@@ -51,7 +49,7 @@ Renderer::~Renderer()
     cdebug("gRenderer:"<<gRenderer);
     assert(gRenderer==this);
     gRenderer=0;
-    checkedDelete(mFBO); // checked - no agrubyobject
+    delete mFBO; // checked - no agrubyobject
   }
 
 bool Renderer::canMultitexture()
@@ -365,7 +363,6 @@ Renderer *getRenderer()
     if(!gRenderer)
       {
         gRenderer=new Renderer;
-        REGISTER_SINGLETON(gRenderer);
       }
     assert(gRenderer);
     return gRenderer;

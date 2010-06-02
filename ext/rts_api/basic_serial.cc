@@ -1,8 +1,6 @@
 #include <basic_serial.h>
 #include <iostream>
 #include <basic_debug.h>
-#include <basic_rubyobj.h>
-
 // INTEL is little endian
 
 int mLittleEndian=-1;
@@ -112,7 +110,7 @@ BinaryIn &BinaryIn::operator>>(std::string &f)
 
 
     f=std::string(s,l);
-    checkedDelete(s); // checked - no agrubyobject
+    delete s; // checked - no agrubyobject
 
     return *this;
   }

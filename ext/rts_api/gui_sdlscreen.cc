@@ -66,7 +66,7 @@ void AGSDLScreen::update(const std::list<AGRect2> &rs)
 
     SDL_UpdateRects(s,rs.size(),nrs);
 
-    checkedDeleteArray(nrs);
+    delete []nrs;
   }
 
 

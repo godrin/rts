@@ -23,8 +23,8 @@
 #ifndef AG_APPLICATION_H
 #define AG_APPLICATION_H
 
-#include <gui_messageobject.h>
 #include <gui_widget.h>
+#include <gui_messageobject.h>
 #include <gui_tooltip.h>
 #include <gui_texture.h>
 

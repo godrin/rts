@@ -108,7 +108,7 @@ AGMessage::AGMessage(const AGMessageSource &pSource,AGMessageData *pData):mSourc
 
 AGMessage::~AGMessage()
   {
-    checkedDelete(mData);
+    delete mData;
   }
 
 const AGMessageSource &AGMessage::getSource() const

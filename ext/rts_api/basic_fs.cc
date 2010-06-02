@@ -213,7 +213,7 @@ std::string directLoad(const std::string &pName)
     fclose(f);
 
     std::string r(buffer,len);
-    checkedDeleteArray(buffer);
+    delete [] buffer;
     return r;
   }
 
@@ -362,7 +362,7 @@ std::string getUserDir()
                       {
                         if (!GetUserProfileDirectory(accessToken, userDir, &psize))
                           {
-                            checkedDeleteArray(userDir);
+                            delete [] (userDir);
                             userDir = NULL;
                           } /* if */
                       } /* else */
@@ -579,7 +579,7 @@ AGString compress(const AGString &pString)
     compress((Bytef*)buf,&destlen,(Bytef*)pString.c_str(),pString.length());
 
     std::string r=o.getString()+std::string(buf,destlen);
-    checkedDeleteArray(buf);
+    delete [] (buf);
     return r;
   }
 AGString uncompress(const AGString &pString)
@@ -594,7 +594,7 @@ AGString uncompress(const AGString &pString)
     char *buf=new char[orig+10];
     uncompress((Bytef*)buf,&orig,(Bytef*)pString.c_str()+4,pString.length()-4);
     std::string r(buf,orig);
-    checkedDeleteArray(buf);
+    delete [] (buf);
 
     return r;
   }

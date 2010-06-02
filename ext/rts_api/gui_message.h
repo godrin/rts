@@ -4,8 +4,6 @@
 #define AG_MESSAGE_H_
 
 #include <basic_string.h>
-#include <basic_rubyobj.h>
-
 #include <map>
 #include <set>
 #include <list>
@@ -59,7 +57,7 @@ private:
  * Ok, here's the description: Any object that wants to pass or receive messages should
  * be derived from this one.
  */
-class AGMessageTransceiver : public AGRubyObject
+class AGMessageTransceiver
 {
   AGMessageTransceiver(AGMessageQueue *pQueue);
   virtual ~AGMessageTransceiver() throw();

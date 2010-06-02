@@ -37,9 +37,9 @@ mMousePosition(0),mRelMousePosition(0)
 AGEvent::~AGEvent() throw()
   {
     if(mMousePosition)
-      checkedDelete(mMousePosition);
+      delete mMousePosition;
     if(mRelMousePosition)
-      checkedDelete(mRelMousePosition);
+      delete mRelMousePosition;
   }
 
 bool AGEvent::isMouseEvent() const
@@ -183,26 +183,16 @@ int AGEvent::getButton() const
   return 0;
 }
 
-
-
-// AGMouseEvent
-
-/*
-AGMouseEvent::AGMouseEvent(AGListener *pCaller,SDL_Event *pEvent):AGEvent(pCaller)
-{
-}
-AGMouseEvent::~AGMouseEvent()
-{
-}*/
-
-// AGListener
-
 AGListener::AGListener()
   {
   }
 
 AGListener::~AGListener() throw()
   {
+    CTRACE;
+    for(std::set<AGSignal*>::iterator i=mLinkedSignals.begin();i!=mLinkedSignals.end();i++) {
+      (*i)->disconnect(*this);
+    }
   }
 
 bool AGListener::signal(AGEvent *m)
@@ -210,27 +200,23 @@ bool AGListener::signal(AGEvent *m)
     return false;
   }
 
+void AGListener::addSignal(AGSignal* s)
+{
+  mLinkedSignals.insert(s);
+}
+void AGListener::removeSignal(AGSignal* s)
+{
+   mLinkedSignals.erase(s);
+}
+
+
+
 AGCPPListener::~AGCPPListener()
   {
   }
 
 
 
-/*
-// AGSignal
-
-AGSignal::AGSignal():mCaller(0)
-  {
-  }
-
-//AGSignal::AGSignal(const AGSignal &s):mListeners(s.mListeners
-
-
-
-AGSignal::AGSignal(AGMessageObject *pCaller):mCaller(pCaller)
-  {
-  }
- */
 AGSignal::AGSignal(AGMessageObject *pCaller,const AGString &pName):
   mName(pName),mCaller(pCaller)
         {
@@ -238,6 +224,7 @@ AGSignal::AGSignal(AGMessageObject *pCaller,const AGString &pName):
 
 AGSignal::~AGSignal()
   {
+    CTRACE;
     std::set<AGListener*>::iterator i=mListeners.begin();
     for(;i!=mListeners.end();i++)
       {
@@ -257,6 +244,7 @@ AGSignal::~AGSignal()
 void AGSignal::connect(AGListener &pListener)
   {
     mListeners.insert(&pListener);
+    pListener.addSignal(this);
     AGMessageObject *o=dynamic_cast<AGMessageObject*>(&pListener);
     if(o)
       o->pushSignal(this);

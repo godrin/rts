@@ -21,7 +21,6 @@
 #include <gui_texture.h>
 #include <gui_texturecache.h>
 #include <gui_png.h>
-#include <basic_kill.h>
 #include <gui_geometry.h>
 
 AGTextureCache *mTextureCache=0;
@@ -34,7 +33,6 @@ AGTextureCache *getTextureCache()
 
 AGTextureCache::AGTextureCache()
   {
-    getInstanceKiller()->reg(createKiller(this));
   }
 
 const AGTexture &AGTextureCache::get(const AGString &pTexture,const AGRect2 &pSub) throw (FileNotFound)

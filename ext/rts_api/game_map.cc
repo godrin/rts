@@ -180,7 +180,7 @@ void AntMap::move(float pTime)
         mEntQuad->remove(*i);
         //      mByType[(*d)->getType()].erase(*d);
 
-        saveDelete(d->get());
+        delete d->get();
       }
     mToDel.clear();
 
