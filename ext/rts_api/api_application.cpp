@@ -32,6 +32,18 @@ AGString from_ruby<AGString>(Object x) {
     return AGString(s.str());
 }
 
+<<<<<<< HEAD
+=======
+template<>
+Object to_ruby<AGSignal*>(AGSignal * const &x ) {
+    return Data_Object<BasicRubyExposer>(new BasicRubyExposer(x));
+}
+/*
+template<>
+Object to_ruby<AGWidget*>(AFWidget * const &x ) {
+    return Data_Object<BasicRubyExposer>(new BasicRubyExposer(x));
+}*/
+>>>>>>> 8f3d444ae4e1bb669a4e4d15373ce8149834e1c8
 
 /*
 template<>

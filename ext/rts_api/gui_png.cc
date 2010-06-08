@@ -26,9 +26,14 @@
    I removed some goto's.
  */
 
+#include <build_config.h>
+#include <stdexcept>
+#include <string>
+#include <SDL.h>
+
+#ifdef PNG_FOUND
 
 #include <png.h>
-#include <SDL.h>
 
 #include <iostream>
 #include <fstream>
@@ -222,3 +227,13 @@ SDL_Surface *fromPNG(std::string s)
     assertGL;
     return surface;
   }
+
+#else
+std::string toPNG(const SDL_Surface *s) {
+  throw std::runtime_error("Not Implemented!");
+}
+SDL_Surface *fromPNG(std::string s) {
+  throw std::runtime_error("Not Implemented!");
+}
+
+#endif

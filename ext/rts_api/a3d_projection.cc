@@ -2,7 +2,7 @@
 
 #include <basic_debug.h>
 
-#include <GL/glu.h>
+#include <glu.h>
 
 
 AntProjection::AntProjection()
