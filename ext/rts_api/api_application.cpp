@@ -32,14 +32,6 @@ AGString from_ruby<AGString>(Object x) {
     return AGString(s.str());
 }
 
-template<>
-Object to_ruby<AGSignal*>(AGSignal * const &x ) {
-    return Data_Object<BasicRubyExposer>(new BasicRubyExposer(x));
-}
-template<>
-Object to_ruby<AGWidget*>(AGSignal * const &x ) {
-    return Data_Object<BasicRubyExposer>(new BasicRubyExposer(x));
-}
 
 /*
 template<>
@@ -53,7 +45,8 @@ AGSignal* from_ruby<AGSignal*>(Object x) {
     return s.get();
 }
   */
-  
+
+
 class RubyListener:public AGListener,public Rice::Director {
     public:
          RubyListener(Object self) : Rice::Director(self) { }
@@ -69,9 +62,6 @@ class RubyListener:public AGListener,public Rice::Director {
   }
 
 };
-
-
-
 
 void init_AGApplication() {
     AGLayout::registerLayouts();
@@ -99,10 +89,10 @@ void init_AGApplication() {
 
     .define_method("signal",&RubyListener::default_signal);
     
-    typedef void (AGSignal::*mrb_connect)(AGListener &pListener);
+    typedef void (SignalWrapper::*mrb_connect)(AGListener &pListener);
 
-    define_class_under<AGSignal>(rb_mGui,"Signal")
-    .define_method("connectCPP",mrb_connect(&AGSignal::connect));
+    define_class_under<SignalWrapper>(rb_mGui,"Signal")
+    .define_method("connectCPP",mrb_connect(&SignalWrapper::sigConnect));
 
     define_class_under<AGWidget>(rb_mGui,"Widget").
     define_method("getChild",&AGWidget::getChild).

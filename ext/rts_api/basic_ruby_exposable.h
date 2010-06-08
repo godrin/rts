@@ -7,7 +7,7 @@ class BasicRubyExposer;
 
 class BasicRubyExposable {
   public:
-    ~BasicRubyExposable();
+    virtual ~BasicRubyExposable();
     void addExposer(BasicRubyExposer *pExposer);
     void removeExposer(BasicRubyExposer *pExposer);
     

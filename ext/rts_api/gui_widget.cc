@@ -251,17 +251,17 @@ void AGWidget::setClient ( const AGRect2 &pWorld,const AGProjection2D &pProjecti
     mUseClientRect=true;
 }
 
-AGSignal *AGWidget::getSigMouseEnter() {
-    return &sigMouseEnter;
+SignalWrapper AGWidget::getSigMouseEnter() {
+    return SignalWrapper(&sigMouseEnter);
 }
-  AGSignal *AGWidget::getSigMouseLeave() {
-      return &sigMouseLeave;
+SignalWrapper AGWidget::getSigMouseLeave() {
+      return SignalWrapper(&sigMouseLeave);
   }
-  AGSignal *AGWidget::getSigClick() {
-      return &sigClick;
+SignalWrapper AGWidget::getSigClick() {
+      return SignalWrapper(&sigClick);
   }
-  AGSignal *AGWidget::getSigDragBy() {
-      return &sigDragBy;
+SignalWrapper AGWidget::getSigDragBy() {
+      return SignalWrapper(&sigDragBy);
   }
 
 

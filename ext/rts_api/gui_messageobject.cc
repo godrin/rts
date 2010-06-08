@@ -312,6 +312,15 @@ bool AGSignal::operator()(AGEvent *m)
         m->setName(mName);
         return signal(m);
       }
+      
+      
+void SignalWrapper::sigConnect(AGListener& pListener)
+{
+  std::cout<<typeid(*getDirect()).name()<<std::endl;
+  get<AGSignal>()->connect(pListener);
+
+}
+
 
 // AGMessageObject
 

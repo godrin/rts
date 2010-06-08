@@ -155,10 +155,10 @@ public:
   AGSignal sigClick;
   AGSignal sigDragBy;
   
-  AGSignal *getSigMouseEnter();
-  AGSignal *getSigMouseLeave();
-  AGSignal *getSigClick();
-  AGSignal *getSigDragBy();
+  SignalWrapper getSigMouseEnter();
+  SignalWrapper getSigMouseLeave();
+  SignalWrapper getSigClick();
+  SignalWrapper getSigDragBy();
 
   virtual float minWidth() const;
   virtual float minHeight() const;

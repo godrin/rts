@@ -26,6 +26,7 @@
 
 #include <basic_string.h>
 #include <basic_ruby_exposable.h>
+#include <basic_ruby_exposer.h>
 
 #include <gui_geometry.h>
 
@@ -204,6 +205,15 @@ class AGEXPORT AGSignal:public BasicRubyExposable
   AGString mName;
   AGMessageObject *mCaller;
 };
+
+class SignalWrapper:public BasicRubyExposer {
+    public:
+     SignalWrapper(AGSignal* pExposable):BasicRubyExposer(pExposable) {
+     }
+     
+     void sigConnect(AGListener &pListener);
+};
+  
 
 /**
    AGMessageObject handles libSDL-events and provides virtual handlers.
