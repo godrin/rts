@@ -11,6 +11,10 @@
 #include <gui_layout.h>
 #include <basic_ruby_exposer.h>
 
+#include <ruby_listener.h>
+
+#include <basic_debug.h>
+
 using namespace Rice;
 
 
@@ -20,6 +24,7 @@ void initGLScreen() {
     m->setVideo ( v );
     v->initVideo ( 1024,768,32,false,true );
 }
+
 
 template<>
 GUIWidgetPtr from_ruby<GUIWidgetPtr>(Object x) {
@@ -32,48 +37,14 @@ AGString from_ruby<AGString>(Object x) {
     return AGString(s.str());
 }
 
-<<<<<<< HEAD
-=======
-template<>
-Object to_ruby<AGSignal*>(AGSignal * const &x ) {
-    return Data_Object<BasicRubyExposer>(new BasicRubyExposer(x));
-}
-/*
-template<>
-Object to_ruby<AGWidget*>(AFWidget * const &x ) {
-    return Data_Object<BasicRubyExposer>(new BasicRubyExposer(x));
-}*/
->>>>>>> 8f3d444ae4e1bb669a4e4d15373ce8149834e1c8
 
-/*
-template<>
-Object to_ruby<AGSignal*>(AGSignal * const&x) {
-    return Data_Object<AGSignal>(x);
-}
-  
-template<>
-AGSignal* from_ruby<AGSignal*>(Object x) {
-    Data_Object<AGSignal> s=(Data_Object<AGSignal> )(x);
-    return s.get();
-}
-  */
-
-
-class RubyListener:public AGListener,public Rice::Director {
-    public:
-         RubyListener(Object self) : Rice::Director(self) { }
-  
-
-    virtual ~RubyListener() throw () {
+    template<>
+    Object to_ruby<SignalWrapper>(SignalWrapper const & x) {
+        TRACE;
+        return Data_Object<SignalWrapper>(new SignalWrapper(x));
     }
-  virtual bool signal(AGEvent *m) {
-      return from_ruby<bool>(getSelf().call("signal",to_ruby<AGEvent*>(m)));
-  }
-  bool default_signal(AGEvent *m) {
-      return AGListener::signal(m);
-  }
 
-};
+
 
 void init_AGApplication() {
     AGLayout::registerLayouts();

@@ -28,8 +28,13 @@ module GUI
     end
   end
   class Signal
+    def initialize
+      super
+    end
     def connect(&block)
-      connectCPP(RubyListener.new(block))
+      l=RubyListener.new(block)
+      pp "L:",l
+      connectCPP(l)
     end
   end
 end

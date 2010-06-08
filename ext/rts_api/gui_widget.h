@@ -32,6 +32,8 @@
 
 #include "gui_painter.h"
 
+#include <ruby_messaging.h>
+
 #include <list>
 #include <set>
 

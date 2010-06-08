@@ -22,13 +22,12 @@ ok&=find_header("SDL.h","/usr/include/SDL",'/Library/Frameworks/SDL.Framework/He
 ok&=find_header("SDL_image.h","/usr/include/SDL",'/Library/Frameworks/SDL_image.Framework/Headers')
 ok&=find_header("SDL_ttf.h","/usr/include/SDL",'/Library/Frameworks/SDL_ttf.Framework/Headers')
 ok&=find_header("SDL_mixer.h","/usr/include/SDL",'/Library/Frameworks/SDL_mixer.Framework/Headers')
-ok&=find_header("gl.h",'/System/Library/Frameworks/OpenGL.framework/Headers')
+ok&=find_header("gl.h",'/System/Library/Frameworks/OpenGL.framework/Headers','/usr/include/GL')
 
 unless ok
   puts "Fatal: Not all needed headers found!"
   exit
 end
-
 
 pngFound=find_header("png.h")
 

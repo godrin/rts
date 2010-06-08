@@ -18,6 +18,8 @@
  * License along with this program.
  */
 
+#include <ruby_listener.h>
+
 #include <gui_messageobject.h>
 
 #include <basic_debug.h>
@@ -25,6 +27,7 @@
 #include <gui_main.h>
 #include <basic_stringstream.h>
 #include <gui_widget.h>
+
 
 SDL_Event AGEvent::NullEvent={SDL_NOEVENT};
 
@@ -314,8 +317,9 @@ bool AGSignal::operator()(AGEvent *m)
       }
       
       
-void SignalWrapper::sigConnect(AGListener& pListener)
+void SignalWrapper::sigConnect(RubyListener& pListener)
 {
+  std::cout<<"getDirect:"<<getDirect()<<std::endl;
   std::cout<<typeid(*getDirect()).name()<<std::endl;
   get<AGSignal>()->connect(pListener);
 

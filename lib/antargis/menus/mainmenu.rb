@@ -24,6 +24,8 @@ module Antargis
       self.mainWidget=@mainMenu
       
       sig=@mainMenu.getChild("quit").sigClick
+      pp sig
+      pp sig
       sig.connect{||
         pp self
         self.eventQuit

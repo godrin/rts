@@ -6,15 +6,14 @@ class BasicRubyExposable;
 class BasicRubyExposer {
   public:
     BasicRubyExposer(BasicRubyExposable *pExposable);
-    ~BasicRubyExposer();
+    BasicRubyExposer(const BasicRubyExposer &orig);
+    virtual ~BasicRubyExposer();
     void unbindCppObject();
     
-    BasicRubyExposable *getDirect() {
-      return mExposable;
-    }
+    BasicRubyExposable *getDirect(); 
     
     template<class T> T *get() {
-      return dynamic_cast<T*>(mExposable);
+      return dynamic_cast<T*>(getDirect());
     }
   private:
     BasicRubyExposable *mExposable;

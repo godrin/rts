@@ -206,13 +206,6 @@ class AGEXPORT AGSignal:public BasicRubyExposable
   AGMessageObject *mCaller;
 };
 
-class SignalWrapper:public BasicRubyExposer {
-    public:
-     SignalWrapper(AGSignal* pExposable):BasicRubyExposer(pExposable) {
-     }
-     
-     void sigConnect(AGListener &pListener);
-};
   
 
 /**
