@@ -1,4 +1,4 @@
-require 'rts_api.so'
+require 'rts_api'
 
 module RTS
   @@inited=false

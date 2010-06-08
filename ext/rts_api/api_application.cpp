@@ -36,10 +36,11 @@ template<>
 Object to_ruby<AGSignal*>(AGSignal * const &x ) {
     return Data_Object<BasicRubyExposer>(new BasicRubyExposer(x));
 }
+/*
 template<>
-Object to_ruby<AGWidget*>(AGSignal * const &x ) {
+Object to_ruby<AGWidget*>(AFWidget * const &x ) {
     return Data_Object<BasicRubyExposer>(new BasicRubyExposer(x));
-}
+}*/
 
 /*
 template<>

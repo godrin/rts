@@ -2,7 +2,7 @@
 
 #include <gui_glwidget.h>
 #include <gui_screen.h>
-#include <GL/glu.h>
+#include <glu.h>
 
 AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect2 &r):
   AGWidget(pParent,r)
