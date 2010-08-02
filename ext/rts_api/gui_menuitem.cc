@@ -24,7 +24,7 @@
 #include <gui_image.h>
 #include <gui_menu.h>
 
-AGMenuItem::AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText):
+AGMenuItem::AGMenuItem(const GUIWidgetPtr& pParent,const AGStringUtf8 &pText):
   AGTable(pParent,AGRect2(0,0,0,0)),mText(pText),mMouseOver(false),mSelected(false)
   {
     AGFont font(getTheme()->getFont("Font.menu"));
@@ -40,8 +40,8 @@ AGMenuItem::AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText):
     addColumn(1);
     arrange();
 
-    addChild(0,0,new AGImage(this,getRect().origin(),surface,false));
-    addChild(1,0,new AGText(this,getRect().origin(),pText,font));
+    addChildOld(0,0,new AGImage(*self(),getRect().origin(),surface,false));
+    addChildOld(1,0,new AGText(*self(),getRect().origin(),pText,font));
 
   }
 AGMenuItem::~AGMenuItem() throw()
@@ -130,13 +130,13 @@ bool AGMenuItem::eventMouseClick(AGEvent *m)
 
 // AGSubMenu
 
-AGSubMenu::AGSubMenu(AGWidget *pParent,const AGStringUtf8 &pText):
+AGSubMenu::AGSubMenu(const GUIWidgetPtr &pParent,const AGStringUtf8 &pText):
   AGMenuItem(pParent,pText)
   {
     AGSurface surface2=AGSurface::load("right_arrow.png");
-    addChildBack(new AGImage(this,getRect().origin(),surface2,false));
+    addChildBack(GUIWidgetPtr( new AGImage(*self(),getRect().origin(),surface2,false))); // FIXME
 
-    addChild(mSubMenu=new AGMenu(this,AGVector2(0,0),pText));
+    addChild(GUIWidgetPtr( mSubMenu=new AGMenu(*self(),AGVector2(0,0),pText))); //FIXME
     mSubMenu->hide();
   }
 
@@ -149,7 +149,7 @@ AGMenu *AGSubMenu::getMenu()
     return mSubMenu;
   }
 
-void AGSubMenu::addChild(AGWidget*pWidget)
+void AGSubMenu::addChild(const GUIWidgetPtr&pWidget)
   {
     AGWidget::addChild(pWidget);
   }

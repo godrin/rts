@@ -3,14 +3,14 @@
 
 #include <basic_debug.h>
 
-AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,int pWidth,int pWidthH):AGWidget(pParent,pRect),
+AGFrame::AGFrame(const GUIWidgetPtr &pParent,const AGRect2 &pRect,int pWidth,int pWidthH):AGWidget(pParent,pRect),
 mWidth(pWidth),mBorder(0),mWidthH(pWidthH<0?pWidth:pWidthH),mTexture((int)width(),(int)height())
 {
   mTextureInited=false;
   mUseTexture=true;
   mBg=0;
 }
-AGFrame::AGFrame(AGWidget *pParent,const AGRect2 &pRect,const AGBorder &pBorder):AGWidget(pParent,pRect),
+AGFrame::AGFrame(const GUIWidgetPtr &pParent,const AGRect2 &pRect,const AGBorder &pBorder):AGWidget(pParent,pRect),
 mWidth(pBorder.getWidth()),mWidthH(pBorder.getWidth()),mBorder(new AGBorder(pBorder)),mTexture((int)width(),(int)height())
 {
   mTextureInited=false;

@@ -33,6 +33,7 @@
 #include "gui_painter.h"
 
 #include <ruby_messaging.h>
+#include <gui_widgetptr.h>
 
 #include <list>
 #include <set>
@@ -68,27 +69,6 @@ class AGApplication;
     the drawing and event-processing.
 
  */
-class AGWidget;
-
-class GUIWidgetPtr {
-  public:
-    GUIWidgetPtr(AGWidget *w);
-    explicit GUIWidgetPtr(const Rice::Data_Object<AGWidget> &w);
-    explicit GUIWidgetPtr(const Rice::Object &w);
-    ~GUIWidgetPtr();
-    
-    AGWidget *widget();
-    Rice::Data_Object<AGWidget> *ruby();
-    
-    (operator bool)() const;
-    //AGWidget *operator->();
-    AGWidget *operator->() const;
-    
-  private:
-    AGWidget *mWidget;
-    Rice::Data_Object<AGWidget> *mRubyWidget;
-};
-
 
 /**
    \brief base class for all widgets
@@ -104,9 +84,9 @@ class AGEXPORT AGWidget:public AGMessageObject
 {
 public:
   typedef std::list<GUIWidgetPtr> Children;
-  typedef std::set<GUIWidgetPtr> ChildrenSet;
+  typedef std::set<AGWidget*> ChildrenSet; // only for reference-killing (don't expose to ruby !)
 
-  AGWidget(const GUIWidgetPtr &pParent,const AGRect2 &r);
+  explicit AGWidget(const GUIWidgetPtr &pParent,const AGRect2 &r);
   virtual ~AGWidget() throw();
 
   AGApplication *getApp();
@@ -122,10 +102,12 @@ public:
   AGRect2 getRect() const;
   virtual AGRect2 getClientRect() const;
   virtual void setRect(const AGRect2 &pRect);
+  void setRectInterface ( AGRect2 pRect );
 
   virtual void setParent(const GUIWidgetPtr&pParent);
   GUIWidgetPtr getParent();
   bool isParent(const GUIWidgetPtr &pParent);
+  bool isParent(AGWidget*pParent);
 
   virtual bool eventShow();
   virtual bool eventHide();
@@ -191,10 +173,10 @@ public:
   virtual void mark() throw();
 public:
 
-  virtual void addChild(const GUIWidgetPtr &w);
-  virtual void addChildBack(const GUIWidgetPtr &w);
+  virtual void addChild(GUIWidgetPtr w);
+  virtual void addChildBack(GUIWidgetPtr w);
 
-  virtual void removeChild(const GUIWidgetPtr &w);
+  virtual void removeChild(GUIWidgetPtr w);
 
   // Functions for caching appearance
   virtual bool redraw() const;
@@ -252,20 +234,19 @@ public:
   bool getFocus() const;
   bool hasFocus(const GUIWidgetPtr &pWidget);
   bool hasFocus();
-  AGWidget *getFocusedWidget ();
+  GUIWidgetPtr getFocusedWidget ();
 
-  AGLayout *getLayout();
 
 
   const AGString &getName() const;
-  void setName(const AGString &pName);
-  AGWidget *getChild(AGString pName);
+  void setName(AGString pName);
+  GUIWidgetPtr getChild(AGString pName);
 
   void setModal(bool pModal);
 
   void erase(const GUIWidgetPtr &w);
 
-  void eventChildrenDeleted(const GUIWidgetPtr &pWidget);
+  void eventChildrenDeleted(GUIWidgetPtr pWidget); // don't expose to ruby - because called from widget, that does not know it's VALUE
 
   void setTooltip(const AGStringUtf8 &pTooltip);
 
@@ -293,7 +274,11 @@ public:
   void initEvents();
 
   virtual void eventInitEvents();
-
+  
+  void regPtr(GUIWidgetPtr *p);
+  void unregPtr(GUIWidgetPtr *p);
+  
+  GUIWidgetPtr *self();
 
 protected:
   virtual bool letChildProcess(AGWidget *pChild,AGEvent *event);
@@ -304,6 +289,8 @@ private:
   bool containsPoint(AGWidget *pWidget,const AGVector2 &pVector) const;
 
 
+  std::set<GUIWidgetPtr*> mPtrs;
+  
   AGApplication *mApp;
 
   std::list<AGRect2> mMyChanges;
@@ -337,6 +324,7 @@ private:
 
   bool mHasFocus;
   GUIWidgetPtr mFocus;
+  GUIWidgetPtr *pseudoSelf;
 
   AGVector2 mOldMousePos;
 

@@ -20,7 +20,7 @@
 
 #include <gui_cell.h>
 
-AGCell::AGCell(AGWidget *pParent,const AGRect2 &pRect)
+AGCell::AGCell(const GUIWidgetPtr &pParent,const AGRect2 &pRect)
 :AGWidget(pParent,pRect)
     {
 

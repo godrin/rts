@@ -31,7 +31,7 @@ class AGMenu;
 class AGEXPORT AGMenuItem:public AGTable
 {
  public:
-  AGMenuItem(AGWidget *pParent,const AGStringUtf8 &pText);
+  AGMenuItem(const GUIWidgetPtr &pParent,const AGStringUtf8 &pText);
   virtual ~AGMenuItem() throw();
 
   void draw(AGPainter &p);
@@ -58,7 +58,7 @@ class AGEXPORT AGMenuItem:public AGTable
 class AGEXPORT AGSubMenu:public AGMenuItem
 {
  public:
-  AGSubMenu(AGWidget *pParent,const AGStringUtf8 &ptext);
+  AGSubMenu(const GUIWidgetPtr &pParent,const AGStringUtf8 &ptext);
   virtual ~AGSubMenu() throw();
 
   AGMenu *getMenu();
@@ -69,7 +69,7 @@ class AGEXPORT AGSubMenu:public AGMenuItem
   virtual bool eventMouseClick(AGEvent *m);
 
  private:
-  void addChild(AGWidget*pWidget);
+  void addChild(const GUIWidgetPtr&pWidget);
 
   AGMenu *mSubMenu;
 };

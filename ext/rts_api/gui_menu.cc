@@ -29,7 +29,7 @@
 
 using namespace std;
 
-AGMenu::AGMenu(AGWidget *pParent,AGVector2 pWishPos,const AGStringUtf8 &pName):
+AGMenu::AGMenu(const GUIWidgetPtr&pParent,AGVector2 pWishPos,const AGStringUtf8 &pName):
   AGTable(pParent,AGRect2(pWishPos[0],pWishPos[1],1,1)),
   sigSelected(this,"sigSelected"),
   mName(pName.toString()),
@@ -56,10 +56,10 @@ void AGMenu::show(AGVector2 pWishPos)
 
 void AGMenu::addItem(const AGStringUtf8 &pString)
   {
-    AGMenuItem *i=new AGMenuItem(this,pString);
+    AGMenuItem *i=new AGMenuItem(*self(),pString);
     addFixedRow(i->height());
 
-    addChild(0,getRows()-1,i);
+    addChildOld(0,getRows()-1,i);
 
     mW=std::max(mW,i->width());
     setWidth(mW);
@@ -69,9 +69,9 @@ void AGMenu::addItem(const AGStringUtf8 &pString)
 
 AGMenu &AGMenu::addMenu(const AGStringUtf8 &pString)
   {
-    AGSubMenu *s=new AGSubMenu(this,pString);
+    AGSubMenu *s=new AGSubMenu(*self(),pString);
     addFixedRow(s->height());
-    addChild(0,getRows()-1,s);
+    addChildOld(0,getRows()-1,s);
 
     mH+=s->height();
     setWidth(mW);

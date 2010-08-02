@@ -28,7 +28,7 @@
 class AGCell:public AGWidget
   {
 public:
-  AGCell(AGWidget *pParent,const AGRect2 &pRect);
+  AGCell(const GUIWidgetPtr &pParent,const AGRect2 &pRect);
   void setWidth(float w);
   void setHeight(float w);
   //void setTop(float w);

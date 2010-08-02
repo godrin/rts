@@ -4,6 +4,8 @@
 #include <gui_widget.h>
 
 class GuiRubyWidget:public AGWidget {
+  public:
+  GuiRubyWidget(const GUIWidgetPtr &pParent,const AGRect2 &r);
 };
 
 

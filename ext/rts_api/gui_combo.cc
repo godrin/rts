@@ -26,11 +26,11 @@
 #include <gui_listbox.h>
 #include <gui_theme.h>
 
-AGComboBox::AGComboBox(AGWidget *pParent,const AGRect2 &pRect):
+AGComboBox::AGComboBox(const GUIWidgetPtr &pParent,const AGRect2 &pRect):
   AGWidget(pParent,pRect),sigSelect(this,"sigSelect")
   {
-    mEdit=new AGEdit(this,AGRect2(0,0,width()-height(),height()));
-    mButton=new AGButton(this,AGRect2(width()-height(),0,height(),height()),"");
+    mEdit=new AGEdit(*self(),AGRect2(0,0,width()-height(),height()));
+    mButton=new AGButton(*self(),AGRect2(width()-height(),0,height(),height()),"");
 
     mButton->setSurface(AGSurface::load("data/gui/arrow_down.png"));
 
@@ -38,8 +38,8 @@ AGComboBox::AGComboBox(AGWidget *pParent,const AGRect2 &pRect):
 
     mEdit->setMutable(false);
     mEdit->setFont(f);
-    addChild(mEdit);
-    addChild(mButton);
+    addChild(*mEdit->self());
+    addChild(*mButton->self());
 
     mButton->sigClick.connect(slot(this,&AGComboBox::eventButtonClicked));
   }
@@ -90,7 +90,7 @@ bool AGComboBox::eventButtonClicked(AGEvent *pEvent)
       mItemHeight=25;
 
 
-    mListBox=new AGListBox(0,AGRect2(sr.x(),sr.y()+height(),width(),mItemHeight*8));
+    mListBox=new AGListBox(GUIWidgetPtr(),AGRect2(sr.x(),sr.y()+height(),width(),mItemHeight*8));
 
     mListBox->sigSelect.connect(slot(this,&AGComboBox::eventSelected));
 

@@ -33,8 +33,8 @@ module GUI
     end
     def connect(&block)
       l=RubyListener.new(block)
-      pp "L:",l
-      connectCPP(l)
+      connect_cpp(l)
     end
   end
+  
 end

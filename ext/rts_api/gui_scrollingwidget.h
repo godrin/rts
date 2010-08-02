@@ -28,7 +28,7 @@
 class AGScrollingWidget:public AGWidget
   {
 public:
-  AGScrollingWidget(AGWidget *pParent, const AGRect2& pRect);
+  AGScrollingWidget(const GUIWidgetPtr &pParent, const AGRect2& pRect);
   void setClientRect(const AGRect2 &pRect);
   
   bool eventMouseButtonDown(AGEvent *pEvent);

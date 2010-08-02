@@ -21,7 +21,7 @@
 #include <gui_table.h>
 #include <basic_debug.h>
 
-AGTable::AGTable(AGWidget *pWidget,const AGRect2 &pRect):
+AGTable::AGTable(const GUIWidgetPtr &pWidget,const AGRect2 &pRect):
   AGWidget(pWidget,pRect),
   w(0),h(0),xw(0),yw(0),mInserted(false),mRoundPositions(true)
   {
@@ -78,26 +78,34 @@ void AGTable::addRow(float weight)
     yw+=weight;
   }
 
+// syntax sugar
+void AGTable::addChildOld(int x, int y, AGWidget* pWidget)
+{
+  addChild(x,y,*pWidget->self());
+}
+
+
 /// adds a widget to the given cell (px,py)
-void AGTable::addChild(int px,int py,AGWidget *pWidget)
+void AGTable::addChild(int px,int py,GUIWidgetPtr pWidget)
   {
     if(px>=w || py>=h || px<0 || py<0)
       {
         std::cerr<<"ERROR: wrong table-position:"<<px<<","<<py<<std::endl;
         std::cerr<<"table size is:"<<w<<","<<h<<std::endl;
+        std::cerr<<"Name:"<<getName()<<std::endl;
         throw std::runtime_error("WARNING:wrong input position");
         return;
       }
 
     if(!mInserted)
-      children=std::vector<AGWidget*>(w*h,(AGWidget*)0);
+      children=std::vector<GUIWidgetPtr>(w*h,GUIWidgetPtr());
 
       if(children[px+py*w])
         cdebug("Children "<<px<<","<<py<<" already set!");
 
       mInserted=true;
       children[px+py*w]=pWidget;
-      AGWidget::addChild(pWidget);
+      AGWidget::addChild(*pWidget->self());
   }
 
 /// returns the Position and size of a given cell (x,y)
@@ -199,6 +207,10 @@ void AGTable::arrange()
     int mfx,mfy; // max
     fx=fy=0;
     mfx=mfy=0;
+    
+    assert(children.size()==w*h);
+    assert(w>0);
+    assert(h>0);
 
     // in y dir
     for(mx=0;mx<w;mx++)
@@ -227,6 +239,14 @@ void AGTable::arrange()
           }
         mfx=std::max(mfx,fx);
       }
+    std::cout<<"NAME:"<<getName()<<std::endl;
+      
+    for(int px=0;px<w;px++) {
+      std::cout<<"COL "<<px<<":"<<cols[px].first<<"  "<<cols[px].second<<std::endl;
+    }
+    for(int py=0;py<h;py++) {
+      std::cout<<"ROW "<<py<<":"<<rows[py].first<<"  "<<rows[py].second<<std::endl;
+    }
 
     // TODO: assign width's and heights for all fixed !!!
     for(mx=0;mx<w;mx++)
@@ -234,7 +254,7 @@ void AGTable::arrange()
         {
           if(cols[mx].second)
             {
-              AGWidget *wd=children[mx+my*w];
+              GUIWidgetPtr wd=children[mx+my*w];
               if(wd)
                 {
                   wd->setWidth(cols[mx].first);
@@ -242,7 +262,7 @@ void AGTable::arrange()
             }
           if(rows[my].second)
             {
-              AGWidget *wd=children[mx+my*w];
+              GUIWidgetPtr wd=children[mx+my*w];
               if(wd)
                 {
                   wd->setHeight(rows[my].first);
@@ -256,7 +276,7 @@ void AGTable::arrange()
         {
           if(!cols[mx].second)
             {
-              AGWidget *wd=children[mx+my*w];
+              GUIWidgetPtr wd=children[mx+my*w];
               if(wd)
                 {
                   wd->setWidth((int)((width()-mfx)*cols[mx].first/xw));
@@ -264,7 +284,7 @@ void AGTable::arrange()
             }
           if(!rows[my].second)
             {
-              AGWidget *wd=children[mx+my*w];
+              GUIWidgetPtr wd=children[mx+my*w];
               if(wd)
                 {
                   wd->setHeight((int)((height()-mfy)*rows[my].first/yw));
@@ -280,7 +300,7 @@ void AGTable::arrange()
         float maxx=0;
         for(my=0;my<h;my++)
           {
-            AGWidget *wd=children[mx+my*w];
+            GUIWidgetPtr wd=children[mx+my*w];
             if(wd)
               {
                 wd->setLeft(ax);
@@ -298,7 +318,7 @@ void AGTable::arrange()
         float maxy=0;
         for(mx=0;mx<w;mx++)
           {
-            AGWidget *wd=children[mx+my*w];
+            GUIWidgetPtr wd=children[mx+my*w];
             if(wd)
               {
                 wd->setTop(ay);

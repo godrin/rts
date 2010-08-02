@@ -1,5 +1,4 @@
 #include <game_minimap.h>
-#include <gui_layoutfactory.h>
 #include <gui_screen.h>
 #include <basic_profiler.h>
 #include <game_app.h>
@@ -7,7 +6,7 @@
 
 #define MAP_BORDER
 
-MiniMap::MiniMap(AGWidget *p,const AGRect2 &r,AntMap *pMap):
+MiniMap::MiniMap(const GUIWidgetPtr &p,const AGRect2 &r,AntMap *pMap):
   AGWidget(p,r),
   mMap(pMap),
   mSurface(r.w(),r.h()),
@@ -369,22 +368,5 @@ AGVector2 MiniMap::fromMapCoords(AGVector2 v) const
 MiniMap *toMiniMap(AGWidget *w)
   {
     return dynamic_cast<MiniMap*>(w);
-  }
-
-// AGLayout creator
-class AGMiniMapLayoutCreator:public AGLayoutCreator
-  {
-    public:
-      REGISTER_COMPONENT(MiniMap,"miniMap")
-
-      virtual void create(AGWidget *pParent,const AGRect2 &pRect,const Node &pNode)
-        {
-          setResult(new MiniMap(pParent,pRect,0));
-        }
-  };
-
-void registerMinimapCreator()
-  {
-    getLayoutFactory()->addCreator("miniMap",new AGMiniMapLayoutCreator);
   }
 

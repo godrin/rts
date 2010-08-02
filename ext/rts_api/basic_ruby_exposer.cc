@@ -48,6 +48,12 @@ BasicRubyExposer::~BasicRubyExposer()
   mExposable=0;
 }
 
+BasicRubyExposer &BasicRubyExposer::operator=(const BasicRubyExposer &e) {
+  throw int();
+  return *this;
+}
+
+
 BasicRubyExposable *BasicRubyExposer::getDirect() {
   std::cout<<"getDirect:"<<this<<"::"<<mExposable<<std::endl;
       return mExposable;

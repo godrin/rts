@@ -23,7 +23,6 @@
 #include <gui_text.h>
 #include <gui_theme.h>
 #include <basic_debug.h>
-#include <gui_layoutfactory.h>
 #include <gui_local.h>
 
 AGCheckBox::AGCheckBox(const GUIWidgetPtr&pParent,AGRect2 pRect):

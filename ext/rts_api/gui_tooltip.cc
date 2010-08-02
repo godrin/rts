@@ -27,7 +27,7 @@
 #include <basic_tools.h>
 
 AGTooltip::AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText):
-  AGWidget(0,pRect),
+  AGWidget(GUIWidgetPtr(),pRect),
   mText(pText),
   mFont(getTheme()->getFont("tooltip.font")),
   mBgColor(getTheme()->getColor("tooltip.bgcolor")),
@@ -101,12 +101,12 @@ AGTooltip::AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText):
     cdebug(getRect());
 
     //  mFont.setColor(AGColor(0,0,0));
-    AGEdit *e=new AGEdit(this,getRect().origin().shrink(1));
+    AGEdit *e=new AGEdit(*self(),getRect().origin().shrink(1));
     e->setText(mText);
     e->setFont(mFont);
     e->setMutable(false);
     e->setBackground(false);
-    addChild(e);
+    addChild(*e->self());
   }
 
 AGTooltip::~AGTooltip() throw()

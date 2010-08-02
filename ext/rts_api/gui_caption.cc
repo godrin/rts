@@ -35,7 +35,7 @@ static bool useVertexArrays()
   }
 
 
-AGCaption::AGCaption(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG):
+AGCaption::AGCaption(const GUIWidgetPtr&pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG):
   AGText(pParent,pRect,pText,pFont),
   mBG(pBG)
   {

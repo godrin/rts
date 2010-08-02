@@ -19,9 +19,10 @@
  */
 
 #include <gui_colorbutton.h>
-#include <gui_layoutfactory.h>
+#include <basic_debug.h>
 
-AGColorButton::AGColorButton(AGWidget *pParent,const AGRect2 &r,int x,int y):
+
+AGColorButton::AGColorButton(const GUIWidgetPtr &pParent,const AGRect2 &r,int x,int y):
   AGWidget(pParent,r),gridx(x),gridy(y),mColors(x*y)
   {
   }

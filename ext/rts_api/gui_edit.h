@@ -67,6 +67,9 @@ class AGEXPORT AGEditLine
   std::pair<AGStringUtf8,bool> checkWrap(int pW);
 
   void setFont(const AGFont &pFont);
+  
+  void setAlignString(AGString name);
+  void setCAlignString(AGString name);
 
  private:
   AGStringUtf8 mText;
@@ -79,7 +82,7 @@ class AGEXPORT AGEditLine
 class AGEXPORT AGEdit:public AGWidget
 {
  public:
-  AGEdit(AGWidget *pParent,const AGRect2 &pRect);
+  AGEdit(const GUIWidgetPtr &pParent,const AGRect2 &pRect);
   virtual ~AGEdit()  throw();
 
   virtual void draw(AGPainter &p);
@@ -93,7 +96,7 @@ class AGEXPORT AGEdit:public AGWidget
   bool insert(const AGStringUtf8 &c);
   void doDelete(int p);
 
-  void setText(const AGStringUtf8 &pText);
+  void setText(AGStringUtf8 pText);
   void setFont(const AGFont &pFont);
 
   void clear() throw();
@@ -123,7 +126,14 @@ class AGEXPORT AGEdit:public AGWidget
 
   void setCursor(int p);
 
+  
+  void setFontByFilename(AGString fontname);
+
   AGSignal sigModified;
+  
+  void setAlignString(AGString name);
+  void setVAlignString(AGString name);
+
 
  private:
 

@@ -25,7 +25,7 @@
 
 
 AGScreenWidget::AGScreenWidget():
-  AGWidget(0,getScreen().getRect())
+  AGWidget(GUIWidgetPtr(),getScreen().getRect())
   {
   }
 AGScreenWidget::~AGScreenWidget() throw()

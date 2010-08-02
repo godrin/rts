@@ -261,7 +261,7 @@ void AGEditLine::setText(const AGStringUtf8 &s)
 
 
 
-AGEdit::AGEdit(AGWidget *pParent,const AGRect2 &pRect):
+AGEdit::AGEdit(const GUIWidgetPtr&pParent,const AGRect2 &pRect):
   AGWidget(pParent,pRect),mCursorTime(0),mCursorLast(SDL_GetTicks()),
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
   sigModified(this,"sigModified"),mMultiLine(true),mWrapLines(true)
@@ -666,6 +666,7 @@ void AGEdit::checkWrap()
   {
     if(mWrapLines)
       {
+        if(width()==0) return;
         std::list<AGEditLine>::iterator i=mLines.begin();
         for(;i!=mLines.end();)
           {
@@ -778,7 +779,7 @@ void AGEdit::setFont(const AGFont &pFont)
 
   }
 
-void AGEdit::setText(const AGStringUtf8 &pText)
+void AGEdit::setText(AGStringUtf8 pText)
   {
     if(getText()==pText)
       return;
@@ -954,3 +955,41 @@ void AGEdit::setCursor(int p)
     actLine=&(*j);
 
   }
+
+
+
+void AGEdit::setFontByFilename(AGString fontname) {
+
+      AGFont font;
+      font=getTheme()->getFont(fontname);
+      setFont(font);
+}
+
+void AGEdit::setAlignString(AGString name) {
+  
+  AGAlign a;
+  if(name=="left")
+    a=EDIT_LEFT;
+  else if(name=="right")
+    a=EDIT_RIGHT;
+  else if(name=="justify")
+    a=EDIT_JUSTIFY;
+  else if(name=="center" || name=="middle")
+    a=EDIT_CENTER;
+  else
+    a=EDIT_LEFT;
+  setAlign(a);
+}
+void AGEdit::setVAlignString(AGString name) {
+    
+  AGVAlign a;
+  if(name=="top") {
+    a=EDIT_TOP;
+  } else if(name=="bottom") {
+    a=EDIT_BOTTOM;
+  } else if(name=="center" || name=="middle") {
+    a=EDIT_VCENTER;
+  } else
+    a=EDIT_TOP;
+  setVAlign(a);
+}

@@ -29,11 +29,14 @@
 class AGEXPORT AGImage:public AGWidget
 {
  public:
-  AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile);
-  AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile);
+  AGImage(const GUIWidgetPtr&pParent,const AGRect2 &r);
+  AGImage(const GUIWidgetPtr&pParent,const AGRect2 &r,AGSurface pSurface,bool pTile);
+  AGImage(const GUIWidgetPtr&pParent,const AGRect2 &r,AGTexture pTexture,bool pTile);
   virtual ~AGImage() throw();
 
   virtual void draw(AGPainter &p);
+  
+  void setFilename(AGString fn);
 
   void setSurface(const AGSurface &pSurface);
   void setTexture(const AGTexture &pTexture);

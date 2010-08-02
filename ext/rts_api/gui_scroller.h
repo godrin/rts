@@ -32,7 +32,7 @@ class AGBackground;
 class AGEXPORT AGScroller:public AGWidget
 {
  public:
-  AGScroller(AGWidget *pParent,const AGRect2 &pRect,bool pHor);
+  AGScroller(const GUIWidgetPtr &pParent,const AGRect2 &pRect,bool pHor);
   ~AGScroller() throw();
 
   void draw(AGPainter &p);

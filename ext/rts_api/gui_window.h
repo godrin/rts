@@ -28,7 +28,7 @@
 class AGEXPORT AGWindow:public AGTable
 {
  public:
-  AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pTitle="",const AGString &pTheme="");
+  AGWindow(const GUIWidgetPtr&pWidget,const AGRect2 &pRect,const AGStringUtf8 &pTitle="",const AGString &pTheme="");
   virtual ~AGWindow()  throw();
 
   AGWidget *getClient();

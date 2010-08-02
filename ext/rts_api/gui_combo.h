@@ -32,7 +32,7 @@ class AGListBox;
 class AGEXPORT AGComboBox:public AGWidget
 {
  public:
-  AGComboBox(AGWidget *pParent,const AGRect2 &pRect);
+  AGComboBox(const GUIWidgetPtr&pParent,const AGRect2 &pRect);
   virtual ~AGComboBox() throw();
 
   void insertItem(const AGString &pID,const AGStringUtf8 &pContent);

@@ -24,11 +24,10 @@
 #include <gui_local.h>
 #include <gui_theme.h>
 #include <gui_image.h>
-#include <gui_layoutfactory.h>
 #include <typeinfo>
 
 
-AGRadioGroup::AGRadioGroup(AGWidget *p,const AGRect2 &r):
+AGRadioGroup::AGRadioGroup(const GUIWidgetPtr&p,const AGRect2 &r):
   AGWidget(p,r),
   sigChanged(this,"sigChanged")
   {

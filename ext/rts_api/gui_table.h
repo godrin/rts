@@ -38,7 +38,7 @@
 class AGEXPORT AGTable:public AGWidget
 {
  public:
-  AGTable(AGWidget *pWidget,const AGRect2 &pRect);
+  AGTable(const GUIWidgetPtr &pWidget,const AGRect2 &pRect);
   virtual ~AGTable() throw();
 
   void addFixedColumn(float size);
@@ -53,7 +53,8 @@ class AGEXPORT AGTable:public AGWidget
   float getColumn(size_t c) const;
   float getRow(size_t c) const;
 
-  void addChild(int x,int y,AGWidget *pWidget);
+  void addChildOld(int x,int y,AGWidget *pWidget);
+  void addChild(int x,int y,GUIWidgetPtr pWidget);
   AGRect2 getClientRect(int x,int y) const;
 
   void arrange();
@@ -70,7 +71,7 @@ class AGEXPORT AGTable:public AGWidget
 
   std::vector<std::pair<float,bool> > rows,cols;
 
-  std::vector<AGWidget*> children;
+  std::vector<GUIWidgetPtr> children; //FIXME: What for ???
 
   bool mInserted;
   bool mRoundPositions;

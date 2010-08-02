@@ -80,7 +80,7 @@ class AGEXPORT AGButton:public AGWidget
 
   void setTheme(const AGString &pTheme);
 
-  void setCaption(const AGStringUtf8 &pCaption);
+  void setCaption(AGStringUtf8 pCaption);
 
   /// sets the current state and ensures a redraw
   virtual void setState(const State &pState);

@@ -23,7 +23,6 @@
 #include <gui_local.h>
 #include <gui_theme.h>
 #include <gui_image.h>
-#include <gui_layoutfactory.h>
 #include <gui_radiogroup.h>
 #include <typeinfo>
 

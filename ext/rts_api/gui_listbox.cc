@@ -33,7 +33,7 @@ AGListBoxItem::AGListBoxItem(AGString pID,AGStringUtf8 pValue)
     value=pValue;
   }
 
-AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pRect),
+AGListBox::AGListBox(const GUIWidgetPtr &pParent,const AGRect2 &pRect):AGWidget(pParent,pRect),
   sigSelect(this,"sigSelect"),
   sigDoubleClick(this,"sigDoubleClick")
 {
@@ -44,15 +44,15 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pR
   if(mItemHeight<5)
     mItemHeight=25;
 
-  mScroller=new AGScroller(this,AGRect2(width()-mItemHeight,0,mItemHeight,height()),false);
-  addChild(mScroller);
+  mScroller=new AGScroller(*self(),AGRect2(width()-mItemHeight,0,mItemHeight,height()),false);
+  addChild(*mScroller->self());
 
   mScroller->sigValueChanged.connect(slot(this,&AGListBox::eventScroller));
 
   for(;y<pRect.h();y+=mItemHeight,count++)
     {
       AGRect2 r(0,y,pRect.w()-mItemHeight,mItemHeight);
-      AGEdit *e=new AGEdit(this,r);
+      AGEdit *e=new AGEdit(*self(),r);
       e->setMutable(false);
       e->setBackground(false);
       //e->setFont(f);
@@ -61,7 +61,7 @@ AGListBox::AGListBox(AGWidget *pParent,const AGRect2 &pRect):AGWidget(pParent,pR
       e->setName(os.str());
 
       mEdits.push_back(e);
-      addChild(e);
+      addChild(*e->self());
     }
   mHeight=count;
   mY=0;

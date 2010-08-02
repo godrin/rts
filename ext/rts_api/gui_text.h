@@ -29,10 +29,8 @@
 class AGEXPORT AGText:public AGWidget
 {
  public:
-  AGText(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont);
-#ifndef SWIG
-  AGText(AGWidget *pParent,const AGVector2 &pPoint,const AGStringUtf8 &pText,const AGFont &pFont);
-#endif
+  AGText(const GUIWidgetPtr &pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont);
+  AGText(const GUIWidgetPtr &pParent,const AGVector2 &pPoint,const AGStringUtf8 &pText,const AGFont &pFont);
   virtual ~AGText() throw();
   
   void setDeriveRect();

@@ -45,7 +45,7 @@ struct AGEXPORT AGListBoxItem
 class AGEXPORT AGListBox:public AGWidget
 {
  public:
-  AGListBox(AGWidget *pParent,const AGRect2 &pRect);
+  AGListBox(const GUIWidgetPtr&pParent,const AGRect2 &pRect);
   virtual ~AGListBox() throw();
   
   void insertItem(AGString pID,AGStringUtf8 pValue);

@@ -16,6 +16,8 @@ class BasicRubyExposer {
       return dynamic_cast<T*>(getDirect());
     }
   private:
+    BasicRubyExposer &operator=(const BasicRubyExposer &e);
+    
     BasicRubyExposable *mExposable;
 };
 

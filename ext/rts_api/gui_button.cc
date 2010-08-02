@@ -48,14 +48,14 @@ AGButton::AGButton(const GUIWidgetPtr &pParent,const AGRect2 &r,const AGStringUt
     setTheme("");
     AGFont font("FreeSans.ttf");
     font.setColor(AGColor(0,0,0));
-    mTextW=new AGEdit(this,r.origin().shrink(borderWidth));//,mText,font);
+    mTextW=new AGEdit(*self(),r.origin().shrink(borderWidth));//,mText,font);
     mTextW->setText(mText);
     mTextW->setAlign(EDIT_CENTER);
     mTextW->setVAlign(EDIT_VCENTER);
     mTextW->setFont(font);
     mTextW->setMutable(false);
     mTextW->setBackground(false);
-    addChild(mTextW);
+    addChild(GUIWidgetPtr(mTextW)); // FIXME ???
 
     setTheme("");
     mChecked=false;
@@ -77,8 +77,8 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
     mGrayedSurface=mSurface.grayed();
     if(!mImageW)
       {
-        mImageW=new AGImage(this,getRect().origin(),mSurface,false);
-        addChild(mImageW);
+        mImageW=new AGImage(*self(),getRect().origin(),mSurface,false);
+        addChild(GUIWidgetPtr( mImageW)); // FIXME
       }
     else
       {
@@ -105,8 +105,8 @@ void AGButton::setTexture(const AGTexture &pTexture)
   {
     if(!mImageW)
       {
-        mImageW=new AGImage(this,getRect().origin(),mSurface,false);
-        addChild(mImageW);
+        mImageW=new AGImage(*self(),getRect().origin(),mSurface,false);
+        addChild(GUIWidgetPtr (mImageW)); // FIXME
       }
     else
       {
@@ -321,7 +321,7 @@ void AGButton::setTheme(const AGString &pTheme)
 
   }
 
-void AGButton::setCaption(const AGStringUtf8 &pCaption)
+void AGButton::setCaption(AGStringUtf8 pCaption)
   {
     queryRedraw();
     mText=pCaption;

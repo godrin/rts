@@ -19,10 +19,9 @@
  */
 
 #include <gui_scrollingwidget.h>
-#include <gui_layoutfactory.h>
 #include <gui_painter.h>
 
-AGScrollingWidget::AGScrollingWidget(AGWidget *pParent, const AGRect2& pRect):
+AGScrollingWidget::AGScrollingWidget(const GUIWidgetPtr &pParent, const AGRect2& pRect):
   AGWidget(pParent,pRect),
   mDragging(false)
     {
@@ -60,7 +59,6 @@ bool AGScrollingWidget::eventMouseButtonDown(AGEvent *pEvent)
     if(hovered())
       {
         mDragging=true;
-        cdebug("dragging!");
       }
     return result;
   }
@@ -68,8 +66,6 @@ bool AGScrollingWidget::eventMouseButtonUp(AGEvent *pEvent)
   {
     if(mDragging)
       {
-        cdebug("No longer dragging!");
-
         mDragging=false;
       }
     return AGWidget::eventMouseButtonUp(pEvent);

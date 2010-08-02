@@ -4,7 +4,7 @@
 #include <gui_screen.h>
 #include <glu.h>
 
-AGGLWidget::AGGLWidget(AGWidget *pParent,const AGRect2 &r):
+AGGLWidget::AGGLWidget(const GUIWidgetPtr&pParent,const AGRect2 &r):
   AGWidget(pParent,r)
 {
 }

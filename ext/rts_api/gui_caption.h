@@ -29,7 +29,7 @@
 class AGEXPORT AGCaption:public AGText
 {
  public:
-  AGCaption(AGWidget *pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG);
+  AGCaption(const GUIWidgetPtr &pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG);
 
   void draw(AGPainter &p);
 

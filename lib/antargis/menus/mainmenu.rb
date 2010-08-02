@@ -1,5 +1,7 @@
 require 'pp'
 
+require File.expand_path('../layouts/mainmenu_layout.rb',__FILE__)
+
 module Antargis
   
   class MainMenu<::Game::Application
@@ -14,21 +16,15 @@ module Antargis
      
     def initialize
       super
-      #@menues=[]
       
-      @mainMenu=GUI::Layout.new(nil)
-      c=loadFile("data/gui/layout/mainmenu.xml")
-      puts c
-      @mainMenu.loadXML(c)
-      #@menues.push(@mainMenu)
-      self.mainWidget=@mainMenu
+      @mainMenu=MainMenuLayout.new(nil)
       
-      sig=@mainMenu.getChild("quit").sigClick
-      pp sig
-      pp sig
+      self.main_widget=@mainMenu
+      c=@mainMenu.get_child("quit")
+      sig=c.sig_click
       sig.connect{||
-        pp self
-        self.eventQuit
+        pp "QUIT"
+        self.event_quit
         exit
       }
       
@@ -43,8 +39,8 @@ module Antargis
       end
     end
     
-    def eventQuit
-      tryQuit
+    def event_quit
+      try_quit
     end
   end
   

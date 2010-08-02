@@ -21,14 +21,21 @@
 #include <gui_image.h>
 #include <basic_debug.h>
 
-AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGSurface pSurface,bool pTile):
+AGImage::AGImage(const GUIWidgetPtr&pParent, const AGRect2& r): AGWidget(pParent, r),
+mTile(false),mScale(false)
+{
+
+}
+
+
+AGImage::AGImage(const GUIWidgetPtr& pParent,const AGRect2 &r,AGSurface pSurface,bool pTile):
   AGWidget(pParent,r),
   mTexture(pSurface),mTile(pTile),mScale(false)
     {
       mCenter=true;
     }
 
-AGImage::AGImage(AGWidget *pParent,const AGRect2 &r,AGTexture pTexture,bool pTile):
+AGImage::AGImage(const GUIWidgetPtr&pParent,const AGRect2 &r,AGTexture pTexture,bool pTile):
   AGWidget(pParent,r),
   mTexture(pTexture),mTile(pTile),mScale(false)
   {
@@ -95,3 +102,8 @@ void AGImage::setScale(bool c)
   {
     mScale=c;
   }
+  
+void AGImage::setFilename(AGString fn) {
+  setSurface(AGSurface::load(fn));
+}
+

@@ -30,7 +30,7 @@
 
 #undef connect
 
-AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pTitle,const AGString &pTheme):
+AGWindow::AGWindow(const GUIWidgetPtr&pWidget,const AGRect2 &pRect,const AGStringUtf8 &pTitle,const AGString &pTheme):
   AGTable(pWidget,pRect),sigClose(this,"sigClose"),mTitle(pTitle)
 
   {
@@ -73,17 +73,17 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
         addColumn(1.0);
         addFixedColumn(bw);
 
-        AGTable::addChild(0,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[0],true));
-        AGTable::addChild(1,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[1],true));
-        AGTable::addChild(2,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[2],true));
+        AGTable::addChildOld(0,0,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[0],true));
+        AGTable::addChildOld(1,0,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[1],true));
+        AGTable::addChildOld(2,0,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[2],true));
 
         AGImage *i1,*i2;
 
-        AGTable::addChild(0,1,i1=new AGImage(this,AGRect2(0,0,bw,titBarHeight),*textures[3],true));
+        AGTable::addChildOld(0,1,i1=new AGImage(*self(),AGRect2(0,0,bw,titBarHeight),*textures[3],true));
         // title
         t=dynamic_cast<AGTable*>(getTitleBar((int)(width()-2*bw),titBarHeight));
 
-        AGTable::addChild(2,1,i2=new AGImage(this,AGRect2(0,0,bw,titBarHeight),*textures[5],true));
+        AGTable::addChildOld(2,1,i2=new AGImage(*self(),AGRect2(0,0,bw,titBarHeight),*textures[5],true));
         i1->setHeight(t->height());
         i2->setHeight(t->height());
 
@@ -91,14 +91,14 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
         cdebug("bw:"<<bw);
 
 
-        AGTable::addChild(0,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[3],true));
-        AGTable::addChild(2,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[5],true));
+        AGTable::addChildOld(0,2,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[3],true));
+        AGTable::addChildOld(2,2,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[5],true));
 
-        AGTable::addChild(0,3,new AGImage(this,AGRect2(0,0,bw,bw),*textures[6],true));
-        AGTable::addChild(1,3,new AGImage(this,AGRect2(0,0,bw,bw),*textures[7],true));
-        AGTable::addChild(2,3,new AGImage(this,AGRect2(0,0,bw,bw),*textures[8],true));
+        AGTable::addChildOld(0,3,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[6],true));
+        AGTable::addChildOld(1,3,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[7],true));
+        AGTable::addChildOld(2,3,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[8],true));
 
-        AGTable::addChild(1,2,mClient=new AGCaption(this,AGRect2(0,0,0,0),"",theme.getFont("window.title.font"),AGBackground(theme,"window.background")));
+        AGTable::addChildOld(1,2,mClient=new AGCaption(*self(),AGRect2(0,0,0,0),"",theme.getFont("window.title.font"),AGBackground(theme,"window.background")));
 
       }
     else
@@ -111,18 +111,18 @@ AGWindow::AGWindow(AGWidget *pWidget,const AGRect2 &pRect,const AGStringUtf8 &pT
         addColumn(1.0);
         addFixedColumn(bw);
 
-        AGTable::addChild(0,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[0],true));
-        AGTable::addChild(1,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[1],true));
-        AGTable::addChild(2,0,new AGImage(this,AGRect2(0,0,bw,bw),*textures[2],true));
+        AGTable::addChildOld(0,0,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[0],true));
+        AGTable::addChildOld(1,0,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[1],true));
+        AGTable::addChildOld(2,0,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[2],true));
 
-        AGTable::addChild(0,1,new AGImage(this,AGRect2(0,0,bw,bw),*textures[3],true));
-        AGTable::addChild(2,1,new AGImage(this,AGRect2(0,0,bw,bw),*textures[5],true));
+        AGTable::addChildOld(0,1,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[3],true));
+        AGTable::addChildOld(2,1,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[5],true));
 
-        AGTable::addChild(0,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[6],true));
-        AGTable::addChild(1,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[7],true));
-        AGTable::addChild(2,2,new AGImage(this,AGRect2(0,0,bw,bw),*textures[8],true));
+        AGTable::addChildOld(0,2,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[6],true));
+        AGTable::addChildOld(1,2,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[7],true));
+        AGTable::addChildOld(2,2,new AGImage(*self(),AGRect2(0,0,bw,bw),*textures[8],true));
 
-        AGTable::addChild(1,1,mClient=new AGCaption(this,AGRect2(0,0,0,0),"",theme.getFont("window.title.font"),AGBackground(theme,"window.background")));
+        AGTable::addChildOld(1,1,mClient=new AGCaption(*self(),AGRect2(0,0,0,0),"",theme.getFont("window.title.font"),AGBackground(theme,"window.background")));
       }
 
     arrange();
@@ -146,7 +146,7 @@ bool AGWindow::eventMouseButtonDown(AGEvent *e)
           if(getScreenRect().contains(e->getMousePosition()))
             if(getParent())
               {
-                getParent()->gainFocus(this);
+                getParent()->gainFocus(*self());
                 return true;
               }
       }
@@ -171,12 +171,12 @@ bool AGWindow::eventDragBy(AGEvent *event,const AGVector2 &pDiff)
 AGWidget *AGWindow::getTitleBar(int w,int h)
   {
     cdebug("W:"<<w);
-    AGTable *t=new AGTable(this,AGRect2(0,0,0,20));//60,20));
+    AGTable *t=new AGTable(*self(),AGRect2(0,0,0,20));//60,20));
     AGSurface closeSurface=getTheme()->getSurface("window.buttons.close");
     AGButton *closeButton;
     AGWidget *title;
 
-    AGTable::addChild(1,1,t);
+    AGTable::addChildOld(1,1,t);
 
     t->addRow(1.0);
 
@@ -184,8 +184,8 @@ AGWidget *AGWindow::getTitleBar(int w,int h)
     t->addFixedColumn(h);//close button
 
     //  t->addChild(0,0,title=new AGButton(t,AGRect2(0,0,0,0),mTitle));
-    t->addChild(0,0,title=new AGCaption(t,AGRect2(0,0,0,0),mTitle,getTheme()->getFont("window.title.font"),AGBackground("window.title.background")));
-    t->addChild(1,0,closeButton=new AGButton(t,AGRect2(0,0,20,20),"aa"));
+    t->addChildOld(0,0,title=new AGCaption(*t->self(),AGRect2(0,0,0,0),mTitle,getTheme()->getFont("window.title.font"),AGBackground("window.title.background")));
+    t->addChildOld(1,0,closeButton=new AGButton(*t->self(),AGRect2(0,0,20,20),"aa"));
     closeButton->setSurface(closeSurface,false);
     title->setName("title"); // FIXME: maybe name getName()+".title"
 

@@ -25,7 +25,7 @@
 #include <gui_background.h>
 #include <basic_debug.h>
 
-AGScroller::AGScroller(AGWidget *pParent,const AGRect2 &pRect,bool pHor):
+AGScroller::AGScroller(const GUIWidgetPtr&pParent,const AGRect2 &pRect,bool pHor):
   AGWidget(pParent,pRect),
   sigValueChanged(this,"sigValueChanged"),
   mHorizontal(pHor)
@@ -45,26 +45,26 @@ AGScroller::AGScroller(AGWidget *pParent,const AGRect2 &pRect,bool pHor):
 
     if(mHorizontal)
       {
-        mB1=new AGButton(this,AGRect2(mBorderWidth,mBorderWidth,height()-mBorderWidth*2,height()-mBorderWidth*2),"");
-        mB2=new AGButton(this,AGRect2(width()+mBorderWidth-height(),mBorderWidth,height()-mBorderWidth*2,height()-mBorderWidth*2),"");
+        mB1=new AGButton(*self(),AGRect2(mBorderWidth,mBorderWidth,height()-mBorderWidth*2,height()-mBorderWidth*2),"");
+        mB2=new AGButton(*self(),AGRect2(width()+mBorderWidth-height(),mBorderWidth,height()-mBorderWidth*2,height()-mBorderWidth*2),"");
 
-        mScroller=new AGButton(this,AGRect2(mBorderWidth+height(),mBorderWidth,(width()-2*height())*0.5  ,height()-mBorderWidth*2),"");
+        mScroller=new AGButton(*self(),AGRect2(mBorderWidth+height(),mBorderWidth,(width()-2*height())*0.5  ,height()-mBorderWidth*2),"");
 
         //      mScroller->setSurface(AGSurface::load("data/gui/v_bars.png"));
       }
     else
       {
-        mB1=new AGButton(this,AGRect2(mBorderWidth,mBorderWidth,width()-mBorderWidth*2,width()-mBorderWidth*2),"");
-        mB2=new AGButton(this,AGRect2(mBorderWidth,height()+mBorderWidth-width(),width()-mBorderWidth*2,width()-mBorderWidth*2),"");
+        mB1=new AGButton(*self(),AGRect2(mBorderWidth,mBorderWidth,width()-mBorderWidth*2,width()-mBorderWidth*2),"");
+        mB2=new AGButton(*self(),AGRect2(mBorderWidth,height()+mBorderWidth-width(),width()-mBorderWidth*2,width()-mBorderWidth*2),"");
 
-        mScroller=new AGButton(this,AGRect2(mBorderWidth,mBorderWidth+width(),width()-mBorderWidth*2,(height()-2*width())*0.5),"");
+        mScroller=new AGButton(*self(),AGRect2(mBorderWidth,mBorderWidth+width(),width()-mBorderWidth*2,(height()-2*width())*0.5),"");
 
         //      mScroller->setSurface(AGSurface::load("data/gui/h_bars.png"));
       }
 
-    addChild(mB1);
-    addChild(mB2);
-    addChild(mScroller);
+    addChild(*mB1->self());
+    addChild(*mB2->self());
+    addChild(*mScroller->self());
 
     mScroller->sigDragBy.connect(slot(this,&AGScroller::eventDragBy));
     mB1->sigClick.connect(slot(this,&AGScroller::eventUpClick));
