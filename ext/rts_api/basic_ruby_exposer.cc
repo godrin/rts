@@ -49,7 +49,7 @@ BasicRubyExposer::~BasicRubyExposer()
 }
 
 BasicRubyExposer &BasicRubyExposer::operator=(const BasicRubyExposer &e) {
-  throw int();
+  throw AGException("Error in BasicRubyExposer::operator=");
   return *this;
 }
 

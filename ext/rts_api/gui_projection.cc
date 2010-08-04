@@ -7,7 +7,7 @@ AGProjection2D::AGProjection2D() :
   {
   }
 
-AGProjection2D::AGProjection2D(const AGMatrix3 &pMatrix) throw (GeometryException) :
+AGProjection2D::AGProjection2D(const AGMatrix3 &pMatrix)  :
   mInited(true), m(pMatrix)
   {
     bool invertable=isInvertable(m);
@@ -26,6 +26,19 @@ AGProjection2D::AGProjection2D(const AGProjection2D &p) :
 AGProjection2D::AGProjection2D(const AGRect2 &from, const AGRect2 &to) :
   mInited(true)
   {
+    if(from.content()<=0) {
+      cdebug("AGRect2 from "<<from.toString()<<" has no content!");
+      cdebug("from:"<<from.toString());
+      cdebug("to:"<<to.toString());
+      throw  GeometryException(AGString("AGRect2 from ")+from.toString()+" has no content!");
+    }
+    if(to.content()<=0) {
+      cdebug("AGRect2 to "<<from.toString()<<" has no content!");
+      cdebug("from:"<<from.toString());
+      cdebug("to:"<<to.toString());
+      throw  GeometryException(AGString("AGRect2 to ")+from.toString()+" has no content!");
+    }
+      
     assert(from.content()>0 && to.content()>0);
 
     float sx=to.w()/from.w();
@@ -74,7 +87,7 @@ void AGProjection2D::pushProjection(const AGProjection2D &p)
     m*=p.m;
   }
 
-AGProjection2D AGProjection2D::inverse() const throw (GeometryException)
+AGProjection2D AGProjection2D::inverse() const 
   {
     CTRACE;
     bool invertable=isInvertable(m);

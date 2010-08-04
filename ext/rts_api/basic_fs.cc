@@ -137,7 +137,7 @@ void checkDir(const std::string &s)
           {
             dbout(0,"could not create dir:"<<s);
             dbout(0,"rc:"<<rc);
-            throw std::runtime_error("could not create dir");
+            throw AGException("could not create dir");
           }
       }
 #else
@@ -154,7 +154,7 @@ void checkDir(const std::string &s)
           return; // probably exists - we don't have access
         default:
           dbout(0,"could not create dir:"<<s);
-          throw std::runtime_error("could not create dir");
+          throw AGException("could not create dir");
         }
       }
 #endif
@@ -188,7 +188,7 @@ AGString checkFileName(AGString s)
   {
 #ifdef WIN32
     if(s.length()>300)
-      throw std::runtime_error("possible segfault???");
+      throw AGException("possible segfault???");
     s=replace(s,"/","\\");
     s=replace(s,"\\\\","\\"); // prevent windows from searching on network
 #endif
@@ -236,7 +236,6 @@ AGString findFile(const AGString &pName)
           return findFile(pName.substr(0,pName.length()-3)+"jpg");
       }
 
-    //  throw std::runtime_error("File not found!");
     return "";
   }
 
@@ -253,9 +252,6 @@ std::string loadFromPath(const std::string &pName)
         if(r.length())
           return r;
       }
-
-    //  if(mFsPaths.size()==0)
-    //    throw std::runtime_error("Not yet inited fs-paths!");
 
     for(std::list<AGString>::iterator i=gFilesystemPathes.begin();i!=gFilesystemPathes.end();i++)
       dbout(0,"path:"<<*i);

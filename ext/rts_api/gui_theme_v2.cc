@@ -318,11 +318,11 @@ AGBorder AGThemeItem::getBorder() const
 }
 AGBackground AGThemeItem::getBackground() const
 {
-  throw new NotImplementedException();
+  throw new NotImplementedException("AGThemeItem::getBackground not implemented!");
 }
 AGFont AGThemeItem::getFont() const
 {
-  throw new NotImplementedException();
+  throw new NotImplementedException("AGThemeItem::getFont() nt implemented!");
 }
 
 

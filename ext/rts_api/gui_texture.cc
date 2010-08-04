@@ -396,8 +396,6 @@ void AGTexture::fillRect(const AGRect2 &pRect,const AGColor &c)
         for(int x=(int)pRect.x0();x<=pRect.x1();x++)
           for(int y=(int)pRect.y0();y<=pRect.y1();y++)
             putPixel(x,y,c);
-
-        //      throw std::runtime_error("implement fillRect for sdl-texture");
       }
 
   }
@@ -455,7 +453,7 @@ void AGTexture::blit(const AGTexture &pSource,const AGRect2 &pDest,const AGRect2
         AGGLPainter::blit(pSource,pDest,pSrc,pColor);
       }
     else
-      throw std::runtime_error("implement blitting for sdl-texture");
+      throw AGException("implement blitting for sdl-texture");
   }
 void AGTexture::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &c)
   {
@@ -467,7 +465,6 @@ void AGTexture::drawLine(const AGVector2 &p0,const AGVector2 &p1,const AGColor &
       }
     else
       AGSDLPainter::drawLine(mSDLTexture->surface,p0,p1,c);
-    //    throw std::runtime_error("implement drawLine for sdl-texture");
   }
 
 void AGTexture::drawGradient(const AGRect2& rect, const AGColor& ul, const AGColor& ur, const AGColor& dl, const AGColor& dr)

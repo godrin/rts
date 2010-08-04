@@ -527,14 +527,14 @@ void SimpleGraph::check()
         if((*i)->edges.size()==0)
           {
             cdebug("empty node:"<<(*i)->p<<"("<<(*i));
-            throw std::runtime_error("check failed 0");
+            throw AGException("check failed 0");
           }
         for(Edges::iterator j=(*i)->edges.begin();j!=(*i)->edges.end();j++)
           {
             if((*j)->a!=(*i) && (*j)->b!=(*i))
-              throw std::runtime_error("check failed 1");
+              throw AGException("check failed 1");
             if(mEdges.find(*j)==mEdges.end())
-              throw std::runtime_error("check failed 2");
+              throw AGException("check failed 2");
           }
       }
   }

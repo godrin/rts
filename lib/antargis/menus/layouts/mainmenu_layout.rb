@@ -40,9 +40,9 @@ module Antargis
       image
     end
     
-    def rect
-      GUI::Rect2.new(0,0,0,0)
-    end
+    #def rect
+    ##  GUI::Rect2.new(0,0,0,0)
+    #end
     
     
     def processArgs(target,args)
@@ -74,6 +74,10 @@ module Antargis
       @table.arrange
     end
     
+    def rect
+      @table.cell_client_rect(@x,@y)
+    end
+    
   end
   
   class TableLayout
@@ -87,6 +91,20 @@ module Antargis
     def arrange
       @table.arrange
     end
+    
+    def output_cell_structure
+      @table.structure_finished
+      puts "STRUCTURE:"
+      (0...@table.rows).each{|i|
+        (0...@table.cols).each{|j|
+          print @table.cell_client_rect(j,i),"  "
+        }
+        puts
+      }
+      puts "STRUCTURE."
+                              
+    end
+
     
     def row(params=nil)
       if params
@@ -126,6 +144,7 @@ module Antargis
     end
     def cell(x,y,&block)
       #arrange
+      @table.structure_finished
       TableCell.new(@table,x,y).instance_eval(&block)
     end
   end
@@ -133,14 +152,16 @@ module Antargis
   class RubyLayout<GUI::RubyBaseWidget
     include LayoutElements
     def initialize(parent)
-      rect=GUI::Rect2.new(0,0,GUI::screen_width,GUI::screen_height)
+      crect=GUI::Rect2.new(0,0,GUI::screen_width,GUI::screen_height)
       
       if parent
-        rect=parent.getClientRect
+        crect=parent.getClientRect
       end
       pp "RubyLayout"
-      pp rect
-      super(parent,rect)
+      pp crect
+      super(parent,crect)
+      puts "----"
+      pp self.method(:rect) #s.sort
       pp "MyRect:",self.rect
       pp "MyClientRect:",self.client_rect
       layout
@@ -160,25 +181,21 @@ module Antargis
       pp "MainMenuLayout::add"
       pp "X:",x
       pp "clientrect:",self.client_rect
+      pp "MYRECT:",self.rect
       x.rect=self.client_rect
       add_child(x)
     end
+    
+    
+    
     def layout
-      table(:name=>"outer") {
-        row(:fixed=>200)
-        row(:fixed=>30)
-        row
-        row(:fixed=>34)
-        col
-        cell(0,0) {
-          image(:filename=>"data/gui/antargisLogo.png")
-        }
-    cell(0,2)  {
-       table(:name=>"menubuttons") {
-         1.upto(6) {row ; row(:relative=>2) } ; row
+      buttonlayout=lambda {
+      table(:name=>"menubuttons") {
+         1.upto(6) {row(:relative=>2);row };row(:relative=>2)
          col(:relative=>2)
          col(:relative=>0.6)
          col(:fixed=>5)
+         output_cell_structure
          cell(0, 0) { button(:name=>"tutorial", :caption=>"Tutorial") }
          cell(0, 2) { button(:name=>"campaign", :caption=>"Start campaign") }
          cell(0, 4) { button(:name=>"single", :caption=>"Single Map", :enabled=>true) }
@@ -187,17 +204,38 @@ module Antargis
          cell(0,10) { button(:name=>"credits", :caption=>"Credits") }
          cell(0,12) { button(:name=>"quit", :caption=>"Quit") }
        }
-     }
-     cell(0,0) {
-      table(:name=>"forestpic") {
-        row(:fixed=>5)
-        row(:fixed=>456)
-        row
-        col
-        col(:fixed=>606)
-        col
-        cell(1,1) { image(:filename=>"data/gui/small_forest.png") }
       }
+      table(:name=>"outer") {
+        row(:fixed=>200)
+        row(:fixed=>30)
+        row
+        row(:fixed=>34)
+        col
+        output_cell_structure
+        cell(0,0) {
+          image(:filename=>"data/gui/antargisLogo.png",:name=>"logo",:center=>true)
+        }
+        cell(0,2)  {
+          table(:name=>"inner") {
+            col(:relative=>2)
+            col(:relative=>0.6)
+            col(:fixed=>5)
+            row
+            cell(1,0,&buttonlayout)
+            cell(0,0) {
+              table(:name=>"forestpic") {
+                row(:fixed=>5)
+                row(:fixed=>456)
+                row
+                col
+                col(:fixed=>606)
+                col
+                output_cell_structure
+                cell(1,1) { image(:filename=>"data/gui/small_forest.png",:name=>"forest",:center=>true) }
+             }
+          }
+        }
+    
     }
     cell(0,3) { text(:font=>"yellow.font", :align=>"center", :enabled=>false, :caption=>"(C) 2005-2007 by the Antargis-team") }
          }

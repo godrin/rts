@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdexcept>
+#include <basic_exception.h>
 
 std::string rubyHash(const std::string &p)
 {
@@ -54,7 +55,7 @@ bool rubyMatchRegex(const std::string &p,const std::string &pregex)
 
 
 
-unsigned char fromHexBS(unsigned char c) //throws(std::runtime_error)
+unsigned char fromHexBS(unsigned char c)
   {
     if(c>='a' && c<='f')
       return c-'a'+0xA;
@@ -63,7 +64,7 @@ unsigned char fromHexBS(unsigned char c) //throws(std::runtime_error)
 
     if(c>='0' && c<='9')
       return c-'0';
-    throw std::runtime_error("wrong input in fromHex()");
+    throw AGException("wrong input in fromHex()");
   }
 
 void toHexBS(char c,std::ostream &os)

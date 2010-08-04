@@ -205,29 +205,52 @@ void AGWidget::drawAll ( AGPainter &p ) {
     return;
 
   if ( mCache ) {
+    std::cout<<"blt..."<<std::endl;
     p.blit ( *mCache,getRect(),getRect().origin() );
+    std::cout<<"blt!"<<std::endl;
   } else {
+    std::cout<<"drawAll 0"<<std::endl;
     p.pushMatrix();
+    std::cout<<"drawAll 01"<<std::endl;
 
     p.clip ( getRect() );
+    std::cout<<"drawAll 02"<<std::endl;
     //p.transform(getRect());
-    p.transform ( innerToOuter().getMatrix() );
+    AGMatrix3 tmp=innerToOuter().getMatrix();
+    std::cout<<"drawAll 03"<<std::endl;
+    p.transform ( tmp );
+    std::cout<<"drawAll 1"<<std::endl;
 
     if ( !mChildrenDrawFirst )
       draw ( p );
+    std::cout<<"drawAll 2"<<std::endl;
 
     Children::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+    std::cout<<"drawAll 3"<<std::endl;
 
-    for ( ;i!=mChildren.rend();i++ )
+    for ( ;i!=mChildren.rend();i++ ) {
+      std::cout<<"DrawChild:"<<(i->widget())<<std::endl;
       drawChild ( p,i->widget() );
+      std::cout<<"DrawChild - ok "<<(i->widget())<<std::endl;
+    }
+    std::cout<<"drawAll 4"<<std::endl;
 
-    if ( mChildrenDrawFirst )
+    if ( mChildrenDrawFirst ) {
+      std::cout<<"Draw me "<<this<<":"<<typeid(*this).name()<<std::endl;
       draw ( p );
+      std::cout<<"Draw me ok "<<this<<":"<<typeid(*this).name()<<std::endl;
+    }
+    std::cout<<"drawAll 5"<<std::endl;
 
     drawAfter ( p );
+    std::cout<<"drawAll 6"<<std::endl;
 
     p.popMatrix();
+        std::cout<<"drawAll 7"<<std::endl;
+
     setDrawn();
+        std::cout<<"drawAll 8"<<std::endl;
+
   }
 }
 
@@ -245,6 +268,7 @@ AGRect2 AGWidget::getClientWorld() const {
 
 
 AGRect2 AGWidget::getRect() const {
+  std::cout<<"AGWidget::getRect:"<<mRect.toString()<<std::endl;
   return mRect;
 }
 
@@ -537,9 +561,15 @@ void AGWidget::setRectInterface ( AGRect2 pRect ) {
 
 
 void AGWidget::setRect ( const AGRect2 &pRect ) {
+  if(!(pRect.w()>=0)) {
+    std::cout<<"Invalid height in setRect"<<std::endl;
+  }
+  
   if ( mCache&& ( width() !=pRect.width() ||height() !=pRect.height() ) )
     setCaching ( true );
 
+  
+  
   regChange();
   mRect=pRect;
   regChange();
@@ -600,6 +630,10 @@ void AGWidget::setWidth ( float w ) {
   queryRedraw();
 }
 void AGWidget::setHeight ( float h ) {
+  if(!(h>=0)) {
+    std::cout<<"Invalid height given !!!"<<std::endl;
+  }
+  
   bool changed= ( height() !=h );
   regChange();
   mRect.setHeight ( h );
@@ -1206,6 +1240,11 @@ AGProjection2D AGWidget::outerToInner() const {
 
 AGRect2 AGWidget::innerToOuter ( const AGRect2 &p ) const {
   AGRect2 m=p;
+std::cout<<"innerToOuter"<<m.toString()<<std::endl;
+std::cout<<"use client rect:"<<mUseClientRect<<std::endl;
+std::cout<<"getRect"<<getRect()<<std::endl;
+std::cout<<"this:"<<typeid(this).name()<<std::endl;
+std::cout<<"name:"<<getName()<<std::endl;
 
   if ( mUseClientRect )
     m=mClientProj.project ( m );

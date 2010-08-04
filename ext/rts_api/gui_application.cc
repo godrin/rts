@@ -108,6 +108,7 @@ bool AGApplication::run()
 
     size_t loopCount=0;
 
+    cdebug("running...");
     while (mRunning)
       {
         STACKTRACE;
@@ -164,7 +165,7 @@ bool AGApplication::run()
                 draw();
               }
           }
-
+        std::cout<<"Frame ended"<<std::endl;
         eventFrameEnd(t);
         last=now;
 

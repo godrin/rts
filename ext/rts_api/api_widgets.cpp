@@ -14,6 +14,12 @@
 
 using namespace Rice;
 
+ void handle_my_exception(AGException const & ex)
+    {
+      std::cout<<"HANDLE_MY_ECXEPTION"<<std::endl;
+      throw Rice::Exception(rb_eRuntimeError, ex.what());
+    }
+
 
 void init_GUIWidgets ( Rice::Module &rb_mGui ) {
   define_class_under<GuiRubyWidget,AGWidget> (rb_mGui,"RubyBaseWidget")
@@ -31,17 +37,25 @@ void init_GUIWidgets ( Rice::Module &rb_mGui ) {
   //FIXME: Mark function must be used !!!! - problem it's implemented within Data_Object<>()
   
   define_class_under<AGTable,AGWidget>(rb_mGui,"Table")
+  //.add_handler<AGException>(handle_my_exception)
   .define_constructor(Constructor<AGTable,GUIWidgetPtr,AGRect2>())
   .define_method("add_fixed_row",&AGTable::addFixedRow)
   .define_method("add_row",&AGTable::addRow)
   .define_method("add_fixed_column",&AGTable::addFixedColumn)
   .define_method("add_column",&AGTable::addColumn)
   .define_method("add_child_to_cell",table_addChild(&AGTable::addChild))
-  .define_method("arrange",&AGTable::arrange);
+  .define_method("arrange",&AGTable::arrange)
+  .define_method("structure_finished",&AGTable::structureFinished)
+  .define_method("cell_client_rect",&AGTable::getClientRect)
+  .define_method("cols",&AGTable::getColumns)
+  .define_method("rows",&AGTable::getRows);
+  
   
   define_class_under<AGImage,AGWidget>(rb_mGui,"Image")
   .define_constructor(Constructor<AGImage,GUIWidgetPtr,AGRect2>())
-  .define_method("filename=",&AGImage::setFilename);
+  .define_method("filename=",&AGImage::setFilename)
+  .define_method("center=",&AGImage::setCenter)
+  .define_method("center",&AGImage::getCenter);
   
   define_class_under<AGEdit,AGWidget>(rb_mGui,"Edit")
   .define_constructor(Constructor<AGEdit,GUIWidgetPtr,AGRect2>())

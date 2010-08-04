@@ -26,10 +26,24 @@ template<>
 Rice::Object to_ruby<GUIWidgetPtr> ( GUIWidgetPtr const & x );
 
 
+/*
+template<class T>
+Rice::Object to_ruby<T> ( T const & x ) {
+    return Rice::Data_Object<T> ( new T( x ) );
+
+}
+*/
+template<>
+Rice::Object to_ruby<AGRect2> ( AGRect2 const & x );
+template<>
+Rice::Object to_ruby<AGEvent> ( AGEvent const & x );
+
 template<>
 GUIWidgetPtr from_ruby<GUIWidgetPtr> ( Rice::Object x );
 
 template<>
 void ruby_mark<AGWidget>(AGWidget*t);
+template<>
+void ruby_mark<AGApplication>(AGApplication*t);
 
 #endif

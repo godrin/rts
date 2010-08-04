@@ -37,7 +37,7 @@ mMousePosition(0),mRelMousePosition(0)
       {
         mClipped=false;
       }
-AGEvent::~AGEvent() throw()
+AGEvent::~AGEvent()
   {
     if(mMousePosition)
       delete mMousePosition;
@@ -190,7 +190,7 @@ AGListener::AGListener()
   {
   }
 
-AGListener::~AGListener() throw()
+AGListener::~AGListener()
   {
     CTRACE;
     for(std::set<AGSignal*>::iterator i=mLinkedSignals.begin();i!=mLinkedSignals.end();i++) {
@@ -347,7 +347,7 @@ AGMessageObject::AGMessageObject():
 	  
         }
 
-AGMessageObject::~AGMessageObject() throw()
+AGMessageObject::~AGMessageObject()
   {
     std::set<AGSignal*> sigs=mSignals;
     std::set<AGSignal*>::iterator i=sigs.begin();

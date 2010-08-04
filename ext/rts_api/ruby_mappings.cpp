@@ -1,5 +1,6 @@
 #include <ruby_mappings.h>
 #include <gui_table.h>
+#include <gui_application.h>
 
 #include <basic_debug.h>
 
@@ -43,7 +44,21 @@ Rice::Object to_ruby<GUIWidgetPtr> ( GUIWidgetPtr const & x )
 }
 
 template<>
+Rice::Object to_ruby<AGRect2> ( AGRect2 const & x ) {
+  return Rice::Data_Object<AGRect2> ( new AGRect2( x ) );
+  
+}
+
+
+template<>
 void ruby_mark<AGWidget>(AGWidget*t) {
   TRACE;
   t->mark();
 }
+
+template<>
+void ruby_mark<AGApplication>(AGApplication*t) {
+  TRACE;
+  t->mark();
+}
+

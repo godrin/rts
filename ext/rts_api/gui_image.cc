@@ -97,6 +97,10 @@ void AGImage::setCenter(bool c)
   {
     mCenter=c;
   }
+  
+bool AGImage::getCenter() {
+  return mCenter;
+}
 
 void AGImage::setScale(bool c)
   {

@@ -75,6 +75,7 @@ public:
   AGVector2(const AGAngle &a);
   AGVector2(const AGVector2 &a);
   AGVector2();
+  AGVector2&operator=(const AGVector2&t);
 
   void setX(float pX);
   void setY(float pY);
@@ -454,10 +455,14 @@ class AGEXPORT AGRect2 {
   AGVector2 v0, v1;
 public:
   AGRect2();
+  AGRect2(const AGRect2 &r);
   AGRect2(const AGVector2 &pv0, const AGVector2 &pv1);
   AGRect2(float x, float y, float w, float h);
   AGRect2(const AGString &ps);
   AGRect2(const SDL_Rect &r);
+  ~AGRect2();
+  
+  AGRect2&operator=(const AGRect2&r);
 
   bool collide(const AGRect2 &r) const;
 

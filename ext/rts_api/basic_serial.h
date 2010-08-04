@@ -7,8 +7,10 @@
 #include <SDL.h>
 #include <sstream>
 
-class AGEXPORT SerialException
+class AGEXPORT SerialException:public AGException
 {
+  public:
+   SerialException(const std::string& e):AGException(e) {}
 };
 
 class AGEXPORT BinaryIn

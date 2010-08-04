@@ -173,7 +173,7 @@ void AGGLTexture::setSurface(AGInternalSurface *pSurface,const AGVector2 &offset
     case 4:
       format = GL_RGBA;break;
     default:
-      throw std::runtime_error("Surface-format not supported for texturing!");
+      throw AGException("Surface-format not supported for texturing!");
       }
 
     AGRenderContext c;

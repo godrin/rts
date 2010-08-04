@@ -27,6 +27,7 @@
 #include <basic_debug.h>
 #include <gui_vdebug.h>
 #include <gui_projection.h>
+#include <basic_exceptions.h>
 
 namespace AGGLPainter
   {
@@ -345,7 +346,7 @@ namespace AGGLPainter
 
     void blitTri(const AGTexture &pSource,const AGTriangle2 &pSrc,const AGTriangle2 &pDest)
       {
-        throw int();
+        throw NotImplementedException("GLPainter::glitTri not implemented!");
         STACKTRACE;
         /*    AGRenderContext c;
     c.setTexture(const_cast<AGTexture&>(pSource).glTexture());

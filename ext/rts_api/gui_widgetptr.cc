@@ -18,6 +18,12 @@ GUIWidgetPtr::GUIWidgetPtr(const GUIWidgetPtr& p)
   mWidget=p.mWidget;
   if(p.mRubyWidget)
   {
+    if(mWidget) {
+      std::cout<<"mWidget:"<<mWidget<<"  "<<typeid(*mWidget).name()<<std::endl;
+    } else {
+      std::cout<<"ruby widget !=null but mWidget==null !!!"<<std::endl;
+    }
+      
     mRubyWidget=new Rice::Data_Object<AGWidget>(*p.mRubyWidget);
     std::cout<<"created:"<<mRubyWidget<<" from :"<<p.mRubyWidget<<std::endl;
   }
@@ -72,7 +78,7 @@ GUIWidgetPtr::GUIWidgetPtr ( const Rice::Object &w ) {
       std::cout<<"w is neither nil nor AGWidget!"<<std::endl;
       std::cout<<"classname:"<<w.class_of().name()<<std::endl;
       std::cout<<"inspect:"<<w.inspect()<<std::endl;
-      throw int();
+      throw AGException("pointer is niL");
     }
   }
   if(mWidget) {

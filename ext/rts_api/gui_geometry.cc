@@ -190,6 +190,13 @@ AGVector2::AGVector2()
   {
     v[0]=v[1]=0;
   }
+  
+AGVector2&AGVector2::operator=(const AGVector2&t) {
+  v[0]=t.v[0];
+  v[1]=t.v[1];
+  return *this;
+}
+
 
 void AGVector2::saveXML(Node &node) const
 {
@@ -1264,11 +1271,27 @@ AGRect2::AGRect2(const AGVector2 &pv0,const AGVector2 &pv1):
   v0(pv0),v1(pv1)
         {
         }
+        
+AGRect2::AGRect2(const AGRect2 &r):v0(r.v0),v1(r.v1) {
+//  std::cout<<"Copy constructor AGRect2 :"<<r.toString()<<" "<<toString()<<std::endl;
+}
+
 
 AGRect2::AGRect2(float x,float y,float w,float h):
   v0(x,y),v1(x+w,y+h)
         {
         }
+
+AGRect2&AGRect2::operator=(const AGRect2&r) {
+  v0=r.v0;
+  v1=r.v1;
+  return *this;
+}
+
+AGRect2::~AGRect2() {
+}
+
+
 
 AGVector2 AGRect2::clip(const AGVector2 &v) const
 {
@@ -1400,7 +1423,7 @@ AGVector2 AGRect2::operator[](size_t i) const
   case 1:
     return v1;
   default:
-    throw AGString("invalid index in AGRect2::operator[]");
+    throw GeometryException("invalid index in AGRect2::operator[]");
     }
   return v0;
 }
@@ -1413,7 +1436,7 @@ AGVector2 &AGRect2::operator[](size_t i)
         case 1:
           return v1;
         default:
-          throw AGString("invalid index in AGRect2::operator[]");
+          throw GeometryException ("invalid index in AGRect2::operator[]");
           }
         return v0;
       }

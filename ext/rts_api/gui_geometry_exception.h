@@ -2,22 +2,13 @@
 #define AG_GEOMETRY_EXCEPTION
 
 #include <string>
+#include <basic_exception.h>
 
-class GeometryException {
+class GeometryException:public AGException {
 public:
 
-  GeometryException(const std::string &p) : s(p) {
+  GeometryException(const std::string &p) : AGException(p) {
   }
-#ifdef SWIG
-  %rename(to_s) what() const;
-#endif
-
-  std::string what() const {
-    return s;
-  }
-
-private:
-  std::string s;
 };
 
 #endif

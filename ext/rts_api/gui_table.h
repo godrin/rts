@@ -64,16 +64,48 @@ class AGEXPORT AGTable:public AGWidget
 
   size_t getRows() const;
   size_t getColumns() const;
+  
+  void structureFinished();
+  class StructureWasFixed:public AGException{
+    public:
+     StructureWasFixed(const std::string& e):AGException(e) {}
+  };
+  class StructureNotFixed:public AGException {
+    public:
+     StructureNotFixed(const std::string& e):AGException(e) {}
+  };
+  class InvalidWeight:public AGException {
+    public:
+     InvalidWeight(const std::string& e):AGException(e) {}
+  };
 
  private:
+   
+   
   int w,h;
   float xw,yw; // weights
 
+  // definition
   std::vector<std::pair<float,bool> > rows,cols;
+  
+  // pre-computed sizes
+  std::vector<float> rowSizes,colSizes;
 
-  std::vector<GUIWidgetPtr> children; //FIXME: What for ???
+  //std::vector<GUIWidgetPtr> children; //FIXME: What for ???
+  
+  class CellEntry {
+    public:
+    int x,y;
+    GUIWidgetPtr ptr;
+  };
+  
+  std::list<CellEntry> children;
 
-  bool mInserted;
+  void arrangeCell(CellEntry *ce);
+
+  bool mStructurFixed;
+
+  //bool mInserted;
   bool mRoundPositions;
 };
 

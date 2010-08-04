@@ -21,7 +21,7 @@ void agAssertGL(std::string s)
           << gluErrorString(error);
 
           std::cerr<<msg.str()<<std::endl;
-          throw std::runtime_error(msg.str());
+          throw AGException(msg.str());
 #ifndef MNDEBUG
           agRaise(msg.str());
 #endif

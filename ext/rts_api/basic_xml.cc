@@ -198,7 +198,7 @@ AGString Node::unescape(const AGString &s)
                 escape=false;
               }
             else
-              throw std::string("Error in unescaping");
+              throw AGException("Error in unescaping");
           }
         else
           {
@@ -451,7 +451,7 @@ AGString Parser::Data::getFirst(size_t i) const
   return os.str();
 }
 
-void Parser::Data::eat(size_t i) throw (XMLParseError)
+void Parser::Data::eat(size_t i)
   {
     STACKTRACE;
     if(pos+i>s.length())
@@ -486,7 +486,7 @@ void Parser::Data::discard()
     linestack.pop_back();
   }
 
-void Parser::Data::eatBlanks() throw (XMLParseError)
+void Parser::Data::eatBlanks() 
   {
     AGString f=getFirst(1);
 

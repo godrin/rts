@@ -19,6 +19,8 @@
  */
 
 #include <basic_debug.h>
+#include <basic_exceptions.h>
+
 #include <gui_draw.h>
 #include <gui_fontengine.h>
 #include <gui_glscreen.h>
@@ -469,10 +471,10 @@ void AGPainter::drawPoint(const AGVector2 &p, const AGColor &c, float size) {
   }
 }
 
-AGColor AGPainter::getPixel(int x, int y) {
+AGColor AGPainter::getPixel(int x, int y) throw (PaintingException) {
   AGVector2 p = mCurrent.project(AGVector2(x, y));
   if (!mCurrent.pointOk(p))
-    throw std::string("pixel out of clipping!");
+    throw PaintingException("pixel out of clipping in getPixel!");
   return mTarget->getPixel((int) p[0], (int) p[1]);
 }
 
@@ -524,7 +526,7 @@ void AGPainter::translate(const AGVector2 &v) {
 }
 
 void AGPainter::scale(const AGVector2 &v) {
-  throw std::string("not implemented!");
+  throw NotImplementedException("AGPainter::scale not implemented!");
 }
 
 void AGPainter::clip(const AGRect2 &r) {
@@ -547,7 +549,7 @@ AGRect2 AGPainter::getRect() const {
 }
 
 void AGPainter::clip(const AGClipping &clip) {
-  throw std::runtime_error("NOT IMPLEMENTED !");
+  throw NotImplementedException("AGPainter::clip NOT IMPLEMENTED !");
 }
 
 AGPaintTarget *AGPainter::getTarget() {

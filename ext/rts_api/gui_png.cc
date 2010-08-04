@@ -40,6 +40,8 @@
 #include <assert.h>
 #include <gui_vdebug.h>
 
+#include <basic_exceptions.h>
+
 using namespace std;
 #include <SDL_image.h>
 
@@ -230,10 +232,10 @@ SDL_Surface *fromPNG(std::string s)
 
 #else
 std::string toPNG(const SDL_Surface *s) {
-  throw std::runtime_error("Not Implemented!");
+  throw NotImplementedException("toPNG Not Implemented!");
 }
 SDL_Surface *fromPNG(std::string s) {
-  throw std::runtime_error("Not Implemented!");
+  throw NotImplementedException("fromPNG Not Implemented!");
 }
 
 #endif

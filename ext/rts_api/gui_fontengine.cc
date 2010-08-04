@@ -83,7 +83,7 @@ TTF_Font *getFont(std::string s,int i)
           {
             std::cerr<<" Font not found:"<<s<<" probable file:"<<name<<std::endl;
             std::cerr<<" Error:"<<SDL_GetError()<<std::endl;
-            throw std::runtime_error(std::string("Font '")+s+"' not found!");
+            throw AGException(std::string("Font '")+s+"' not found!");
           }
 
         int renderstyle=TTF_STYLE_NORMAL;

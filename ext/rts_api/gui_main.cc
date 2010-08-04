@@ -100,7 +100,7 @@ AGMain *getMain()
       {
         std::cerr<<"AGMain not initialized!"<<std::endl;
         assert(0==1);
-        throw std::runtime_error("AGMain not initialized");
+        throw AGException("AGMain not initialized");
         exit(1);
       }
 

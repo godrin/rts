@@ -25,13 +25,14 @@
 
 #include <basic_string.h>
 #include <basic_base.h>
+#include <basic_exception.h>
 
 #include <vector>
 
-struct FileNotFound
+class FileNotFound:public AGException
   {
-    FileNotFound(const std::string &f):filename(f){}
-    std::string filename;
+    public:
+    FileNotFound(const std::string &f):AGException(f){}
   };
 
 AGEXPORT void initFS(const char *argv0);

@@ -96,14 +96,14 @@ int agRand(int i)
   {
     AGRandomizerBase *r=getMain()->getRand();
     if(!r)
-      throw std::runtime_error("Randomizer not set!");
+      throw AGException("Randomizer not set!");
     return (*r)(i);
   }
 float agRand(float f)
   {
     AGRandomizerBase *r=getMain()->getRand();
     if(!r)
-      throw std::runtime_error("Randomizer not set!");
+      throw AGException("Randomizer not set!");
     return (*r)(f);
   }
 

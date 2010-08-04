@@ -37,6 +37,11 @@
 class AGTriangle2;
 class AGRect2;
 
+class PaintingException:public AGException {
+  public:
+   PaintingException(const std::string& e):AGException(e) {}
+};
+
 struct AGEXPORT AGPaintProjection
 {
   AGMatrix3 a;
@@ -79,7 +84,7 @@ class AGEXPORT AGPainter
   virtual ~AGPainter() throw();
 
   void putPixel(const AGVector2 &p,const AGColor &c);
-  AGColor getPixel(int x,int y);
+  AGColor getPixel(int x,int y) throw (PaintingException);
 
   void drawCircle(const AGVector2 &p,float rad,const AGColor &c);
 

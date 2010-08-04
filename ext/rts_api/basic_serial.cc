@@ -35,7 +35,7 @@ bool BinaryIn::eof()
   }
 char BinaryIn::read()
   {
-    throw SerialException();
+    throw SerialException("should not call read here");
     return 0;
   }
 
@@ -46,7 +46,7 @@ BinaryIn &BinaryIn::operator>>(Sint32 &i)
 BinaryIn &BinaryIn::operator>>(Uint32 &u)
   {
     if(eof())
-      throw SerialException();
+      throw SerialException("EOF reached!");
     u=((Uint32(read())&0xFF))|((Uint32(read()&0xFF))<<8)|((Uint32(read())&0xFF)<<16)|((Uint32(read())&0xFF)<<24);
 
     return *this;
@@ -55,7 +55,7 @@ BinaryIn &BinaryIn::operator>>(Uint32 &u)
 BinaryIn &BinaryIn::operator>>(Uint16 &i)
   {
     if(eof())
-      throw SerialException();
+      throw SerialException("EOF reached!!");
     i=((Uint16(read())&0xFF))|((Uint16(read())&0xFF)<<8);
     return *this;
   }
@@ -63,12 +63,12 @@ BinaryIn &BinaryIn::operator>>(Uint16 &i)
 BinaryIn &BinaryIn::operator>>(float &f)
   {
     if(eof())
-      throw SerialException();
+      throw SerialException("EOF Reached!!");
 
     if(sizeof(float)!=4)
       {
         std::cerr<<"sizeof(float) should be 4 :-|"<<std::endl;
-        throw SerialException();
+        throw SerialException("sizeof shuold be 4!");
       }
     if(!littleEndian())
       {
@@ -156,7 +156,7 @@ BinaryOut &BinaryOut::operator<<(const float &f)
     if(sizeof(float)!=4)
       {
         std::cerr<<"sizeof(float) should be 4 :-|"<<std::endl;
-        throw SerialException();
+        throw SerialException("sizeof float should be 4!");
       }
     if(!littleEndian())
       {
@@ -228,7 +228,7 @@ char BinaryFileIn::read()
       {
         if(mEof)
           {
-            throw SerialException();
+            throw SerialException("EOF reached!!");
             return 0;
           }
         char buf[1001];

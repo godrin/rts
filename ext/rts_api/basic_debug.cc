@@ -39,10 +39,11 @@ static bool gRubyRaising=false;
 void agRaise(const std::string &s)
   {
     cdebug("assertion failed:"<<s);
+    std::cout<<"Assertion failed:"<<s<<std::endl;
     if(gRubyRaising)
       rb_raise(rb_eRuntimeError,s.c_str(),"");
     else
-      throw std::runtime_error(s);
+      throw AGException(s);
   }
 
 void setRubyRaising(bool flag)

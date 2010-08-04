@@ -113,7 +113,7 @@ AnimMeshData::AnimMeshData(const AGString &xmlFilename):
     if(anims.size()==0)
       {
         std::cerr<<"There are no animations in "<<xmlFilename<<std::endl;
-        throw std::string("no animations found in xmlfile");
+        throw AGException("no animations found in xmlfile");
       }
     mName=AGString(xmlFilename);
   }
