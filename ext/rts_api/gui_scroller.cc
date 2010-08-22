@@ -25,10 +25,15 @@
 #include <gui_background.h>
 #include <basic_debug.h>
 
-AGScroller::AGScroller(const GUIWidgetPtr&pParent,const AGRect2 &pRect,bool pHor):
-  AGWidget(pParent,pRect),
+#include <rice/Data_Type.hpp>
+
+AGScroller::AGScroller(Rice::Object pSelf):
+  AGWidget(pSelf),
   sigValueChanged(this,"sigValueChanged"),
-  mHorizontal(pHor)
+  mHorizontal(true),
+  mB1(Create<AGButton>()),
+  mB2(Create<AGButton>()),
+  mScroller(Create<AGButton>())
   {
     mBorder=new AGBorder("button.border.normal");
     mBackground=new AGBackground("button.background.normal");
@@ -42,29 +47,13 @@ AGScroller::AGScroller(const GUIWidgetPtr&pParent,const AGRect2 &pRect,bool pHor
     mVirtualValue=mValue;
 
     mBorderWidth=2;
+    
+    setHorizontal(mHorizontal);
 
-    if(mHorizontal)
-      {
-        mB1=new AGButton(*self(),AGRect2(mBorderWidth,mBorderWidth,height()-mBorderWidth*2,height()-mBorderWidth*2),"");
-        mB2=new AGButton(*self(),AGRect2(width()+mBorderWidth-height(),mBorderWidth,height()-mBorderWidth*2,height()-mBorderWidth*2),"");
 
-        mScroller=new AGButton(*self(),AGRect2(mBorderWidth+height(),mBorderWidth,(width()-2*height())*0.5  ,height()-mBorderWidth*2),"");
-
-        //      mScroller->setSurface(AGSurface::load("data/gui/v_bars.png"));
-      }
-    else
-      {
-        mB1=new AGButton(*self(),AGRect2(mBorderWidth,mBorderWidth,width()-mBorderWidth*2,width()-mBorderWidth*2),"");
-        mB2=new AGButton(*self(),AGRect2(mBorderWidth,height()+mBorderWidth-width(),width()-mBorderWidth*2,width()-mBorderWidth*2),"");
-
-        mScroller=new AGButton(*self(),AGRect2(mBorderWidth,mBorderWidth+width(),width()-mBorderWidth*2,(height()-2*width())*0.5),"");
-
-        //      mScroller->setSurface(AGSurface::load("data/gui/h_bars.png"));
-      }
-
-    addChild(*mB1->self());
-    addChild(*mB2->self());
-    addChild(*mScroller->self());
+    addChild(mB1);
+    addChild(mB2);
+    addChild(mScroller);
 
     mScroller->sigDragBy.connect(slot(this,&AGScroller::eventDragBy));
     mB1->sigClick.connect(slot(this,&AGScroller::eventUpClick));
@@ -72,6 +61,41 @@ AGScroller::AGScroller(const GUIWidgetPtr&pParent,const AGRect2 &pRect,bool pHor
 
     updateScroller();
 
+    mB1->setCaching(false);
+    mB2->setCaching(false);
+    mScroller->setCaching(false);
+    setCaching(true);
+  }
+
+AGScroller::~AGScroller() throw()
+  {
+    delete mBorder;
+    delete mBackground;
+  }
+  
+  
+void AGScroller::setHorizontal(bool b) {
+ //FIXME: set correct surfaces 
+  mHorizontal=b;
+    if(mHorizontal)
+      {
+        mB1->setRect(AGRect2(mBorderWidth,mBorderWidth,getRect().height()-mBorderWidth*2,getRect().height()-mBorderWidth*2));
+        mB2->setRect(AGRect2(getRect().width()+mBorderWidth-getRect().height(),mBorderWidth,getRect().height()-mBorderWidth*2,getRect().height()-mBorderWidth*2));
+
+        mScroller->setRect(AGRect2(mBorderWidth+getRect().height(),mBorderWidth,(getRect().width()-2*getRect().height())*0.5  ,getRect().height()-mBorderWidth*2));
+
+        //      mScroller->setSurface(AGSurface::load("data/gui/v_bars.png"));
+      }
+    else
+      {
+        mB1->setRect(AGRect2(mBorderWidth,mBorderWidth,getRect().width()-mBorderWidth*2,getRect().width()-mBorderWidth*2));
+        mB2->setRect(AGRect2(mBorderWidth,getRect().height()+mBorderWidth-getRect().width(),getRect().width()-mBorderWidth*2,getRect().width()-mBorderWidth*2));
+
+        mScroller->setRect(AGRect2(mBorderWidth,mBorderWidth+getRect().width(),getRect().width()-mBorderWidth*2,(getRect().height()-2*getRect().width())*0.5));
+
+        //      mScroller->setSurface(AGSurface::load("data/gui/h_bars.png"));
+      }
+      
     if(mHorizontal)
       {
         mB1->setSurface(AGSurface::load("data/gui/arrow_left.png"));
@@ -85,17 +109,8 @@ AGScroller::AGScroller(const GUIWidgetPtr&pParent,const AGRect2 &pRect,bool pHor
         mScroller->setSurface(AGSurface::load("data/gui/h_bars.png"));
       }
 
-    mB1->setCaching(false);
-    mB2->setCaching(false);
-    mScroller->setCaching(false);
-    setCaching(true);
-  }
 
-AGScroller::~AGScroller() throw()
-  {
-    delete mBorder;
-    delete mBackground;
-  }
+}
 
 void AGScroller::draw(AGPainter &p)
   {
@@ -129,9 +144,9 @@ float AGScroller::getScrollerWidth()
   {
     float v=0;
     if(mHorizontal)
-      v=(width()-mBorderWidth*2-getScrollerHeight()*2);
+      v=(getRect().width()-mBorderWidth*2-getScrollerHeight()*2);
     else
-      v=(height()-mBorderWidth*2-getScrollerHeight()*2);
+      v=(getRect().height()-mBorderWidth*2-getScrollerHeight()*2);
 
     if(mMax!=mMin)
       v*=mValueWidth/(mMax-mMin);
@@ -141,18 +156,18 @@ float AGScroller::getScrollerWidth()
 float AGScroller::getScrollerHeight()
   {
     if(mHorizontal)
-      return (height()-mBorderWidth*2);
+      return (getRect().height()-mBorderWidth*2);
     else
-      return (width()-mBorderWidth*2);
+      return (getRect().width()-mBorderWidth*2);
 
   }
 float AGScroller::getMovingWidth()
   {
     if(mHorizontal)
-      return width()-getScrollerWidth()-2*mBorderWidth-2*getScrollerHeight();
+      return getRect().width()-getScrollerWidth()-2*mBorderWidth-2*getScrollerHeight();
     else
       {
-        return height()-getScrollerWidth()-2*mBorderWidth-2*getScrollerHeight();
+        return getRect().height()-getScrollerWidth()-2*mBorderWidth-2*getScrollerHeight();
       }
   }
 

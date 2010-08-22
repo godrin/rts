@@ -30,7 +30,7 @@
 class AGEXPORT AGColorButton:public AGWidget
 {
  public:
-  AGColorButton(const GUIWidgetPtr &pParent,const AGRect2 &r,int x,int y);
+  AGColorButton(Rice::Object pSelf);
   virtual ~AGColorButton() throw();
 
   virtual void draw(AGPainter &p);
@@ -38,6 +38,8 @@ class AGEXPORT AGColorButton:public AGWidget
   AGColor getColor() const;
   void setColor(const AGColor &c);
   void setColor(int x,int y,const AGColor &c);
+  
+  void setGrid(int w,int h);
 
   virtual bool eventMouseClick(AGEvent *m);
 

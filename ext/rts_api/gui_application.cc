@@ -34,6 +34,8 @@
 
 #include <ruby.h>
 
+#include <rice/Data_Type.hpp>
+
 void disableKeyrepeat()
   {
     SDL_EnableKeyRepeat(0, 0);
@@ -62,7 +64,7 @@ AGApplication::~AGApplication() throw()
   {
     CTRACE;
     if(mainWidget)
-      mainWidget->setApp(0);
+      (*mainWidget)->setApp(0);
     delete mCursor;
   }
 
@@ -77,13 +79,13 @@ void AGApplication::setKeyRepeat(bool enable)
 void AGApplication::setMainWidget(AGWidget *w)
   {
     mainWidget=w;
-    mainWidget->setApp(this);
+    (*mainWidget)->setApp(this);
     setOverlay(0);
     if (w)
       w->redraw();
   }
 
-AGWidget *AGApplication::getMainWidget()
+Nullable<Rice::Data_Object<AGWidget> > AGApplication::getMainWidget()
   {
     return mainWidget;
   }
@@ -146,7 +148,7 @@ bool AGApplication::run()
                 t=(now-last)/1000.0;
               }
             if (mainWidget)
-              mainWidget->sigTick(t);
+              (*mainWidget)->sigTick(t);
 
             //            dbout(2,"frame events:"<<t);
             eventPrepareFrame(t);
@@ -216,13 +218,13 @@ bool AGApplication::doEvent(const SDL_Event &event)
     bool processed=false;
     //cdebug(event);
     if (mOverlay)
-      processed=mOverlay->processEvent(message);
+      processed=(*mOverlay)->processEvent(message);
 
 //    cdebug(processed);
     if (!processed)
       {
         if (!processed && mainWidget)
-          processed=mainWidget->processEvent(message);
+          processed=(*mainWidget)->processEvent(message);
 
         if (!processed)
           processed=processEvent(message);
@@ -278,14 +280,14 @@ void AGApplication::prepareDraw()
 
     if (mainWidget)
       {
-        mainWidget->prepareDrawAll();
-        mainWidget->useTexturesRecursive();
+        (*mainWidget)->prepareDrawAll();
+        (*mainWidget)->useTexturesRecursive();
       }
     if (mOverlay)
-      mOverlay->prepareDrawAll();
+      (*mOverlay)->prepareDrawAll();
   }
 
-AGWidget *pLastDrawn=0;
+Nullable<GUIWidgetPtr> pLastDrawn;
 
 /**
  * \brief query redraw
@@ -296,10 +298,10 @@ AGWidget *pLastDrawn=0;
 
 void AGApplication::redraw()
   {
-    pLastDrawn=0;
+    pLastDrawn=Nullable<GUIWidgetPtr>();
 
     if (mainWidget)
-      mainWidget->redraw();
+      (*mainWidget)->redraw();
   }
 
 /**
@@ -312,13 +314,6 @@ void AGApplication::redraw()
 
 void AGApplication::draw()
   {
-    if (delCue.size()>0)
-      {
-        for (std::list<AGWidget*>::iterator i=delCue.begin(); i!=delCue.end(); i++)
-          delete *i;
-        delCue.clear();
-      }
-
     if (!videoInited())
       return;
 
@@ -341,12 +336,12 @@ void AGApplication::draw()
         else
           p=new AGPainter(paintTarget);
 
-        clip.exclude(mainWidget->getScreenRect());
+        clip.exclude((*mainWidget)->getScreenRect());
         if (pLastDrawn==mainWidget && !opengl())
           {
             if (oldClippingTechnique)
               {
-                AGRect2 r=mainWidget->getChangeRect();
+                AGRect2 r=(*mainWidget)->getChangeRect();
                 if (mCursor)
                   r+=mCursorOld;
 
@@ -355,27 +350,27 @@ void AGApplication::draw()
             else
               {
                 // FIXME: do some advanced clipping
-                mainWidget->acquireClipping(clip);
+                (*mainWidget)->acquireClipping(clip);
               }
           }
         else
           {
-            clip.include(mainWidget->getScreenRect());
+            clip.include((*mainWidget)->getScreenRect());
           }
 
         //    cdebug("CLIP:"<<clip.toString());
         paintTarget.clip(clip);
-        mainWidget->drawAll(*p);
+        (*mainWidget)->drawAll(*p);
 
         if (mTooltip)
           {
             AGPainter p;
-            mTooltip->drawAll(p);
+            (*mTooltip)->drawAll(p);
           }
         if (mOverlay)
           {
             AGPainter p;
-            mOverlay->drawAll(p);
+            (*mOverlay)->drawAll(p);
           }
 
         pLastDrawn=mainWidget;
@@ -389,8 +384,8 @@ void AGApplication::draw()
     std::list<AGRect2> changeList;
     if (mainWidget)
       {
-        changeList=mainWidget->aquireChanges();
-        mainWidget->clearChangeRects();
+        changeList=(*mainWidget)->aquireChanges();
+        (*mainWidget)->clearChangeRects();
       }
 
 
@@ -400,7 +395,7 @@ void AGApplication::draw()
       getScreen().flip();
     else
       {
-        std::vector<AGRect2> changeV=clip.clip(mainWidget->getScreenRect());
+        std::vector<AGRect2> changeV=clip.clip((*mainWidget)->getScreenRect());
         changeList.clear();
         std::copy(changeV.begin(), changeV.end(),
             std::back_inserter(changeList));
@@ -486,34 +481,29 @@ void AGApplication::mark() throw()
   }
 
 /// this function sets the current tooltip, which is display above all widgets
-void AGApplication::setTooltip(AGTooltip *pTooltip)
+void AGApplication::setTooltip(Nullable<Rice::Data_Object<AGTooltip> > pTooltip)
   {
-    delete  mTooltip;
     mTooltip=pTooltip;
-
   }
 
 /// this functions resets the tooltip pTooltip.
 /// @param pTooltip a tooltip of a widget
-void AGApplication::resetTooltip(AGTooltip *pTooltip)
+void AGApplication::resetTooltip(Nullable<Rice::Data_Object<AGTooltip> > pTooltip)
   {
     if (pTooltip==mTooltip)
       {
-        delete mTooltip;
-        mTooltip=0;
+        mTooltip=Nullable<Rice::Data_Object<AGTooltip> >();
       }
   }
 
-AGWidget *AGApplication::getOverlay()
+Nullable<Rice::Data_Object<AGWidget> >  AGApplication::getOverlay()
   {
     return mOverlay;
   }
 
-void AGApplication::setOverlay(AGWidget *pOverlay)
+void AGApplication::setOverlay(const GUIWidgetPtr &pOverlay)
   {
     CTRACE;
-    if (mOverlay)
-      delCue.push_back(mOverlay);
     mOverlay=pOverlay;
   }
 

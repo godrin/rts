@@ -31,7 +31,7 @@ class AGImage;
 class AGEXPORT AGCheckBox:public AGButton
 {
  public:
-  AGCheckBox(const GUIWidgetPtr &pParent,AGRect2 pRect);
+  AGCheckBox(Rice::Object pSelf);
 
   void setSurfaces(AGSurface pDisabledSurface,AGSurface pEnabledSurface);
 

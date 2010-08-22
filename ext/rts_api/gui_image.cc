@@ -21,27 +21,16 @@
 #include <gui_image.h>
 #include <basic_debug.h>
 
-AGImage::AGImage(const GUIWidgetPtr&pParent, const AGRect2& r): AGWidget(pParent, r),
+AGImage::AGImage(Rice::Object pSelf): AGWidget(pSelf),
 mTile(false),mScale(false)
 {
 
 }
 
 
-AGImage::AGImage(const GUIWidgetPtr& pParent,const AGRect2 &r,AGSurface pSurface,bool pTile):
-  AGWidget(pParent,r),
-  mTexture(pSurface),mTile(pTile),mScale(false)
-    {
-      mCenter=true;
-    }
-
-AGImage::AGImage(const GUIWidgetPtr&pParent,const AGRect2 &r,AGTexture pTexture,bool pTile):
-  AGWidget(pParent,r),
-  mTexture(pTexture),mTile(pTile),mScale(false)
-  {
-    mCenter=true;
-  }
-
+void AGImage::setTiling(bool b) {
+  mTile=b;
+}
 
 
 AGImage::~AGImage() throw()
@@ -65,7 +54,7 @@ void AGImage::draw(AGPainter &p)
         AGRect2 fr=mTexture.getRect();
 
         if(mCenter && !mScale)
-          mr+=AGVector2((width()-mTexture.width())/2,(height()-mTexture.height())/2);
+          mr+=AGVector2((getRect().width()-mTexture.width())/2,(getRect().height()-mTexture.height())/2);
 
         if(mScale)
           p.blit(mTexture,mr,fr);

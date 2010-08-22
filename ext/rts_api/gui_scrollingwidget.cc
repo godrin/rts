@@ -21,13 +21,18 @@
 #include <gui_scrollingwidget.h>
 #include <gui_painter.h>
 
-AGScrollingWidget::AGScrollingWidget(const GUIWidgetPtr &pParent, const AGRect2& pRect):
-  AGWidget(pParent,pRect),
+AGScrollingWidget::AGScrollingWidget(Rice::Object pSelf):
+  AGWidget(pSelf),
   mDragging(false)
     {
-      AGRect2 r=getRect().origin();
-      setClient(r,AGProjection2D(r,r));
     }
+    
+void AGScrollingWidget::setRect(const AGRect2 &pRect) {
+  //FIXME: is that really needed ???
+  AGWidget::setRect(pRect);
+  AGRect2 r=getRect().origin();
+  setClient(r,AGProjection2D(r,r));
+}
 
 void AGScrollingWidget::setClientRect(const AGRect2 &pRect)
   {

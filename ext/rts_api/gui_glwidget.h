@@ -10,7 +10,7 @@
 class AGEXPORT AGGLWidget:public AGWidget
 {
  public:
-  AGGLWidget(const GUIWidgetPtr&pParent,const AGRect2 &r);
+  AGGLWidget(Rice::Object pSelf);
 
   virtual void drawGL();
   

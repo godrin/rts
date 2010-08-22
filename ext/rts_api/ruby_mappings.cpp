@@ -1,14 +1,11 @@
 #include <ruby_mappings.h>
 #include <gui_table.h>
 #include <gui_application.h>
+#include <game_app.h>
 
 #include <basic_debug.h>
 
-template<>
-GUIWidgetPtr from_ruby<GUIWidgetPtr> ( Rice::Object x )
-{
-  return GUIWidgetPtr ( x );
-}
+
 
 template<>
 AGString from_ruby<AGString> ( Rice::Object x )
@@ -37,11 +34,6 @@ Rice::Object to_ruby<SignalWrapper> ( SignalWrapper const & x )
   return Rice::Data_Object<SignalWrapper> ( new SignalWrapper ( x ) );
 }
 
-template<>
-Rice::Object to_ruby<GUIWidgetPtr> ( GUIWidgetPtr const & x )
-{
-  return *x.ruby();
-}
 
 template<>
 Rice::Object to_ruby<AGRect2> ( AGRect2 const & x ) {
@@ -51,14 +43,45 @@ Rice::Object to_ruby<AGRect2> ( AGRect2 const & x ) {
 
 
 template<>
-void ruby_mark<AGWidget>(AGWidget*t) {
+GUIWidgetPtr from_ruby<GUIWidgetPtr> ( Rice::Object x )
+{
+  return GUIWidgetPtr ( x);
+}
+
+
+
+template<>
+Rice::Object to_ruby<GUIWidgetPtr> ( GUIWidgetPtr const & x ) {
+  return const_cast<GUIWidgetPtr&>(x);
+  
+}
+
+
+
+
+template<>
+void ruby_mark(AGWidget*t) {
   TRACE;
+  std::cout<<"ruby_mark"<<std::endl;
   t->mark();
 }
 
 template<>
-void ruby_mark<AGApplication>(AGApplication*t) {
+void ruby_mark(AGApplication*t) {
   TRACE;
+  std::cout<<"ruby_mark"<<std::endl;
   t->mark();
 }
 
+template<>
+void ruby_mark(GameApp*t) {
+  TRACE;
+  std::cout<<"ruby_mark"<<std::endl;
+  t->mark();
+}
+template<>
+void ruby_mark(AGTable*t) {
+  TRACE;
+  std::cout<<"ruby_mark"<<std::endl;
+  t->mark();
+}

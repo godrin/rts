@@ -2,7 +2,8 @@ module Antargis
   
   module LayoutElements
     def table(args=nil,&block)
-      t=GUI::Table.new(me,self.rect)
+      t=GUI::Table.new
+      
       processArgs(t,args)
       l=TableLayout.new(t)
       add(t)
@@ -20,21 +21,21 @@ module Antargis
     end
     
     def text(args)
-      image=GUI::Edit.new(@table,self.rect)
+      image=GUI::Edit.new
       processArgs(image,args)
       add(image)
       image
     end
 
     def image(args)
-      image=GUI::Image.new(@table,self.rect)
+      image=GUI::Image.new
       processArgs(image,args)
       add(image)
       image
     end
     
     def button(args)
-      image=GUI::Button.new(@table,self.rect)
+      image=GUI::Button.new
       processArgs(image,args)
       add(image)
       image
@@ -47,6 +48,7 @@ module Antargis
     
     def processArgs(target,args)
       if args
+	puts caller
         args.each{|k,v|
           target.send(k.to_s+"=",v)
         }
@@ -68,6 +70,9 @@ module Antargis
     
     def add(widget)
       pp "TableCell::add"
+      pp "Table:",@table
+      pp "widget:",widget
+      puts "GOOOO"
       @table.add_child_to_cell(@x,@y,widget)
       pp "ADD TABLECELL"
       pp @table.rect
@@ -159,7 +164,7 @@ module Antargis
       end
       pp "RubyLayout"
       pp crect
-      super(parent,crect)
+      super()
       puts "----"
       pp self.method(:rect) #s.sort
       pp "MyRect:",self.rect

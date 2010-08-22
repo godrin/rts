@@ -82,7 +82,7 @@ class AGEXPORT AGEditLine
 class AGEXPORT AGEdit:public AGWidget
 {
  public:
-  AGEdit(const GUIWidgetPtr &pParent,const AGRect2 &pRect);
+  AGEdit(Rice::Object pSelf);
   virtual ~AGEdit()  throw();
 
   virtual void draw(AGPainter &p);
@@ -133,6 +133,7 @@ class AGEXPORT AGEdit:public AGWidget
   
   void setAlignString(AGString name);
   void setVAlignString(AGString name);
+  
 
 
  private:

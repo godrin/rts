@@ -28,9 +28,10 @@
 class AGCell:public AGWidget
   {
 public:
-  AGCell(const GUIWidgetPtr &pParent,const AGRect2 &pRect);
-  void setWidth(float w);
-  void setHeight(float w);
+  AGCell(Rice::Object pSelf);
+  void setRect(const AGRect2&r);
+  //void setWidth(float w);
+  //void setHeight(float w);
   //void setTop(float w);
   //void setLeft(float w);
   };

@@ -261,10 +261,10 @@ void AGEditLine::setText(const AGStringUtf8 &s)
 
 
 
-AGEdit::AGEdit(const GUIWidgetPtr&pParent,const AGRect2 &pRect):
-  AGWidget(pParent,pRect),mCursorTime(0),mCursorLast(SDL_GetTicks()),
+AGEdit::AGEdit(Rice::Object pSelf):
+  AGWidget(pSelf),sigModified(this,"sigModified"),mCursorTime(0),mCursorLast(SDL_GetTicks()),
   mLShift(false),mRShift(false),mLCtrl(false),mRCtrl(false),mLAlt(false),mRAlt(false),
-  sigModified(this,"sigModified"),mMultiLine(true),mWrapLines(true)
+  mMultiLine(true),mWrapLines(true)
     {
       CTRACE;
       mInserting=true;
@@ -666,11 +666,11 @@ void AGEdit::checkWrap()
   {
     if(mWrapLines)
       {
-        if(width()==0) return;
+        if(getRect().width()==0) return;
         std::list<AGEditLine>::iterator i=mLines.begin();
         for(;i!=mLines.end();)
           {
-            std::pair<AGStringUtf8,bool> n=i->checkWrap((int)width());
+            std::pair<AGStringUtf8,bool> n=i->checkWrap((int)getRect().width());
             if(n.first.length())
               {
                 // make new line
@@ -720,7 +720,7 @@ void AGEdit::checkWrap()
             j++;
             if(j!=mLines.end() && !i->hardEnd())
               {
-                std::pair<AGStringUtf8,bool> nText=i->checkUnwrap((int)width(),j->getText());
+                std::pair<AGStringUtf8,bool> nText=i->checkUnwrap((int)getRect().width(),j->getText());
                 if(nText.second) // changed
                   {
                     int count=j->getText().length()-nText.first.length();

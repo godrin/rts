@@ -31,17 +31,17 @@ class AGRadio;
 class AGEXPORT AGRadioGroup:public AGWidget
 {
  public:
-  AGRadioGroup(const GUIWidgetPtr&pParent,const AGRect2 &pr);
+  AGRadioGroup(Rice::Object pSelf);
   virtual ~AGRadioGroup() throw();
 
   virtual void eventChange(const AGString &p);
 
-  void add(AGRadio *r);
-  void erase(AGRadio *r);
+  void add(const Rice::Data_Object<AGRadio> &r);
+  void erase(const Rice::Data_Object<AGRadio> &r);
   
   AGSignal sigChanged;
  private:
-  std::set<AGRadio*> mChildren;
+  std::set<Rice::Data_Object<AGRadio> > mChildren;
 };
 
 #endif

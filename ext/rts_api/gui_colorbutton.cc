@@ -22,8 +22,8 @@
 #include <basic_debug.h>
 
 
-AGColorButton::AGColorButton(const GUIWidgetPtr &pParent,const AGRect2 &r,int x,int y):
-  AGWidget(pParent,r),gridx(x),gridy(y),mColors(x*y)
+AGColorButton::AGColorButton(Rice::Object pSelf):
+  AGWidget(pSelf),gridx(0),gridy(0),mColors(0)
   {
   }
 
@@ -56,6 +56,15 @@ void AGColorButton::setColor(const AGColor &c)
   {
     mColor=c;
   }
+  
+void AGColorButton::setGrid(int w, int h)
+{
+  mColors=std::vector<AGColor>(w*h);
+  gridx=w;
+  gridy=h;
+}
+
+  
 void AGColorButton::setColor(int x,int y,const AGColor &c)
   {
     assert(x>=0);

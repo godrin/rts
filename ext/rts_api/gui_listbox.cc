@@ -24,8 +24,9 @@
 #include <gui_theme.h>
 #include <gui_scroller.h>
 #include <basic_stringstream.h>
-
 #include <sstream>
+
+#include <rice/Data_Type.hpp>
 
 AGListBoxItem::AGListBoxItem(AGString pID,AGStringUtf8 pValue)
   {
@@ -33,9 +34,10 @@ AGListBoxItem::AGListBoxItem(AGString pID,AGStringUtf8 pValue)
     value=pValue;
   }
 
-AGListBox::AGListBox(const GUIWidgetPtr &pParent,const AGRect2 &pRect):AGWidget(pParent,pRect),
+AGListBox::AGListBox(Rice::Object pSelf):AGWidget(pSelf),
   sigSelect(this,"sigSelect"),
-  sigDoubleClick(this,"sigDoubleClick")
+  sigDoubleClick(this,"sigDoubleClick"),
+  mScroller(Create<AGScroller>())
 {
   // insert AGEdits
   int y=0;
@@ -44,15 +46,17 @@ AGListBox::AGListBox(const GUIWidgetPtr &pParent,const AGRect2 &pRect):AGWidget(
   if(mItemHeight<5)
     mItemHeight=25;
 
-  mScroller=new AGScroller(*self(),AGRect2(width()-mItemHeight,0,mItemHeight,height()),false);
-  addChild(*mScroller->self());
+  mScroller->setRect(AGRect2(getRect().width()-mItemHeight,0,mItemHeight,getRect().height()));
+  mScroller->setHorizontal(false);
+  addChild(mScroller);
 
   mScroller->sigValueChanged.connect(slot(this,&AGListBox::eventScroller));
 
-  for(;y<pRect.h();y+=mItemHeight,count++)
+  for(;y<getRect().h();y+=mItemHeight,count++)
     {
-      AGRect2 r(0,y,pRect.w()-mItemHeight,mItemHeight);
-      AGEdit *e=new AGEdit(*self(),r);
+      AGRect2 r(0,y,getRect().w()-mItemHeight,mItemHeight);
+      Rice::Data_Object<AGEdit> e=Create<AGEdit>();
+      e->setRect(r);
       e->setMutable(false);
       e->setBackground(false);
       //e->setFont(f);
@@ -61,7 +65,7 @@ AGListBox::AGListBox(const GUIWidgetPtr &pParent,const AGRect2 &pRect):AGWidget(
       e->setName(os.str());
 
       mEdits.push_back(e);
-      addChild(*e->self());
+      addChild(e);
     }
   mHeight=count;
   mY=0;
@@ -89,7 +93,7 @@ void AGListBox::setTheme(const AGString &pTheme)
     AGFont f=theme.getFont("font");
 
     // change fonts for edits
-    for(std::vector<AGEdit*>::iterator i=mEdits.begin();i!=mEdits.end();i++)
+    for(std::vector<Rice::Data_Object<AGEdit> >::iterator i=mEdits.begin();i!=mEdits.end();i++)
       (*i)->setFont(f);
 
     rearrange();
@@ -103,11 +107,11 @@ void AGListBox::rearrange()
     if(mItemHeight<5)
       mItemHeight=25;
 
-    mScroller->setRect(AGRect2(width()-mItemHeight,0,mItemHeight,height()));
+    mScroller->setRect(AGRect2(getRect().width()-mItemHeight,0,mItemHeight,getRect().height()));
 
     int count=0;
-    for(int y=0;y<height();y+=mItemHeight,count++)
-        mEdits[count]->setRect(AGRect2(0,y,width()-mItemHeight,mItemHeight));
+    for(int y=0;y<getRect().height();y+=mItemHeight,count++)
+        mEdits[count]->setRect(AGRect2(0,y,getRect().width()-mItemHeight,mItemHeight));
   }
 
 void AGListBox::insertItem(AGString pID,AGStringUtf8 pValue)
@@ -193,7 +197,7 @@ void AGListBox::draw(AGPainter &p)
       {
         int y=mSelected-mY;
 
-        AGRect2 r(0,y*mItemHeight,width(),mItemHeight);
+        AGRect2 r(0,y*mItemHeight,getRect().width(),mItemHeight);
         p.transform(r);
         mHilight.draw(getRect().origin(),p);
       }
@@ -286,7 +290,7 @@ void AGListBox::updateScroller()
     // update scroller
       {
         int itemCount=mItems.size();
-        int visibleCount=(int)(height()/mItemHeight);
+        int visibleCount=(int)(getRect().height()/mItemHeight);
 
         int maxVal=std::max(0,itemCount-visibleCount);
 

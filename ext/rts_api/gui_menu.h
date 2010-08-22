@@ -29,7 +29,7 @@
 class AGEXPORT AGMenu:public AGTable
 {
  public:
-  AGMenu(const GUIWidgetPtr&pParent,AGVector2 pWishPos,const AGStringUtf8 &pName);
+  AGMenu(Rice::Object pSelf);
   virtual ~AGMenu() throw();
 
   void show(AGVector2 pWishPos);
@@ -42,6 +42,9 @@ class AGEXPORT AGMenu:public AGTable
   void eventItemSelected(const AGString &pString);
   void eventItemClicked(const AGString &pString);
 
+  void setWishPos(const AGVector2 &pWishPos);
+
+  
   AGSignal sigSelected;
 
  private:

@@ -25,13 +25,15 @@
 
 #include <gui_table.h>
 
+class AGCaption;
+
 class AGEXPORT AGWindow:public AGTable
 {
  public:
-  AGWindow(const GUIWidgetPtr&pWidget,const AGRect2 &pRect,const AGStringUtf8 &pTitle="",const AGString &pTheme="");
+  AGWindow(Rice::Object pSelf);
   virtual ~AGWindow()  throw();
 
-  AGWidget *getClient();
+  Rice::Data_Object<AGWidget> getClient();
 
   virtual bool eventMouseButtonDown(AGEvent *m);
   bool eventDragBy(AGEvent *event,const AGVector2 &pDiff);
@@ -44,13 +46,15 @@ class AGEXPORT AGWindow:public AGTable
   AGRect2 getClientRect() const;
 
   AGSignal sigClose;
+  void setTitle(const AGString &pTitle);
 
  private:
+  Rice::Data_Object<AGWidget> image(const AGRect2 r,const AGTexture &t);
 
-  AGWidget *getTitleBar(int w,int h);
+  Rice::Data_Object<AGTable> getTitleBar(int w,int h);
 
   AGStringUtf8 mTitle;
-  AGWidget *mClient;
+  Nullable<Rice::Data_Object<AGCaption> > mClient;
 };
 
 //AGWindow &toAGWindow(AGWidget &w);

@@ -24,8 +24,10 @@
 #include <gui_image.h>
 #include <gui_menu.h>
 
-AGMenuItem::AGMenuItem(const GUIWidgetPtr& pParent,const AGStringUtf8 &pText):
-  AGTable(pParent,AGRect2(0,0,0,0)),mText(pText),mMouseOver(false),mSelected(false)
+#include <rice/Data_Type.hpp>
+
+AGMenuItem::AGMenuItem(Rice::Object pSelf):
+  AGTable(pSelf),mText(""),mMouseOver(false),mSelected(false)
   {
     AGFont font(getTheme()->getFont("Font.menu"));
 
@@ -39,14 +41,24 @@ AGMenuItem::AGMenuItem(const GUIWidgetPtr& pParent,const AGStringUtf8 &pText):
     addFixedColumn(surface.width());
     addColumn(1);
     arrange();
-
-    addChildOld(0,0,new AGImage(*self(),getRect().origin(),surface,false));
-    addChildOld(1,0,new AGText(*self(),getRect().origin(),pText,font));
+    Rice::Data_Object<AGImage> image=Create<AGImage>();
+    image->setSurface(surface);
+    image->setTiling(false);
+    addChild(0,0,image);//(Rice::Nil,getSelf(),getRect().origin(),surface,false));
+    mTextWidget=Create<AGText>();
+    (*mTextWidget)->setText(mText);
+    (*mTextWidget)->setFont(font);
+    addChild(1,0,*mTextWidget);
 
   }
 AGMenuItem::~AGMenuItem() throw()
   {
   }
+
+void AGMenuItem::setText(AGStringUtf8 pText) {
+  mText=pText;
+  (*mTextWidget)->setText(mText);
+}
 
 void AGMenuItem::draw(AGPainter &p)//const AGRect2 &pr)
   {
@@ -79,11 +91,11 @@ bool AGMenuItem::eventMouseEnter()
     mSelected=true;
     eventSelect();
 
-    AGMenu *p=dynamic_cast<AGMenu*>(getParent().widget());
+    Nullable<Rice::Data_Object<AGMenu> > p=(*getParent())->casted<AGMenu>();
     //  cdebug(p);
     if(p)
       {
-        p->eventItemSelected(mText.toString());
+        (*p)->eventItemSelected(mText.toString());
       }
     return false;
   }
@@ -118,10 +130,10 @@ void AGMenuItem::eventUnselect()
 
 bool AGMenuItem::eventMouseClick(AGEvent *m)
   {
-    AGMenu *me=dynamic_cast<AGMenu*>(getParent().widget());
+    Nullable<Rice::Data_Object<AGMenu> > me=(*getParent())->casted<AGMenu>();
     if(me)
       {
-        me->eventItemClicked(mText.toString());
+        (*me)->eventItemClicked(mText.toString());
 
         return true;
       }
@@ -130,23 +142,27 @@ bool AGMenuItem::eventMouseClick(AGEvent *m)
 
 // AGSubMenu
 
-AGSubMenu::AGSubMenu(const GUIWidgetPtr &pParent,const AGStringUtf8 &pText):
-  AGMenuItem(pParent,pText)
+AGSubMenu::AGSubMenu(Rice::Object pSelf):
+  AGMenuItem(pSelf)
   {
     AGSurface surface2=AGSurface::load("right_arrow.png");
-    addChildBack(GUIWidgetPtr( new AGImage(*self(),getRect().origin(),surface2,false))); // FIXME
+    Rice::Data_Object<AGImage> cimage=Create<AGImage>();
+    cimage->setSurface(surface2);
+    cimage->setTiling(false);
+    addChildBack(cimage); //new AGImage(Rice::Nil,getSelf(),getRect().origin(),surface2,false));
 
-    addChild(GUIWidgetPtr( mSubMenu=new AGMenu(*self(),AGVector2(0,0),pText))); //FIXME
-    mSubMenu->hide();
+    mSubMenu=Create<AGMenu>();
+    addChild(*mSubMenu);
+    (*mSubMenu)->hide();
   }
 
 AGSubMenu::~AGSubMenu() throw()
   {
   }
 
-AGMenu *AGSubMenu::getMenu()
+Rice::Data_Object<AGMenu> AGSubMenu::getMenu()
   {
-    return mSubMenu;
+    return *mSubMenu;
   }
 
 void AGSubMenu::addChild(const GUIWidgetPtr&pWidget)

@@ -3,20 +3,20 @@
 
 #include <basic_debug.h>
 
-AGFrame::AGFrame(const GUIWidgetPtr &pParent,const AGRect2 &pRect,int pWidth,int pWidthH):AGWidget(pParent,pRect),
-mWidth(pWidth),mBorder(0),mWidthH(pWidthH<0?pWidth:pWidthH),mTexture((int)width(),(int)height())
+AGFrame::AGFrame(Rice::Object pSelf):AGWidget(pSelf)
 {
   mTextureInited=false;
   mUseTexture=true;
   mBg=0;
 }
-AGFrame::AGFrame(const GUIWidgetPtr &pParent,const AGRect2 &pRect,const AGBorder &pBorder):AGWidget(pParent,pRect),
+/*
+AGFrame::AGFrame(Rice::Object pSelf,const GUIWidgetPtr &pParent,const AGRect2 &pRect,const AGBorder &pBorder):AGWidget(pSelf,pParent,pRect),
 mWidth(pBorder.getWidth()),mWidthH(pBorder.getWidth()),mBorder(new AGBorder(pBorder)),mTexture((int)width(),(int)height())
 {
   mTextureInited=false;
   mUseTexture=true;
   mBg=0;
-}
+}*/
 
 AGFrame::~AGFrame() throw()
   {

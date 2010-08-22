@@ -5,7 +5,7 @@
 
 class GuiRubyWidget:public AGWidget {
   public:
-  GuiRubyWidget(const GUIWidgetPtr &pParent,const AGRect2 &r);
+  GuiRubyWidget(Rice::Object pSelf);
 };
 
 

@@ -35,11 +35,12 @@ static bool useVertexArrays()
   }
 
 
-AGCaption::AGCaption(const GUIWidgetPtr&pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont,const AGBackground &pBG):
-  AGText(pParent,pRect,pText,pFont),
-  mBG(pBG)
+AGCaption::AGCaption(Rice::Object pSelf):
+  AGText(pSelf)
   {
   }
+
+
 
 void AGCaption::draw(AGPainter &p)
   {

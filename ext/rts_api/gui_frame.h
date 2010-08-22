@@ -10,8 +10,8 @@
 class AGEXPORT AGFrame:public AGWidget
 {
  public:
-  AGFrame(const GUIWidgetPtr &pParent,const AGRect2 &pRect,int width,int widthH=-1); // transparent frame
-  AGFrame(const GUIWidgetPtr &pParent,const AGRect2 &pRect,const AGBorder &pBorder);
+  AGFrame(Rice::Object pSelf);
+  //AGFrame(Rice::Object pSelf,const GUIWidgetPtr &pParent,const AGRect2 &pRect,const AGBorder &pBorder);
   ~AGFrame() throw();
 
   void setBackground(const AGBackground &pBg);

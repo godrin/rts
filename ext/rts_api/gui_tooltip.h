@@ -28,7 +28,7 @@
 class AGEXPORT AGTooltip:public AGWidget
 {
  public:
-  AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText);
+  AGTooltip(Rice::Object pSelf);
   virtual ~AGTooltip() throw();
 
   virtual void draw(AGPainter &p);

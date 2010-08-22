@@ -1,3 +1,4 @@
+/*
 #include <gui_widgetptr.h>
 #include <basic_debug.h>
 #include <gui_widget.h>
@@ -93,7 +94,7 @@ GUIWidgetPtr::~GUIWidgetPtr() {
     mWidget->unregPtr(this);
   }
   std::cout<<"mrubywidget:"<<mRubyWidget<<std::endl;
-  delete mRubyWidget;
+  delete mRubyWidget;  WTF!!!!
 }
 
 void GUIWidgetPtr::clear()
@@ -137,11 +138,11 @@ Rice::Data_Object<AGWidget> *GUIWidgetPtr::ruby() const{
   return mWidget;
 }
 
-/*AGWidget *GUIWidgetPtr::operator->() {
-    return mWidget;
-}*/
+//AGWidget *GUIWidgetPtr::operator->() {
+//    return mWidget;
+//}
 
 AGWidget *GUIWidgetPtr::operator->() const {
   return mWidget;
 }
-
+*/

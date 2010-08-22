@@ -6,11 +6,10 @@
 
 #define MAP_BORDER
 
-MiniMap::MiniMap(const GUIWidgetPtr &p,const AGRect2 &r,AntMap *pMap):
-  AGWidget(p,r),
-  mMap(pMap),
-  mSurface(r.w(),r.h()),
-  sigMoved(this,"sigMoved")
+MiniMap::MiniMap(Rice::Object pSelf):
+  AGWidget(pSelf),
+  sigMoved(this,"sigMoved"),
+  mMap(0)
     {
       mMapBorder=24;
       mScene=0;
@@ -77,8 +76,8 @@ void MiniMap::mapChangedP(bool forceFull=false)
         inmem=true;
         x0=0;
         y0=0;
-        x1=width()-1;
-        y1=height()-1;
+        x1=getRect().width()-1;
+        y1=getRect().height()-1;
       }
     else
       {
@@ -291,10 +290,10 @@ bool MiniMap::eventMouseClick(AGEvent *m)
       v[0]=w;
     if(v[1]<h)
       v[1]=h;
-    if(v[0]>width()-w)
-      v[0]=width()-w;
-    if(v[1]>height()-h)
-      v[1]=height()-h;
+    if(v[0]>getRect().width()-w)
+      v[0]=getRect().width()-w;
+    if(v[1]>getRect().height()-h)
+      v[1]=getRect().height()-h;
 
     v=toMapCoords(v);
     cdebug("sigMoved");

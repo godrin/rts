@@ -28,6 +28,8 @@
 #include <gui_glscreen.h>
 #include <gui_video.h>
 
+#include <rice/Data_Type.hpp>
+
 using namespace std;
 
 /**
@@ -39,23 +41,25 @@ using namespace std;
  * @param id      currently not any longer used id
  */
 
-AGButton::AGButton(const GUIWidgetPtr &pParent,const AGRect2 &r,const AGStringUtf8&pText,int id):
-  AGWidget(pParent,r),
-  mText(pText),mID(id),mState(NORMAL),mTextW(0)
+AGButton::AGButton(Rice::Object pSelf):
+  AGWidget(pSelf),
+  mID(0),mState(NORMAL)
   {
     CTRACE;
-    mImageW=0;
     setTheme("");
+
+    
     AGFont font("FreeSans.ttf");
     font.setColor(AGColor(0,0,0));
-    mTextW=new AGEdit(*self(),r.origin().shrink(borderWidth));//,mText,font);
-    mTextW->setText(mText);
-    mTextW->setAlign(EDIT_CENTER);
-    mTextW->setVAlign(EDIT_VCENTER);
-    mTextW->setFont(font);
-    mTextW->setMutable(false);
-    mTextW->setBackground(false);
-    addChild(GUIWidgetPtr(mTextW)); // FIXME ???
+    mTextW=Create<AGEdit>();
+    
+    (*mTextW)->setText(mText);
+    (*mTextW)->setAlign(EDIT_CENTER);
+    (*mTextW)->setVAlign(EDIT_VCENTER);
+    (*mTextW)->setFont(font);
+    (*mTextW)->setMutable(false);
+    (*mTextW)->setBackground(false);
+    addChild(*mTextW); // FIXME ???
 
     setTheme("");
     mChecked=false;
@@ -77,26 +81,32 @@ void AGButton::setSurface(AGSurface pSurface,bool pChangeSize)
     mGrayedSurface=mSurface.grayed();
     if(!mImageW)
       {
-        mImageW=new AGImage(*self(),getRect().origin(),mSurface,false);
-        addChild(GUIWidgetPtr( mImageW)); // FIXME
+        mImageW=Create<AGImage>();
+        (*mImageW)->setRect(getRect().origin());
+        (*mImageW)->setSurface(mSurface);
+        (*mImageW)->setTiling(false);
+        
+        addChild(*mImageW);
       }
     else
       {
-        mImageW->setSurface(pSurface);
-        mImageW->show();
+        (*mImageW)->setSurface(pSurface);
+        (*mImageW)->show();
       }
-    mTextW->hide();
+    (*mTextW)->hide();
     if(pChangeSize)
       {
-        setWidth(mImageW->width()+2+2*borderWidth);
-        setHeight(mImageW->height()+2+2*borderWidth);
+        setRect(getRect().
+          setWidth((*mImageW)->getRect().width()+2+2*borderWidth).
+          setHeight((*mImageW)->getRect().height()+2+2*borderWidth));
       }
 
     else
       {
         // then center
-        mImageW->setLeft((width()-mImageW->width())/2);
-        mImageW->setTop((height()-mImageW->height())/2);
+        (*mImageW)->setRect((*mImageW)->getRect().
+            setLeft((getRect().width()-(*mImageW)->getRect().width())/2).
+            setTop((getRect().height()-(*mImageW)->getRect().height())/2));
       }
     queryRedraw();
   }
@@ -105,15 +115,18 @@ void AGButton::setTexture(const AGTexture &pTexture)
   {
     if(!mImageW)
       {
-        mImageW=new AGImage(*self(),getRect().origin(),mSurface,false);
-        addChild(GUIWidgetPtr (mImageW)); // FIXME
+        mImageW=Create<AGImage>();
+        (*mImageW)->setRect(getRect().origin());
+        (*mImageW)->setSurface(mSurface);
+        (*mImageW)->setTiling(false);
+        addChild(*mImageW);
       }
     else
       {
         //      mImageW->setSurface(pTexture);
-        mImageW->show();
+        (*mImageW)->show();
       }
-    mImageW->setTexture(pTexture);
+    (*mImageW)->setTexture(pTexture);
   }
 
 
@@ -122,7 +135,7 @@ void AGButton::draw(AGPainter &p)
     CTRACE;
     assert(mTextW);
     p.pushMatrix();
-    p.transform(AGRect2(0,0,width(),height()).shrink(borderWidth));
+    p.transform(getRect().origin().shrink(borderWidth));
     AGRect2 pr=getRect().origin();
     mBG[mState].draw(pr,p);
     mBorder[mState].draw(pr,p);
@@ -237,23 +250,12 @@ void AGButton::setRect(const AGRect2 &r)
     updateClientRects();
   }
 
-void AGButton::setWidth(float w)
-  {
-    assert(w>=0);
-    AGWidget::setWidth(w);
-    updateClientRects();
-  }
-void AGButton::setHeight(float h)
-  {
-    assert(h>=0);
-    AGWidget::setHeight(h);
-    updateClientRects();
-  }
 
 void AGButton::updateClientRects()
   {
-    Children::iterator i=mChildren.begin();
-    for(;i!=mChildren.end();i++)
+    ObjectList children=getChildren();
+    ObjectIterator i=children.begin();
+    for(;i!=children.end();i++)
       (*i)->setRect(getRect().origin().shrink(borderWidth));
   }
 
@@ -283,9 +285,9 @@ void AGButton::setEnabled(bool pEnable)
         if(mImageW)
           {
             if(mEnabled)
-              mImageW->setSurface(mSurface);
+              (*mImageW)->setSurface(mSurface);
             else
-              mImageW->setSurface(mGrayedSurface);
+              (*mImageW)->setSurface(mGrayedSurface);
           }
 
       }
@@ -317,7 +319,7 @@ void AGButton::setTheme(const AGString &pTheme)
     mBorder[DISABLED]=AGBorder(mTheme+"button.border.disabled");
 
     if(mTextW)
-      mTextW->setTheme(mTheme+"button.text");
+      (*mTextW)->setTheme(mTheme+"button.text");
 
   }
 
@@ -326,9 +328,9 @@ void AGButton::setCaption(AGStringUtf8 pCaption)
     queryRedraw();
     mText=pCaption;
     if(mTextW)
-      mTextW->setText(pCaption);
+      (*mTextW)->setText(pCaption);
     if(mImageW)
-      mImageW->hide();
+      (*mImageW)->hide();
   }
 
 void AGButton::setState(const State &pState)

@@ -27,7 +27,7 @@ module Antargis
         self.event_quit
         exit
       }
-      
+      GC.start
       if false
 	addHandler(@mainMenu.getChild("quit"),:sigClick,:eventQuit)
 	addHandler(@mainMenu.getChild("credits"),:sigClick,:eventCredits)

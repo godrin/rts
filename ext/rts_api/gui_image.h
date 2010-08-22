@@ -29,9 +29,7 @@
 class AGEXPORT AGImage:public AGWidget
 {
  public:
-  AGImage(const GUIWidgetPtr&pParent,const AGRect2 &r);
-  AGImage(const GUIWidgetPtr&pParent,const AGRect2 &r,AGSurface pSurface,bool pTile);
-  AGImage(const GUIWidgetPtr&pParent,const AGRect2 &r,AGTexture pTexture,bool pTile);
+  AGImage(Rice::Object pSelf);
   virtual ~AGImage() throw();
 
   virtual void draw(AGPainter &p);
@@ -46,6 +44,7 @@ class AGEXPORT AGImage:public AGWidget
   void setCenter(bool c);
   void setScale(bool s);
   bool getCenter();
+  void setTiling(bool b);
 
  private:
   AGTexture mTexture;

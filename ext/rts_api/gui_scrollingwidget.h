@@ -28,9 +28,10 @@
 class AGScrollingWidget:public AGWidget
   {
 public:
-  AGScrollingWidget(const GUIWidgetPtr &pParent, const AGRect2& pRect);
+  AGScrollingWidget(Rice::Object pSelf);
   void setClientRect(const AGRect2 &pRect);
-  
+  void setRect(const AGRect2 &pRect);
+
   bool eventMouseButtonDown(AGEvent *pEvent);
   bool eventMouseButtonUp(AGEvent *pEvent);
   bool eventDragBy(AGEvent *pEvent,const AGVector2 &pVector);

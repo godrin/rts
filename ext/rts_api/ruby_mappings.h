@@ -7,6 +7,7 @@
 #include "rice/Data_Type.hpp"
 #include "rice/Constructor.hpp"
 
+
 template<>
 GUIWidgetPtr from_ruby<GUIWidgetPtr> ( Rice::Object x );
 
@@ -38,12 +39,20 @@ Rice::Object to_ruby<AGRect2> ( AGRect2 const & x );
 template<>
 Rice::Object to_ruby<AGEvent> ( AGEvent const & x );
 
-template<>
-GUIWidgetPtr from_ruby<GUIWidgetPtr> ( Rice::Object x );
+//template<>
+//GUIWidgetPtr from_ruby<GUIWidgetPtr> ( Rice::Object x );
 
 template<>
-void ruby_mark<AGWidget>(AGWidget*t);
+void ruby_mark(AGWidget*t);
 template<>
-void ruby_mark<AGApplication>(AGApplication*t);
+void ruby_mark(AGApplication*t);
+
+class GameApp;
+class AGTable;
+
+template<>
+void ruby_mark(GameApp*t);
+template<>
+void ruby_mark(AGTable*t);
 
 #endif

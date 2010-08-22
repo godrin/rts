@@ -1508,15 +1508,15 @@ SDL_Rect AGRect2::sdl() const
   return r;
 }
 
-float AGRect2::setWidth(float w)
+AGRect2 AGRect2::setWidth(float w)
   {
     v1[0]=v0[0]+w;
-    return w;
+    return *this;
   }
-float AGRect2::setHeight(float h)
+AGRect2 AGRect2::setHeight(float h)
   {
     v1[1]=v0[1]+h;
-    return h;
+    return *this;
   }
 
 float AGRect2::x0() const
@@ -1603,39 +1603,45 @@ AGString AGRect2::toString() const
 }
 
 
-void AGRect2::setX(float p)
+AGRect2 AGRect2::setX(float p)
   {
     float mw=w();
     v0.setX(p);
     v1.setX(p+mw);
+    return *this;
   }
-void AGRect2::setY(float p)
+AGRect2 AGRect2::setY(float p)
   {
     float mh=h();
     v0.setY(p);
     v1.setY(p+mh);
+    return *this;
   }
 
-void AGRect2::setLeft(float p)
+AGRect2 AGRect2::setLeft(float p)
   {
     float mw=w();
     v0.setX(p);
     v1.setX(p+mw);
+    return *this;
   }
-void AGRect2::setTop(float p)
+AGRect2 AGRect2::setTop(float p)
   {
     float mh=h();
     v0.setY(p);
     v1.setY(p+mh);
+    return *this;
   }
 
-void AGRect2::setRight(float p)
+AGRect2 AGRect2::setRight(float p)
   {
     v1.setX(p);
+    return *this;
   }
-void AGRect2::setBottom(float p)
+AGRect2 AGRect2::setBottom(float p)
   {
     v1.setY(p);
+    return *this;
   }
 
 

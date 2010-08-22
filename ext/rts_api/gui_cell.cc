@@ -20,11 +20,19 @@
 
 #include <gui_cell.h>
 
-AGCell::AGCell(const GUIWidgetPtr &pParent,const AGRect2 &pRect)
-:AGWidget(pParent,pRect)
+AGCell::AGCell(Rice::Object pSelf)
+:AGWidget(pSelf)
     {
 
     }
+void AGCell::setRect(const AGRect2 &r) {
+  AGWidget::setRect(r);
+  ObjectList l=getChildren();
+  for(ObjectIterator i=l.begin();i!=l.end();i++) {
+    (*i)->setRect(r.origin());
+  }
+}
+/*
 void AGCell::setWidth(float w)
   {
     AGWidget::setWidth(w);
@@ -37,6 +45,7 @@ void AGCell::setHeight(float w)
     for(Children::iterator i=mChildren.begin();i!=mChildren.end();i++)
       (*i)->setHeight(w);
   }
+  */
 /*
 void AGCell::setTop(float w)
   {

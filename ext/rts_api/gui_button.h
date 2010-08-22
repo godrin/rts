@@ -28,6 +28,8 @@
 #include <gui_background.h>
 #include <gui_border.h>
 
+#include <basic_nullable.h>
+
 #include <iostream>
 #include <map>
 
@@ -56,7 +58,7 @@ class AGEXPORT AGButton:public AGWidget
      DISABLED        //!< the button disabled (greyed)
    };
 
-  AGButton(const GUIWidgetPtr&pParent,const AGRect2 &r,const AGStringUtf8&pText="",int id=-1);
+  AGButton(Rice::Object pself);
   virtual ~AGButton() throw();
 
   void setSurface(AGSurface pSurface,bool pChangeSize=false);
@@ -70,8 +72,6 @@ class AGEXPORT AGButton:public AGWidget
   virtual bool eventMouseButtonDown(AGEvent *m);
   virtual bool eventMouseButtonUp(AGEvent *m);
 
-  virtual void setWidth(float w);
-  virtual void setHeight(float w);
   void setRect(const AGRect2 &r);
 
   virtual AGStringUtf8 getCaption() const;
@@ -94,6 +94,7 @@ class AGEXPORT AGButton:public AGWidget
   virtual void useTextures();
 
   bool isOpaque() const;
+  
 
  private:
    
@@ -106,8 +107,8 @@ class AGEXPORT AGButton:public AGWidget
   AGSurface mSurface;
   AGSurface mGrayedSurface;
   bool mHasSurface;
-  AGEdit *mTextW;
-  AGImage *mImageW;
+  Nullable<Rice::Data_Object<AGEdit> > mTextW;
+  Nullable<Rice::Data_Object<AGImage> > mImageW;
 
   bool lower;
   bool mChecked;

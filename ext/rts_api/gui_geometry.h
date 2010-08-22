@@ -502,17 +502,17 @@ public:
   AGRect2 shrinkToTopLeft(float w, float h) const;
   AGRect2 grow(float f) const;
 
-  void setX(float p);
-  void setY(float p);
+  AGRect2 setX(float p);
+  AGRect2 setY(float p);
 
-  void setLeft(float p); // attention - modifies right, too
-  void setTop(float p); // attention - modifies bottom, too
+  AGRect2 setLeft(float p); // attention - modifies right, too
+  AGRect2 setTop(float p); // attention - modifies bottom, too
 
-  void setRight(float p);
-  void setBottom(float p);
+  AGRect2 setRight(float p);
+  AGRect2 setBottom(float p);
 
-  float setWidth(float w);
-  float setHeight(float w);
+  AGRect2 setWidth(float w);
+  AGRect2 setHeight(float w);
 
   float x() const;
   float y() const;

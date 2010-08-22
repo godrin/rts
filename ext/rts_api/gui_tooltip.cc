@@ -26,9 +26,10 @@
 #include <basic_debug.h>
 #include <basic_tools.h>
 
-AGTooltip::AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText):
-  AGWidget(GUIWidgetPtr(),pRect),
-  mText(pText),
+#include <rice/Data_Type.hpp>
+
+AGTooltip::AGTooltip(Rice::Object pSelf):
+  AGWidget(pSelf),
   mFont(getTheme()->getFont("tooltip.font")),
   mBgColor(getTheme()->getColor("tooltip.bgcolor")),
   mBorderColor(getTheme()->getColor("tooltip.bordercolor"))
@@ -78,35 +79,40 @@ AGTooltip::AGTooltip(const AGRect2 &pRect,const AGStringUtf8 &pText):
     // check below
 
     cdebug("th:"<<th);
-    cdebug("bottom:"<<bottom());
     cdebug("sh:"<<sh);
-    cdebug("left:"<<left());
+    
+    float bottom=getRect().y1();
+    float top=getRect().y0();
+    float left=getRect().x0();
+    float right=getRect().x1();
 
-    if(th+bottom()+4<sh)
-      setRect(AGRect2(left(),bottom()+2,tw,th));
-    else if(top()-4-tw>0)
+    if(th+bottom+4<sh)
+      setRect(AGRect2(left,bottom+2,tw,th));
+    else if(top-4-tw>0)
       // above
-      setRect(AGRect2(left(),top()-th-2,tw,th));
-    else if(tw+right()+4<sw)
+      setRect(AGRect2(left,top-th-2,tw,th));
+    else if(tw+right+4<sw)
       // right
-      setRect(AGRect2(right()+2,top(),tw,th));
+      setRect(AGRect2(right+2,top,tw,th));
     else
       // above
-      setRect(AGRect2(left(),top()-th-2,tw,th));
+      setRect(AGRect2(left,top-th-2,tw,th));
 
-    if(right()>sw)
-      setLeft(sw-2-width());
+    if(right>sw) {
+      setRect(getRect().setX(sw-2-getRect().width()));
+    }
     //  setRect(AGRect2(0,0,tw,th));
 
     cdebug(getRect());
 
     //  mFont.setColor(AGColor(0,0,0));
-    AGEdit *e=new AGEdit(*self(),getRect().origin().shrink(1));
+    Rice::Data_Object<AGEdit> e=Create<AGEdit>();
+    e->setRect(getRect().origin().shrink(1));
     e->setText(mText);
     e->setFont(mFont);
     e->setMutable(false);
     e->setBackground(false);
-    addChild(*e->self());
+    addChild(e);
   }
 
 AGTooltip::~AGTooltip() throw()

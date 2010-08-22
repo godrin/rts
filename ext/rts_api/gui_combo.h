@@ -32,7 +32,7 @@ class AGListBox;
 class AGEXPORT AGComboBox:public AGWidget
 {
  public:
-  AGComboBox(const GUIWidgetPtr&pParent,const AGRect2 &pRect);
+  AGComboBox(Rice::Object pSelf);
   virtual ~AGComboBox() throw();
 
   void insertItem(const AGString &pID,const AGStringUtf8 &pContent);
@@ -47,17 +47,14 @@ class AGEXPORT AGComboBox:public AGWidget
 
   void clear() throw();
   
-  virtual void setWidth(float w);
-  virtual void setHeight(float w);
   void setRect(const AGRect2 &r);
 
  private:
   void update();
-  void updateClientRects();
 
-  AGEdit *mEdit;
-  AGButton *mButton;
-  AGListBox *mListBox;
+  Rice::Data_Object<AGEdit> mEdit;
+  Rice::Data_Object<AGButton> mButton;
+  Rice::Data_Object<AGListBox> mListBox;
 
   AGString mID;
 

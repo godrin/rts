@@ -29,7 +29,7 @@
 class AGEXPORT AGScreenWidget:public AGWidget
 {
  public:
-  AGScreenWidget();
+  AGScreenWidget(Rice::Object pSelf);
   virtual ~AGScreenWidget() throw();
 
   virtual void draw(AGPainter &p);

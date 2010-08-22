@@ -4,8 +4,8 @@
 #include <gui_screen.h>
 #include <glu.h>
 
-AGGLWidget::AGGLWidget(const GUIWidgetPtr&pParent,const AGRect2 &r):
-  AGWidget(pParent,r)
+AGGLWidget::AGGLWidget(Rice::Object pSelf):
+  AGWidget(pSelf)
 {
 }
 
@@ -26,9 +26,10 @@ void AGGLWidget::drawAll(AGPainter &p)
   p2.clip(getRect().origin());
   //  p2.transform(getRect());
 
-  Children::reverse_iterator i=mChildren.rbegin(); // draw from back to front
+  ObjectList children=getChildren();
+  ObjectRIterator i=children.rbegin(); // draw from back to front
   //  AGRect2 r2=r.project(mr);
-  for(;i!=mChildren.rend();i++)
+  for(;i!=children.rend();i++)
     (*i)->drawAll(p2);
 
 }

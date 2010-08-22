@@ -27,36 +27,35 @@
 #include <typeinfo>
 
 
-AGRadioGroup::AGRadioGroup(const GUIWidgetPtr&p,const AGRect2 &r):
-  AGWidget(p,r),
+AGRadioGroup::AGRadioGroup(Rice::Object pSelf):
+  AGWidget(pSelf),
   sigChanged(this,"sigChanged")
   {
   }
 AGRadioGroup::~AGRadioGroup() throw()
   {
-    std::set<AGRadio*>::iterator i=mChildren.begin();
-
-    for(;i!=mChildren.end();i++)
-      (*i)->setGroup(0);
+    Nullable<Rice::Data_Object<AGRadioGroup> > nil;
+    ObjectList children=getChildren();
+    for(ObjectIterator i=children.begin();i!=children.end();i++) {
+      (*(*i)->casted<AGRadio>())->setGroup(nil);
+    }
   }
 
 void AGRadioGroup::eventChange(const AGString &p)
   {
-    std::set<AGRadio*>::iterator i=mChildren.begin();
-
-    for(;i!=mChildren.end();i++)
-      {
+    ObjectList children=getChildren();
+    for(ObjectIterator i=children.begin();i!=children.end();i++) {
         if((*i)->getName()!=p)
-          (*i)->deselect();
+          (*(*i)->casted<AGRadio>())->deselect();
       }
 
   }
 
-void AGRadioGroup::add(AGRadio *r)
+void AGRadioGroup::add(const Rice::Data_Object<AGRadio> &r)
   {
     mChildren.insert(r);
   }
-void AGRadioGroup::erase(AGRadio *r)
+void AGRadioGroup::erase(const Rice::Data_Object<AGRadio> &r)
   {
     mChildren.erase(r);
   }

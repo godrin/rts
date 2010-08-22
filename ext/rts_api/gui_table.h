@@ -27,6 +27,8 @@
 
 #include <vector>
 
+#include <rice/Data_Type.hpp>
+
 /**
    Description:
    At first you can adjust rows/columns - then you can insert some children.
@@ -38,7 +40,7 @@
 class AGEXPORT AGTable:public AGWidget
 {
  public:
-  AGTable(const GUIWidgetPtr &pWidget,const AGRect2 &pRect);
+  AGTable(Rice::Object pSelf);
   virtual ~AGTable() throw();
 
   void addFixedColumn(float size);
@@ -53,14 +55,12 @@ class AGEXPORT AGTable:public AGWidget
   float getColumn(size_t c) const;
   float getRow(size_t c) const;
 
-  void addChildOld(int x,int y,AGWidget *pWidget);
   void addChild(int x,int y,GUIWidgetPtr pWidget);
   AGRect2 getClientRect(int x,int y) const;
 
   void arrange();
 
-  virtual void setWidth(float w);
-  virtual void setHeight(float w);
+  virtual void setRect(const AGRect2 &r);
 
   size_t getRows() const;
   size_t getColumns() const;
@@ -96,9 +96,15 @@ class AGEXPORT AGTable:public AGWidget
   class CellEntry {
     public:
     int x,y;
-    GUIWidgetPtr ptr;
+    std::list<GUIWidgetPtr> ptr;
+    
+    void setRect(const AGRect2 &p) {
+      for(std::list<GUIWidgetPtr>::iterator i=ptr.begin();i!=ptr.end();++i) {
+        (*i)->setRect(p);
+      }
+    }
   };
-  
+
   std::list<CellEntry> children;
 
   void arrangeCell(CellEntry *ce);

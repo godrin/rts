@@ -1,12 +1,16 @@
 #ifndef GUI_WIDGET_PTR_H
 #define GUI_WIDGET_PTR_H
 
-#include "rice/Data_Object.hpp"
+#include <basic_object.h>
+//#include <ruby_messaging.h>
+#include "rice_tree_node.h"
 
-#include <ruby_messaging.h>
 
 class AGWidget;
 
+typedef ObjectTreeNode<AGWidget>::Ptr GUIWidgetPtr;
+
+/*
 class GUIWidgetPtr {
   public:
     GUIWidgetPtr();
@@ -34,6 +38,6 @@ class GUIWidgetPtr {
     Rice::Data_Object<AGWidget> *mRubyWidget;
 };
 
-
+*/
 
 #endif

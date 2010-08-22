@@ -2,6 +2,8 @@
 #include "rice/Data_Type.hpp"
 #include "rice/Constructor.hpp"
 #include "rice/Director.hpp"
+
+#include "ruby_mappings.h"
     
 #include <game_app.h>
     

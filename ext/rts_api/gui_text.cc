@@ -30,19 +30,12 @@
 
 using namespace std;
 
-AGText::AGText(const GUIWidgetPtr &pParent,const AGRect2 &r,const AGStringUtf8 &pText,const AGFont &pFont):
-  AGWidget(pParent,r),
-  mText(pText),mFont(pFont)
+AGText::AGText(Rice::Object pSelf):
+  AGWidget(pSelf)
   {
     mFixedSize=true;
   }
 
-AGText::AGText(const GUIWidgetPtr &pParent,const AGVector2 &p,const AGStringUtf8 &pText,const AGFont &pFont):
-  AGWidget(pParent,AGRect2(p[0],p[1],pFont.getWidth(pText),pFont.getHeight(pText))),
-  mText(pText),mFont(pFont)
-  {
-    mFixedSize=false;
-  }
 
 AGText::~AGText() throw()
   {}
@@ -50,8 +43,8 @@ AGText::~AGText() throw()
 
 void AGText::draw(AGPainter &p)
   {
-    float x=(width()-mFont.getWidth(mText))/2;
-    float y=(height()-mFont.getHeight(mText))/2;
+    float x=(getRect().width()-mFont.getWidth(mText))/2;
+    float y=(getRect().height()-mFont.getHeight(mText))/2;
     p.renderText(mText,AGVector2((int)x,(int)y),mFont);
   }
 
@@ -65,8 +58,9 @@ void AGText::setText(const AGStringUtf8 &pText)
     mText=pText;
     if(!mFixedSize)
       {
-        setWidth(mFont.getWidth(pText));
-        setHeight(mFont.getHeight(pText));
+        setRect(getRect().
+        setWidth(mFont.getWidth(pText)).
+        setHeight(mFont.getHeight(pText)));
       }
   }
 AGStringUtf8 AGText::getText() const

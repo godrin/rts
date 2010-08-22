@@ -25,8 +25,8 @@
 #include <basic_debug.h>
 #include <gui_local.h>
 
-AGCheckBox::AGCheckBox(const GUIWidgetPtr&pParent,AGRect2 pRect):
-  AGButton(pParent,pRect,"")
+AGCheckBox::AGCheckBox(Rice::Object pSelf):
+  AGButton(pSelf)
   {
     mSurfaces[0]=mSurfaces[1]=0;
   }

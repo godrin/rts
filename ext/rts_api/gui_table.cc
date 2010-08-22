@@ -21,8 +21,8 @@
 #include <gui_table.h>
 #include <basic_debug.h>
 
-AGTable::AGTable(const GUIWidgetPtr &pWidget,const AGRect2 &pRect):
-  AGWidget(pWidget,pRect),
+AGTable::AGTable(Rice::Object pSelf):
+  AGWidget(pSelf),
   w(0),h(0),xw(0),yw(0),
   mStructurFixed(false),
   //mInserted(false),
@@ -91,12 +91,6 @@ void AGTable::addRow(float weight)
     yw+=weight;
   }
 
-// syntax sugar
-void AGTable::addChildOld(int x, int y, AGWidget* pWidget)
-{
-  addChild(x,y,*pWidget->self());
-}
-
 
 /// adds a widget to the given cell (px,py)
 void AGTable::addChild(int px,int py,GUIWidgetPtr pWidget)
@@ -119,10 +113,10 @@ void AGTable::addChild(int px,int py,GUIWidgetPtr pWidget)
     CellEntry ce;
     ce.x=px;
     ce.y=py;
-    ce.ptr=pWidget;
+    ce.ptr.push_back(pWidget);
     children.push_back(ce);
       
-    AGWidget::addChild(*pWidget->self());
+    AGWidget::addChild(pWidget);
     pWidget->setRect(getClientRect(px,py));
   }
 
@@ -151,16 +145,16 @@ AGRect2 AGTable::getClientRect(int x,int y) const
 void AGTable::arrangeCell(CellEntry *ce) {
   AGRect2 r=getClientRect(ce->x,ce->y);
   if(r.content()<1 || r.w()<1 || r.h()<1) {
-    std::cout<<"Probably defect rectangle "<<r.toString()<<" in cell:"<<ce->x<<","<<ce->y<<" for element "<<ce->ptr->getName()<< " "<<typeid(*ce->ptr.widget()).name()<<std::endl;
+    std::cout<<"Probably defect rectangle "<<r.toString()<<" in cell:"<<ce->x<<","<<ce->y<<" for element "<<std::endl;
+    //<<ce->ptr->getName()<< " "<<typeid(*ce->ptr).name()<<std::endl;
   }
   else {
-    std::cout<<"Setting rectangle "<<r.toString()<<"("<<r.w()<<";"<<r.h()<<" in cell:"<<ce->x<<","<<ce->y<<" for element "<<ce->ptr->getName()<< " "<<typeid(*ce->ptr.widget()).name()<<std::endl;
+    std::cout<<"Setting rectangle "<<r.toString()<<"("<<r.w()<<";"<<r.h()<<" in cell:"<<ce->x<<","<<ce->y<<" for element "<<std::endl;
+    //<<ce->ptr->getName()<< " "<<typeid(*ce->ptr).name()<<std::endl;
      
   }
   
-  if(ce->ptr) {
-    ce->ptr->setRect(r);
-  }
+  ce->setRect(r);
 }
 
 void AGTable::arrange() {
@@ -188,8 +182,8 @@ void AGTable::structureFinished()
       fixedHeight+=rows[my].first;
   }
   
-  std::cout<<"Width:"<<width()<<std::endl;
-  std::cout<<"height:"<<height()<<std::endl;
+  std::cout<<"Width:"<<getRect().width()<<std::endl;
+  std::cout<<"height:"<<getRect().height()<<std::endl;
   std::cout<<"fixedWidth:"<<fixedWidth<<std::endl;
   std::cout<<"fixedheight:"<<fixedHeight<<std::endl;
 
@@ -213,7 +207,7 @@ void AGTable::structureFinished()
               colSizes[mx]=cols[mx].first;
             }
             else {
-              float val=((width()-fixedWidth)*cols[mx].first/xw);
+              float val=((getRect().width()-fixedWidth)*cols[mx].first/xw);
               colSizes[mx]=(int)val;
             }
         }
@@ -223,7 +217,7 @@ void AGTable::structureFinished()
               rowSizes[my]=rows[my].first;
             }
             else {
-              float val=((height()-fixedHeight)*rows[my].first/yw);
+              float val=((getRect().height()-fixedHeight)*rows[my].first/yw);
               rowSizes[my]=(int)val;
             }
         }
@@ -372,16 +366,10 @@ void AGTable::arrange()
   }
 */
 
-void AGTable::setWidth(float w)
-  {
-    AGWidget::setWidth(w);
-    arrange();
-  }
-void AGTable::setHeight(float w)
-  {
-    AGWidget::setHeight(w);
-    arrange();
-  }
+void AGTable::setRect(const AGRect2 &r) {
+  AGWidget::setRect(r);
+  arrange();
+}
 
 size_t AGTable::getRows() const
 {

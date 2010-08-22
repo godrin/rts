@@ -23,7 +23,7 @@
 #ifndef AG_WIDGET_H
 #define AG_WIDGET_H
 
-#include "rice/Data_Object.hpp"
+#include <basic_object.h>
 #include <basic_base.h>
 
 #include <gui_geometry.h>
@@ -37,6 +37,9 @@
 
 #include <list>
 #include <set>
+
+#include "rice_tree_node.h"
+#include "basic_nullable.h"
 
 
 class AGTooltip;
@@ -80,13 +83,10 @@ class AGApplication;
    The widgets get deleted by their parents
  */
 
-class AGEXPORT AGWidget:public AGMessageObject
+class AGEXPORT AGWidget:public AGMessageObject,public ObjectTreeNode<AGWidget>
 {
 public:
-  typedef std::list<GUIWidgetPtr> Children;
-  typedef std::set<AGWidget*> ChildrenSet; // only for reference-killing (don't expose to ruby !)
-
-  explicit AGWidget(const GUIWidgetPtr &pParent,const AGRect2 &r);
+  explicit AGWidget(Rice::Object pSelf);
   virtual ~AGWidget() throw();
 
   AGApplication *getApp();
@@ -97,17 +97,14 @@ public:
   virtual void draw(AGPainter &p);
   virtual void drawAfter(AGPainter &p);
   virtual void drawAll(AGPainter &p);
-  virtual void drawChild(AGPainter &p,AGWidget *pWidget);
+  virtual void drawChild(AGPainter &p,const GUIWidgetPtr &pWidget);
 
   AGRect2 getRect() const;
   virtual AGRect2 getClientRect() const;
   virtual void setRect(const AGRect2 &pRect);
   void setRectInterface ( AGRect2 pRect );
 
-  virtual void setParent(const GUIWidgetPtr&pParent);
-  GUIWidgetPtr getParent();
-  bool isParent(const GUIWidgetPtr &pParent);
-  bool isParent(AGWidget*pParent);
+  Nullable<Ptr> getParent() const;
 
   virtual bool eventShow();
   virtual bool eventHide();
@@ -144,39 +141,20 @@ public:
   SignalWrapper getSigClick();
   SignalWrapper getSigDragBy();
 
-  virtual float minWidth() const;
-  virtual float minHeight() const;
-
-  float width() const;
-  float height() const;
-  float top() const;
-  float left() const;
-  float bottom() const;
-  float right() const;
-
   bool visible() const;
   void setVisible(bool v);
   bool isOpaque() const;
-
-  virtual void setWidth(float w);
-  virtual void setHeight(float w);
-  virtual void setTop(float y);
-  virtual void setLeft(float x);
-
-  bool fixedWidth() const;
-  bool fixedHeight() const;
 
   void show();
   void hide();
   void close();
 
-  virtual void mark() throw();
 public:
 
   virtual void addChild(GUIWidgetPtr w);
   virtual void addChildBack(GUIWidgetPtr w);
 
-  virtual void removeChild(GUIWidgetPtr w);
+  //virtual void removeChild(GUIWidgetPtr w);
 
   // Functions for caching appearance
   virtual bool redraw() const;
@@ -204,10 +182,6 @@ public:
   AGRect2 outerToInner(const AGRect2 &pRect) const;
   AGVector2 outerToInner(const AGVector2 &pRect) const;
 
-
-  // clear children
-  void clear() throw();
-
   AGRect2 getScreenRect() const;
   AGRect2 toScreen(const AGRect2&p) const;
   AGVector2 toScreen(const AGVector2&p) const;
@@ -234,7 +208,7 @@ public:
   bool getFocus() const;
   bool hasFocus(const GUIWidgetPtr &pWidget);
   bool hasFocus();
-  GUIWidgetPtr getFocusedWidget ();
+  Nullable<Ptr> getFocusedWidget ();
 
 
 
@@ -243,8 +217,6 @@ public:
   GUIWidgetPtr getChild(AGString pName);
 
   void setModal(bool pModal);
-
-  void erase(const GUIWidgetPtr &w);
 
   void eventChildrenDeleted(GUIWidgetPtr pWidget); // don't expose to ruby - because called from widget, that does not know it's VALUE
 
@@ -255,8 +227,6 @@ public:
   std::list<AGRect2> aquireChanges();
   void pushChangeRect(const AGRect2 &pRect);
   void clearChangeRects();
-
-  Children getChildren();
 
   bool hovered() const;
 
@@ -269,27 +239,18 @@ public:
   virtual bool eventMouseButtonUpClipped(AGEvent *pEvent,const AGVector2 &pPosition);
   virtual bool eventMouseMotionClipped(AGEvent *pEvent,const AGVector2 &pPosition);
 
-  void addChildRef(AGWidget *pWidget);
-
   void initEvents();
 
   virtual void eventInitEvents();
   
-  void regPtr(GUIWidgetPtr *p);
-  void unregPtr(GUIWidgetPtr *p);
-  
-  GUIWidgetPtr *self();
-
 protected:
-  virtual bool letChildProcess(AGWidget *pChild,AGEvent *event);
+  virtual bool letChildProcess(const GUIWidgetPtr&pChild,AGEvent *event);
 
 private:
 
   AGRect2 getChildRect(const AGRect2 &pRect) const;
-  bool containsPoint(AGWidget *pWidget,const AGVector2 &pVector) const;
+  bool containsPoint(const GUIWidgetPtr&pWidget,const AGVector2 &pVector) const;
 
-
-  std::set<GUIWidgetPtr*> mPtrs;
   
   AGApplication *mApp;
 
@@ -299,33 +260,26 @@ private:
 
   void drawCache();
 
-  void delObjects();
-
   void gainFocusDown(const GUIWidgetPtr &pWidget);
 
   void checkFocus();
-
-  Children mToClear;
 
   AGRect2 mRect,mClientWorld;
   AGProjection2D mClientProj;
   bool mUseClientRect;
 
-  GUIWidgetPtr mParent;
   bool mChildrenEventFirst;
   bool mChildrenDrawFirst;
   bool mMouseIn;
   bool mButtonDown;
-  bool mFixedWidth,mFixedHeight;
   bool mVisible;
   bool mCaching;
   AGTexture *mCache;
   bool mCacheTouched;
 
   bool mHasFocus;
-  GUIWidgetPtr mFocus;
-  GUIWidgetPtr *pseudoSelf;
-
+  Nullable<Ptr> mFocus;
+  
   AGVector2 mOldMousePos;
 
   AGString mName;
@@ -334,14 +288,9 @@ private:
   AGRect2 mChangeRect;
 
   AGStringUtf8 mTooltip;
-  AGTooltip *mTooltipWidget;
-
-  ChildrenSet mRefChildren;
+  Nullable<Rice::Data_Object<AGTooltip> > mTooltipWidget;
 
   bool mEventsInited;
-
-protected:
-  Children mChildren;
 
 };
 

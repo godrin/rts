@@ -26,12 +26,14 @@
 #include <gui_text.h>
 #include <gui_table.h>
 
+#include <basic_nullable.h>
+
 class AGMenu;
 
 class AGEXPORT AGMenuItem:public AGTable
 {
  public:
-  AGMenuItem(const GUIWidgetPtr &pParent,const AGStringUtf8 &pText);
+  AGMenuItem(Rice::Object pSelf);
   virtual ~AGMenuItem() throw();
 
   void draw(AGPainter &p);
@@ -48,20 +50,22 @@ class AGEXPORT AGMenuItem:public AGTable
 
   virtual void eventSelect();
   virtual void eventUnselect();
+  void setText(AGStringUtf8 pText);
 
  private:
   AGStringUtf8 mText;
   bool mMouseOver;
   bool mSelected;
+  Nullable<Rice::Data_Object<AGText> > mTextWidget;
 };
 
 class AGEXPORT AGSubMenu:public AGMenuItem
 {
  public:
-  AGSubMenu(const GUIWidgetPtr &pParent,const AGStringUtf8 &ptext);
+  AGSubMenu(Rice::Object pSelf);
   virtual ~AGSubMenu() throw();
 
-  AGMenu *getMenu();
+  Rice::Data_Object<AGMenu> getMenu();
 
   virtual void eventSelect();
   virtual void eventUnselect();
@@ -71,7 +75,7 @@ class AGEXPORT AGSubMenu:public AGMenuItem
  private:
   void addChild(const GUIWidgetPtr&pWidget);
 
-  AGMenu *mSubMenu;
+  Nullable<Rice::Data_Object<AGMenu> > mSubMenu;
 };
 
 #endif

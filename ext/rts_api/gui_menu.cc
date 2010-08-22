@@ -27,13 +27,13 @@
 
 #include <basic_debug.h>
 
+#include <rice/Data_Type.hpp>
+
 using namespace std;
 
-AGMenu::AGMenu(const GUIWidgetPtr&pParent,AGVector2 pWishPos,const AGStringUtf8 &pName):
-  AGTable(pParent,AGRect2(pWishPos[0],pWishPos[1],1,1)),
-  sigSelected(this,"sigSelected"),
-  mName(pName.toString()),
-  mWishPos(pWishPos)
+AGMenu::AGMenu(Rice::Object pSelf):
+  AGTable(pSelf),
+  sigSelected(this,"sigSelected")
   {
     mBg=AGTexture(getTheme()->getSurface("menu.background.image"));
     hide();
@@ -44,38 +44,42 @@ AGMenu::AGMenu(const GUIWidgetPtr&pParent,AGVector2 pWishPos,const AGStringUtf8 
 
 AGMenu::~AGMenu()  throw()
   {}
+  
+void AGMenu::setWishPos(const AGVector2 &pWishPos) {
+  mWishPos=pWishPos;
+  setRect(AGRect2(pWishPos[0],pWishPos[1],1,1));
+}
 
 void AGMenu::show(AGVector2 pWishPos)
   {
     AGWidget::show();
     mWishPos=pWishPos;
     AGVector2 p=fromScreen(mWishPos);
-    setTop(p[1]);
-    setLeft(p[0]);
+    setRect(getRect().setTop(p[1]).setLeft(p[0]));
   }
 
 void AGMenu::addItem(const AGStringUtf8 &pString)
   {
-    AGMenuItem *i=new AGMenuItem(*self(),pString);
-    addFixedRow(i->height());
+    Rice::Data_Object<AGMenuItem> i=Create<AGMenuItem>();
+    i->setText(pString);
+    addFixedRow(i->getRect().height());
 
-    addChildOld(0,getRows()-1,i);
+    addChild(0,getRows()-1,i);
 
-    mW=std::max(mW,i->width());
-    setWidth(mW);
-    setHeight(mW);
+    mW=std::max(mW,i->getRect().width());
+    setRect(getRect().setWidth(mW).setHeight(mW));
     arrange();
   }
 
 AGMenu &AGMenu::addMenu(const AGStringUtf8 &pString)
   {
-    AGSubMenu *s=new AGSubMenu(*self(),pString);
-    addFixedRow(s->height());
-    addChildOld(0,getRows()-1,s);
+    Rice::Data_Object<AGSubMenu> s=Create<AGSubMenu>();
+    s->setText(pString);
+    addFixedRow(s->getRect().height());
+    addChild(0,getRows()-1,s);
 
-    mH+=s->height();
-    setWidth(mW);
-    setHeight(mW);
+    mH+=s->getRect().height();
+    setRect(getRect().setWidth(mW).setHeight(mW));
     arrange();
 
     return *s->getMenu();
@@ -95,10 +99,10 @@ void AGMenu::draw(AGPainter &p)
 
 void AGMenu::eventItemSelected(const AGString &pString)
   {
-    Children::iterator i=mChildren.begin();
-    for(;i!=mChildren.end();i++)
+    ObjectList children=getChildren();
+    for(ObjectIterator i=children.begin();i!=children.end();i++)
       {
-        AGMenuItem *item=dynamic_cast<AGMenuItem*>(i->widget());
+        Rice::Data_Object<AGMenuItem> item=*i;
         //cdebug("item:"<<item);
         if(item)
           {
@@ -115,12 +119,12 @@ void AGMenu::eventItemClicked(const AGString &pString)
   {
     sigSelected(new AGEvent(this,pString));
 
-    AGMenuItem *mi=dynamic_cast<AGMenuItem*>(getParent().widget());
+    Nullable<Rice::Data_Object<AGMenuItem> > mi=(*getParent())->casted<AGMenuItem>();
     if(mi)
       {
-        AGMenu *m=dynamic_cast<AGMenu*>(mi->getParent().widget());
+        Nullable<Rice::Data_Object<AGMenu> > m=(*(*mi)->getParent())->casted<AGMenu>();
         if(m)
-          m->eventItemClicked(pString);
+          (*m)->eventItemClicked(pString);
       }
     hide();
     cdebug("hide");

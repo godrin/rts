@@ -30,18 +30,19 @@ class AGRadioGroup;
 class AGEXPORT AGRadio:public AGCheckBox
 {
  public:
-  AGRadio(const GUIWidgetPtr&pParent,AGRect2 pRect);
+  AGRadio(Rice::Object pSelf);
   virtual ~AGRadio() throw();
 
-  void setGroup(AGRadioGroup *pGroup);
+  void setGroup(Nullable<Rice::Data_Object<AGRadioGroup> > pGroup);
   bool eventMouseClick(AGEvent *m);
   
   void deselect();
 
   virtual void setChecked(bool pChecked);
-
+  void eventGotParent(const Ptr &pWidget);
+  void eventLostParent(const Ptr &pWidget);
  private:
-  AGRadioGroup *mGroup;
+  Nullable<Rice::Data_Object<AGRadioGroup> > mGroup;
 };
 
 #endif

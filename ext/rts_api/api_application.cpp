@@ -73,6 +73,7 @@ void init_AGApplication()
   .define_method ( "connect_cpp",mrb_connect ( &SignalWrapper::sigConnect ) );
 
   define_class_under<AGWidget> ( rb_mGui,"Widget" ).
+  define_director<AGWidget>().
   define_method("add_child",&AGWidget::addChild).
   define_method ( "get_child",&AGWidget::getChild ).
   define_method ( "name=",&AGWidget::setName).

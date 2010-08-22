@@ -44,7 +44,7 @@ LIBRUBYARG_SHARED = -l$(RUBY_SO_NAME)
 LIBRUBYARG_STATIC = -lruby1.8-static
 
 RUBY_EXTCONF_H = 
-CFLAGS   =  -fPIC -fno-strict-aliasing -g -g -O2  -fPIC $(cflags) 
+CFLAGS   =  -fPIC -fno-strict-aliasing -g -g -O0  -fPIC $(cflags) 
 INCFLAGS = -I. -I. -I/usr/lib/ruby/1.8/x86_64-linux -I. -I/usr/include/SDL -I/usr/include/GL
 DEFS     = 
 CPPFLAGS =      -I/var/lib/gems/1.8/gems/rice-1.3.2/ruby/lib/include

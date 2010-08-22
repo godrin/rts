@@ -26,11 +26,16 @@
 #include <gui_listbox.h>
 #include <gui_theme.h>
 
-AGComboBox::AGComboBox(const GUIWidgetPtr &pParent,const AGRect2 &pRect):
-  AGWidget(pParent,pRect),sigSelect(this,"sigSelect")
+#include <rice/Data_Type.hpp>
+
+AGComboBox::AGComboBox(Rice::Object pSelf):
+  AGWidget(pSelf),sigSelect(this,"sigSelect"),
+  mEdit(Create<AGEdit>()),
+  mButton(Create<AGButton>()),
+  mListBox(Create<AGListBox>())
   {
-    mEdit=new AGEdit(*self(),AGRect2(0,0,width()-height(),height()));
-    mButton=new AGButton(*self(),AGRect2(width()-height(),0,height(),height()),"");
+    //mEdit=new AGEdit(Rice::Nil,getSelf(),AGRect2(0,0,width()-height(),height()));
+    //mButton=new AGButton(Rice::Nil,getSelf(),AGRect2(width()-height(),0,height(),height()),"");
 
     mButton->setSurface(AGSurface::load("data/gui/arrow_down.png"));
 
@@ -38,14 +43,26 @@ AGComboBox::AGComboBox(const GUIWidgetPtr &pParent,const AGRect2 &pRect):
 
     mEdit->setMutable(false);
     mEdit->setFont(f);
-    addChild(*mEdit->self());
-    addChild(*mButton->self());
+    addChild(mEdit);
+    addChild(mButton);
 
     mButton->sigClick.connect(slot(this,&AGComboBox::eventButtonClicked));
+    
+    mListBox->sigSelect.connect(slot(this,&AGComboBox::eventSelected));
+
   }
 
 AGComboBox::~AGComboBox() throw()
   {}
+  
+  
+void AGComboBox::setRect(const AGRect2 &r) {
+  AGWidget::setRect(r);
+  float width=getRect().width();
+  float height=getRect().height();
+  mEdit->setRect(AGRect2(0,0,width-height,height));
+  mButton->setRect(AGRect2(width-height,0,height,height));
+}
 
 
 void AGComboBox::insertItem(const AGString &pID,const AGStringUtf8 &pContent)
@@ -82,7 +99,7 @@ bool AGComboBox::eventButtonClicked(AGEvent *pEvent)
 
     cdebug(sr.x());
     cdebug(sr.y());
-    cdebug(width());
+    cdebug(getRect().width());
     cdebug(getTheme()->getInt("listbox.item.height")*std::min(8,(int)ops.size()));
 
     float mItemHeight=getTheme()->getInt("listbox.item.height");
@@ -90,9 +107,9 @@ bool AGComboBox::eventButtonClicked(AGEvent *pEvent)
       mItemHeight=25;
 
 
-    mListBox=new AGListBox(GUIWidgetPtr(),AGRect2(sr.x(),sr.y()+height(),width(),mItemHeight*8));
+    mListBox->setRect(AGRect2(sr.x(),sr.y()+getRect().height(),getRect().width(),mItemHeight*8));
 
-    mListBox->sigSelect.connect(slot(this,&AGComboBox::eventSelected));
+    mListBox->clearList();
 
     for(std::list<std::pair<AGString,AGStringUtf8> >::iterator i=ops.begin();i!=ops.end();i++)
       mListBox->insertItem(i->first,i->second);
@@ -131,30 +148,3 @@ void AGComboBox::clear() throw()
     update();
   }
 
-
-
-void AGComboBox::setRect(const AGRect2 &r)
-  {
-    AGWidget::setRect(r);
-    updateClientRects();
-  }
-
-void AGComboBox::setWidth(float w)
-  {
-    assert(w>=0);
-    AGWidget::setWidth(w);
-    updateClientRects();
-  }
-
-void AGComboBox::setHeight(float h)
-  {
-    assert(h>=0);
-    AGWidget::setHeight(h);
-    updateClientRects();
-  }
-
-void AGComboBox::updateClientRects()
-  {
-    mEdit->setRect(AGRect2(0,0,width()-height(),height()));
-    mButton->setRect(AGRect2(width()-height(),0,height(),height()));
-  }

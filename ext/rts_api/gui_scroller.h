@@ -32,7 +32,7 @@ class AGBackground;
 class AGEXPORT AGScroller:public AGWidget
 {
  public:
-  AGScroller(const GUIWidgetPtr &pParent,const AGRect2 &pRect,bool pHor);
+  AGScroller(Rice::Object pSelf);
   ~AGScroller() throw();
 
   void draw(AGPainter &p);
@@ -51,6 +51,8 @@ class AGEXPORT AGScroller:public AGWidget
   float getValue() const;
   float getMin() const;
   float getMax() const;
+  
+  void setHorizontal(bool b);
 
  private:
 
@@ -73,8 +75,8 @@ class AGEXPORT AGScroller:public AGWidget
   float mBorderWidth;
 
   bool mHorizontal;
-  AGButton *mB1,*mB2;
-  AGButton *mScroller;
+  Rice::Data_Object<AGButton> mB1,mB2;
+  Rice::Data_Object<AGButton> mScroller;
   AGBorder *mBorder;
   AGBackground *mBackground;
 };

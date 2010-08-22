@@ -26,30 +26,32 @@
 #include <gui_radiogroup.h>
 #include <typeinfo>
 
+#include <rice/Data_Type.hpp>
 
-AGRadio::AGRadio(const GUIWidgetPtr&pParent,AGRect2 pRect):
-  AGCheckBox(pParent,pRect),mGroup(0)
+
+AGRadio::AGRadio(Rice::Object pSelf):
+  AGCheckBox(pSelf)
   {
-    // search mGroup
-    GUIWidgetPtr w=pParent;
-    AGRadioGroup *g=0;
-    while(w && g==0)
-      {
-        g=dynamic_cast<AGRadioGroup*>(w.widget());
-        w=w->getParent();
-      }
-    if(g)
-      mGroup=g;
-
-    if(mGroup)
-      mGroup->add(this);
   }
 
 AGRadio::~AGRadio() throw()
   {
     if(mGroup)
-      mGroup->erase(this);
+      (*mGroup)->erase(getSelf());
   }
+
+void AGRadio::eventGotParent(const Ptr &pWidget) {
+  mGroup=seekParent<AGRadioGroup>();
+  (*mGroup)->add(getSelf());
+}
+void AGRadio::eventLostParent(const Ptr &pWidget) {
+  if(mGroup==pWidget) {
+    (*mGroup)->erase(getSelf());
+    mGroup=Nullable<Rice::Data_Object<AGRadioGroup> >();
+  }
+}
+
+  
 
 void AGRadio::setChecked(bool pChecked)
   {
@@ -61,7 +63,7 @@ void AGRadio::setChecked(bool pChecked)
         if(pChecked)
           {
             if(mGroup)
-              mGroup->eventChange(getName());
+              (*mGroup)->eventChange(getName());
           }
       }
   }
@@ -71,7 +73,7 @@ void AGRadio::deselect()
     setChecked(false);
   }
 
-void AGRadio::setGroup(AGRadioGroup *pGroup)
+void AGRadio::setGroup(Nullable<Rice::Data_Object<AGRadioGroup> > pGroup)
   {
     mGroup=pGroup;
   }

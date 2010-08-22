@@ -45,7 +45,7 @@ struct AGEXPORT AGListBoxItem
 class AGEXPORT AGListBox:public AGWidget
 {
  public:
-  AGListBox(const GUIWidgetPtr&pParent,const AGRect2 &pRect);
+  AGListBox(Rice::Object pSelf);
   virtual ~AGListBox() throw();
   
   void insertItem(AGString pID,AGStringUtf8 pValue);
@@ -84,10 +84,10 @@ class AGEXPORT AGListBox:public AGWidget
   int mSelected;
   int mHeight;
   int mItemHeight;
-  std::vector<AGEdit*> mEdits;
+  std::vector<Rice::Data_Object<AGEdit> > mEdits;
   AGBackground mBackground,mHilight;
 
-  AGScroller *mScroller;
+  Rice::Data_Object<AGScroller> mScroller;
 };
 
 

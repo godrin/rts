@@ -101,7 +101,7 @@ class AGEXPORT AGApplication:public AGMessageObject
   virtual void eventChangedRes();
 
   void setMainWidget(AGWidget *w);
-  AGWidget *getMainWidget();
+  Nullable<Rice::Data_Object<AGWidget> >  getMainWidget();
 
   virtual void draw();
   virtual void prepareDraw();
@@ -114,11 +114,11 @@ class AGEXPORT AGApplication:public AGMessageObject
   long getTicks() const;
   void delay(int ms);
 
-  void setTooltip(AGTooltip *pTooltip); // transfers ownage !
-  void resetTooltip(AGTooltip *pTooltip); // try to reset this one
+  void setTooltip(Nullable<Rice::Data_Object<AGTooltip> > pTooltip); // transfers ownage !
+  void resetTooltip(Nullable<Rice::Data_Object<AGTooltip> > pTooltip); // try to reset this one
 
-  void setOverlay(AGWidget *pOverlay);
-  AGWidget *getOverlay();
+  void setOverlay(const GUIWidgetPtr &pOverlay);
+  Nullable<Rice::Data_Object<AGWidget> >  getOverlay();
 
   void setCursor(const AGTexture &pTexture);
   void setNormalCursor();
@@ -142,15 +142,13 @@ class AGEXPORT AGApplication:public AGMessageObject
 
   bool mRunning;
   bool mIdleCalls;
-  AGWidget *mainWidget;
-  AGTooltip *mTooltip;
+  Nullable<Rice::Data_Object<AGWidget> >  mainWidget;
+  Nullable<Rice::Data_Object<AGTooltip> > mTooltip;
 
-  AGWidget *mOverlay;
+  Nullable<Rice::Data_Object<AGWidget> > mOverlay;
 
   AGTexture *mCursor;
   AGRect2 mCursorOld;
-
-  std::list<AGWidget*> delCue;
 
   SDL_Event mEvent;
 

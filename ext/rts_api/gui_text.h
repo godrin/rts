@@ -29,8 +29,7 @@
 class AGEXPORT AGText:public AGWidget
 {
  public:
-  AGText(const GUIWidgetPtr &pParent,const AGRect2 &pRect,const AGStringUtf8 &pText,const AGFont &pFont);
-  AGText(const GUIWidgetPtr &pParent,const AGVector2 &pPoint,const AGStringUtf8 &pText,const AGFont &pFont);
+  AGText(Rice::Object pSelf);
   virtual ~AGText() throw();
   
   void setDeriveRect();

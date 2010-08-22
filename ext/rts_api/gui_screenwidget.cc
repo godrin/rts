@@ -23,10 +23,12 @@
 #include <gui_surface.h>
 #include <gui_theme.h>
 
+#include <rice/Data_Type.hpp>
 
-AGScreenWidget::AGScreenWidget():
-  AGWidget(GUIWidgetPtr(),getScreen().getRect())
+AGScreenWidget::AGScreenWidget(Rice::Object pSelf):
+  AGWidget(pSelf)
   {
+    setRect(getScreen().getRect());
   }
 AGScreenWidget::~AGScreenWidget() throw()
   {
